@@ -1,0 +1,69 @@
+% Shared preamble for the PhotonWeave lab-meeting decks.
+% Used by photonweave-lab-meeting.tex (full) and
+% photonweave-lab-meeting-20min.tex (short). Compile with XeLaTeX.
+
+\usetheme{metropolis}
+\metroset{numbering=fraction, progressbar=frametitle, block=fill, sectionpage=progressbar}
+
+\usepackage{fontspec}
+\usepackage{kotex}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{arrows.meta, positioning, calc, fit, backgrounds, shapes.geometric,
+                decorations.pathreplacing, patterns, shadows.blur}
+
+% ---------------------------------------------------------------- fonts ----
+% Korean text falls back gracefully when a font is missing on another machine.
+\IfFontExistsTF{NanumBarunGothic}{%
+  \setmainhangulfont{NanumBarunGothic}\setsanshangulfont{NanumBarunGothic}}{%
+  \IfFontExistsTF{NanumGothic}{\setmainhangulfont{NanumGothic}\setsanshangulfont{NanumGothic}}{}}
+\IfFontExistsTF{NanumGothicCoding}{\setmonohangulfont{NanumGothicCoding}}{}
+
+% --------------------------------------------------------------- colours ---
+\definecolor{pwdeep}{HTML}{123F66}
+\definecolor{pwblue}{HTML}{1F6FB2}
+\definecolor{pwsky}{HTML}{6FA8D0}
+\definecolor{pwred}{HTML}{D0553F}
+\definecolor{pwgreen}{HTML}{3F8F63}
+\definecolor{pwamber}{HTML}{E0A300}
+\definecolor{pwgrey}{HTML}{8BA0B3}
+\definecolor{pwpaper}{HTML}{F3F6F9}
+
+\setbeamercolor{frametitle}{bg=pwdeep, fg=white}
+\setbeamercolor{progress bar}{fg=pwblue, bg=pwsky!40}
+\setbeamercolor{alerted text}{fg=pwred}
+\setbeamercolor{block title}{bg=pwpaper, fg=pwdeep}
+\setbeamercolor{block body}{bg=pwpaper!60, fg=black}
+\setbeamercolor{title separator}{fg=pwblue}
+
+\newcommand{\hl}[1]{\textcolor{pwdeep}{\textbf{#1}}}
+\newcommand{\num}[1]{\textcolor{pwblue}{\textbf{#1}}}
+\newcommand{\caveat}[1]{{\footnotesize\textcolor{pwgrey}{#1}}}
+\newcommand{\source}[1]{\vspace{2pt}{\scriptsize\textcolor{pwgrey}{출처: #1}}}
+
+% ------------------------------------------------------------- listings ----
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{pwdeep}\bfseries,
+  commentstyle=\color{pwgrey}\itshape,
+  stringstyle=\color{pwgreen},
+  showstringspaces=false,
+  columns=fullflexible,
+  breaklines=true,
+  language=Python,
+  frame=none,
+  aboveskip=4pt, belowskip=2pt,
+}
+
+% -------------------------------------------------------------- helpers ----
+% A compact "metric card" used on summary slides.
+\newcommand{\card}[3]{%
+  \begin{tikzpicture}
+    \node[draw=pwsky!60, fill=pwpaper, rounded corners=3pt, inner sep=6pt,
+          text width=#1, align=center] {%
+      {\color{pwdeep}\bfseries\large #2}\\[2pt]{\scriptsize #3}};
+  \end{tikzpicture}}

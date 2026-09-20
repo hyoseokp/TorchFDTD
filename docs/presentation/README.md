@@ -1,21 +1,29 @@
 # 랩미팅 발표자료
 
-`photonweave-lab-meeting.tex`는 PhotonWeave를 "Lumerical FDTD를 대체하는 GPU 가속
-FDTD 워크벤치"로 소개하는 한국어 Beamer 슬라이드입니다. 시각 자료 중심이며,
-숫자가 들어간 모든 슬라이드는 측정 조건과 남은 검증 항목을 같은 화면에 적습니다.
+PhotonWeave를 "Lumerical FDTD를 대체하는 GPU 가속 FDTD 워크벤치"로 소개하는 한국어
+Beamer 슬라이드입니다. 시각 자료 중심이며, 숫자가 들어간 모든 슬라이드는 측정 조건과
+남은 검증 항목을 같은 화면에 적습니다.
+
+| 파일 | 분량 | 용도 |
+| --- | --- | --- |
+| `photonweave-lab-meeting-20min.tex` | 본문 15장 + 부록 7장 | **20분 발표용**. 요약 → 동기 → 구조 → UI → 엔진 → 정확도 → PhC 실계산 → 속도 3장 → adjoint → 메모리 → 한계 → 요약 |
+| `photonweave-lab-meeting.tex` | 본문 37장 | 40분 전체 버전. 경계/소스/메시, 배치 스케일링, 분산재료 adjoint, FSP, 오픈소스 비교를 개별 슬라이드로 다룸 |
+
+두 덱은 `preamble.tex`(테마·색·글꼴·매크로)와 `figures/`를 공유하므로 스타일이 항상
+같이 움직입니다. 20분 버전에서 뺀 내용은 대부분 그 덱의 부록이나 전체 버전에 있습니다.
 
 ## 빌드
 
 ```sh
-bash docs/presentation/build.sh            # 그림 + 슬라이드
-bash docs/presentation/build.sh --slides   # 슬라이드만 (기존 그림 재사용)
+bash docs/presentation/build.sh            # 그림 + 두 덱
+bash docs/presentation/build.sh --slides   # 덱만 (기존 그림 재사용)
 ```
 
-`build.sh`는 XeLaTeX를 두 번 호출합니다. 직접 실행하려면:
+`build.sh`는 덱마다 XeLaTeX를 두 번 호출합니다. 직접 실행하려면:
 
 ```sh
 python docs/presentation/make_figures.py
-cd docs/presentation && xelatex -interaction=nonstopmode photonweave-lab-meeting.tex
+cd docs/presentation && xelatex -interaction=nonstopmode photonweave-lab-meeting-20min.tex
 ```
 
 필요 패키지: `beamer`, `metropolis`, `kotex`, `tikz`, `pgf`, `listings`, `booktabs`.

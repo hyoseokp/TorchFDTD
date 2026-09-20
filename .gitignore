@@ -19,3 +19,12 @@ output/
 /docs/paper/*.fdb_latexmk
 /docs/paper/*.fls
 /docs/paper/*.synctex.gz
+/docs/presentation/*.aux
+/docs/presentation/*.log
+/docs/presentation/*.nav
+/docs/presentation/*.out
+/docs/presentation/*.snm
+/docs/presentation/*.toc
+/docs/presentation/*.vrb
+/docs/presentation/*.fdb_latexmk
+/docs/presentation/*.fls

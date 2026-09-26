@@ -1,0 +1,164 @@
+{
+  "recorder_version": 2,
+  "run_id": "20260926T195655Z-g4-06-bc7aad7f",
+  "task": "G4-06",
+  "stage": "G4",
+  "task_title": "public fork PR의 untrusted code를 개인/연구실 GPU host에서 자동 실행하지 않는다",
+  "command": "D:/TorchFDTD/.venv/Scripts/python.exe -m pytest -q -p no:cacheprovider D:/TorchFDTD/.local/worktrees/ci-fix/tests/test_gpu_runner_policy.py --junitxml=D:/TorchFDTD/.local/worktrees/ci-fix/.local/tmp/junit/rerecord/G4-06.xml",
+  "exit_code": 0,
+  "exit_code_source": "argument",
+  "execution_timestamp": "2026-09-27T04:56:49.660484+09:00",
+  "recorded_at": "2026-09-26T19:56:55+00:00",
+  "source_commit": "675bcde226d250f42883c253ccd14bc1bff1ae28",
+  "source_commit_time": "2026-09-27T04:17:51+09:00",
+  "source_tree_sha256": "8b3e64d2911b9ab13634d53914b42ff2187949e3aa188b195eb4c2641be67349",
+  "junit_started_before_commit": false,
+  "precommit_junit_reason": null,
+  "dirty_source_manifest": [],
+  "dirty_guarded_paths": [],
+  "dirty_allowed": false,
+  "dirty_allowed_reason": null,
+  "package_or_wheel_sha256": null,
+  "package_path": null,
+  "platform_id": "rtx3060-win11-lab",
+  "test_source_sha256": {
+    "tests/test_gpu_runner_policy.py": "9019e9aed018565612cd31602097014bc042e9fd557fc320994976e89da8e0c3"
+  },
+  "unresolved_test_classnames": [],
+  "watch_paths": [
+    ".github/workflows/test.yml",
+    "docs/GPU_RUNNER_POLICY.md",
+    "scripts/run_suite.py"
+  ],
+  "watch_sha256": {
+    ".github/workflows/test.yml": "7fb5c82ca82428f84a838b35033d7f31f4eebfb61bbdd373cfd9b2da60a4e3fd",
+    "docs/GPU_RUNNER_POLICY.md": "78dcee28fa0f0300e63c865501f28be10d804ff914a9d19838aa7c85c6578707",
+    "scripts/run_suite.py": "80c908c1f75b5a475ad8b0bb345b524cf6be428ad63aba87d3ceb4afa9693475"
+  },
+  "fixture_path": "docs/validation/cases/G4-06_untrusted_code_policy.json",
+  "fixture_sha256": "2a478cd3a25db14f86ad1eda40ab0eedbeb20fa3fbe4196fd2bd314ccf2e22e6",
+  "acceptance_criteria_path": "docs/validation/cases/G4-06_untrusted_code_policy.json",
+  "acceptance_criteria_sha256": "2a478cd3a25db14f86ad1eda40ab0eedbeb20fa3fbe4196fd2bd314ccf2e22e6",
+  "case_first_commit": "a73f47920e9c24a3a77164e1cf74a6dc5d39927f",
+  "case_first_commit_time": "2026-09-22T01:30:25+09:00",
+  "declared_before_run_verified": true,
+  "declaration_note": null,
+  "environment": {
+    "python": "3.10.2",
+    "python_executable": "D:\\TorchFDTD\\.venv\\Scripts\\python.exe",
+    "os": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "torch": "2.10.0+cu126",
+    "cupy": "13.6.0",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "cuda_runtime": "12.6",
+    "torch_cuda_available": true,
+    "cuda_driver": "591.86",
+    "fdtd_location": "<user home>\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\fdtd\\__init__.py",
+    "torchfdtd_location": "D:\\TorchFDTD\\.local\\worktrees\\ci-fix\\torchfdtd\\__init__.py",
+    "fdtd": "0.2.2"
+  },
+  "hardware": {
+    "cpu_model": "12th Gen Intel(R) Core(TM) i7-12700",
+    "logical_cpus": 20,
+    "ram_total_bytes": 85628207104,
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 3060",
+        "memory_total_mib": 12288
+      }
+    ]
+  },
+  "seed": null,
+  "precision": null,
+  "backend": null,
+  "physics_configuration": {
+    "workflow": ".github/workflows/test.yml",
+    "policy": "docs/GPU_RUNNER_POLICY.md",
+    "required_workflow_properties": [
+      "no 'self-hosted' token",
+      "no 'pull_request_target' token",
+      "every runs-on is a GitHub-hosted ubuntu image",
+      "triggers are exactly push, pull_request, workflow_dispatch",
+      "tests launched through scripts/run_suite.py cpu-pr without --gpu-required"
+    ],
+    "required_policy_statements": [
+      "names cpu-pr, gpu-nightly and release-full",
+      "fork pull requests never execute on the lab hosts",
+      "checkout by commit hash into an isolated worktree and venv under .local",
+      "no credentials in the environment",
+      "cleanup of worktree and venv after the run"
+    ]
+  },
+  "reference_method": "textual specification checked by tests/test_gpu_runner_policy.py",
+  "observables": [
+    {
+      "name": "workflow_structure",
+      "unit": "boolean",
+      "definition": "the workflow properties above hold"
+    },
+    {
+      "name": "policy_statements",
+      "unit": "boolean",
+      "definition": "the policy statements above are present"
+    }
+  ],
+  "acceptance_limits": {
+    "rule": "every listed property and statement holds; a self-hosted runner or a pull_request_target trigger anywhere in the workflow file fails the test",
+    "source_of_limits": "fixture-specific; no numerical threshold applies"
+  },
+  "observed_metrics": null,
+  "test_results": {
+    "total": 6,
+    "passed": [
+      "tests/test_gpu_runner_policy.py::test_workflow_has_no_self_hosted_runner_and_no_pull_request_target",
+      "tests/test_gpu_runner_policy.py::test_workflow_triggers_are_the_declared_three",
+      "tests/test_gpu_runner_policy.py::test_workflow_skips_only_the_manuscripts",
+      "tests/test_gpu_runner_policy.py::test_workflow_runs_the_cpu_pr_suite_only",
+      "tests/test_gpu_runner_policy.py::test_policy_names_the_three_suites_and_the_fork_rule",
+      "tests/test_gpu_runner_policy.py::test_suite_runner_knows_the_same_three_suites"
+    ],
+    "failed": [],
+    "errors": [],
+    "skipped": [],
+    "skipped_reasons": {},
+    "gpu_required_skips": [],
+    "failure_messages": {},
+    "suite_time_seconds": 0.074,
+    "suite_timestamp": "2026-09-27T04:56:49.660484+09:00"
+  },
+  "required_tests": [
+    "tests/test_gpu_runner_policy.py"
+  ],
+  "skipped_required_tests": [],
+  "enumerated_required_tests": {
+    "tests/test_gpu_runner_policy.py": [
+      "tests/test_gpu_runner_policy.py::test_workflow_has_no_self_hosted_runner_and_no_pull_request_target",
+      "tests/test_gpu_runner_policy.py::test_workflow_triggers_are_the_declared_three",
+      "tests/test_gpu_runner_policy.py::test_workflow_skips_only_the_manuscripts",
+      "tests/test_gpu_runner_policy.py::test_workflow_runs_the_cpu_pr_suite_only",
+      "tests/test_gpu_runner_policy.py::test_policy_names_the_three_suites_and_the_fork_rule",
+      "tests/test_gpu_runner_policy.py::test_suite_runner_knows_the_same_three_suites"
+    ]
+  },
+  "gpu_required_skips": [],
+  "junit_original_path": ".local/tmp/junit/rerecord/G4-06.xml",
+  "artifact_paths_and_sha256": [
+    {
+      "path": "docs/validation/runs/20260926T195655Z-g4-06-bc7aad7f/junit.xml",
+      "sha256": "1f902f32bfc95bf8008da262ca82379bf0c3c92bd4e2fd71c0ed541898a2ec10",
+      "bytes": 983,
+      "original_path": ".local/tmp/junit/rerecord/G4-06.xml"
+    }
+  ],
+  "applicable_scope": "G4-06: textual checks of .github/workflows/test.yml (GitHub-hosted runners only, push/pull_request/workflow_dispatch triggers, cpu-pr suite) and docs/GPU_RUNNER_POLICY.md (three suites, fork rule, reviewed-commit procedure); a policy check, not an execution test re-recorded on 675bcde226d2 for the release candidate.",
+  "note": "rerecord_gates.py replay of 20260925T181236Z-g4-06-9f842377",
+  "verification_state_assigned": "VERIFIED",
+  "verification_reason": "no failures or errors, and no required test skipped or absent",
+  "null_reasons": {
+    "observed_metrics": "no observed-metrics file was supplied; the JUnit pass/fail record is the only measurement",
+    "package_or_wheel_sha256": "no distribution file was supplied; the evidence applies to the source tree at source_commit"
+  },
+  "gate_file": "docs/validation/completion_gates.json"
+}

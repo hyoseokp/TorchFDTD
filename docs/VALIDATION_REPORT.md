@@ -2,7 +2,7 @@
 
 Internal validation report of the completion program ([COMPLETION_PROGRAM_KO.md](COMPLETION_PROGRAM_KO.md)), rendered by `scripts/build_validation_report.py` from the machine outputs named in each section: the gate file and its evidence runs, the platform, clean-install, physics, cross-solver and Meep comparison records, the suite policy in `scripts/run_suite.py`, the version strings, and the known-limitations list (a hand-maintained JSON whose entries cite their records). No number here is typed into this file; `tests/test_validation_report.py` renders it again and compares. It records what was run and what those runs produced. It is not an attestation by a third party, and a passing gate is evidence for that gate only, never a general statement that the solver is correct for every problem.
 
-Package version `0.17.1` (pyproject.toml). Gate file adopted at commit `f3efd3409aaa` with 83 tasks in 11 stages; newest evidence run `20260926T125324Z-g3-05-5008244d` recorded 2026-09-26T12:53:24+00:00 at commit `a8124a771d9e`.
+Package version `0.17.1` (pyproject.toml). Gate file adopted at commit `f3efd3409aaa` with 83 tasks in 11 stages; newest evidence run `20260926T195655Z-g4-06-bc7aad7f` recorded 2026-09-26T19:56:55+00:00 at commit `675bcde226d2`.
 
 Release rule of the gate file: `all_required_tasks_verified=True`, `required_skips_allowed=False`, `missing_or_stale_evidence_allowed=False`, `unresolved_required_external_blockers_allowed=False`, `unresolved_P0_P1_defects_allowed=False`, `source_and_release_artifact_identity_required=True`, `public_release_separately_authorized=True`, `machine_gate_does_not_replace_independent_review=True`.
 Technical readiness of a release candidate (every required task VERIFIED with evidence that matches the candidate) and authorization of a public release are separate decisions; this report can only inform the first, and the second is not given by any file in this repository.
@@ -83,7 +83,7 @@ One row per task of [validation/completion_gates.json](validation/completion_gat
 | G4-03 | noncontiguous tensors, duplicate observers, multiple calls/backward, input lifetime, stream synchronization, cancellation, allocator cleanup을 검사한다 | IMPLEMENTED | VERIFIED | `20260925T181052Z-g4-03-bcf97791` | `2c5f3754c047` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |
 | G4-04 | 최소 격자·홀수 크기·부분 slab·비정렬 tile·index boundary·강한 material contrast·ADE/CPML memory를 무작위/경계 fixture에 포함한다 | IMPLEMENTED | VERIFIED | `20260925T181122Z-g4-04-63d67c63` | `2c5f3754c047` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |
 | G4-05 | CPU PR suite, 신뢰한 코드의 GPU 정기 suite, 실제 release의 전체 GPU suite를 분리한다 | IMPLEMENTED | VERIFIED | `20260925T181227Z-g4-05-b38e7dd0` | `2c5f3754c047` | FAIL | STALE: watched file changed since the run: pyproject.toml |
-| G4-06 | public fork PR의 untrusted code를 개인/연구실 GPU host에서 자동 실행하지 않는다 | IMPLEMENTED | VERIFIED | `20260925T181236Z-g4-06-9f842377` | `2c5f3754c047` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |
+| G4-06 | public fork PR의 untrusted code를 개인/연구실 GPU host에서 자동 실행하지 않는다 | IMPLEMENTED | VERIFIED | `20260926T195655Z-g4-06-bc7aad7f` | `675bcde226d2` | PASS | evidence matches the current checkout |
 
 ### G5 메모리·재시작·장기 안정성 (WORKSTATION, P0)
 
@@ -144,7 +144,7 @@ One row per task of [validation/completion_gates.json](validation/completion_gat
 | G9-03 | RELEASE_REVIEW의 미해결 계약/배포 질문을 실제 문서에 따라 추적한다 | IMPLEMENTED | VERIFIED | `20260925T214448Z-g9-03-cc9b3082` | `70c7bd788fa6` | FAIL | STALE: watched file changed since the run: README.md |
 | G9-04 | API stability/deprecation, project/result/checkpoint version compatibility, changelog, 알려진 한계, bug template, minimal repro, numerical bug severity, release rollback/결과 영향 공지를 준비한다. | IMPLEMENTED | VERIFIED | `20260925T185220Z-g9-04-6cd780b0` | `2c5f3754c047` | FAIL | STALE: watched file changed since the run: docs/CHANGELOG.md |
 | G9-05 | 독립 사용자 또는 독립 설치 환경에서 세 대표 workflow를 실행하고, 실제 발견 이슈를 정리한다 | NOT_ASSESSED | NOT_RUN | none | none | FAIL | verification_state is NOT_RUN |
-| G9-06 | 최종 release candidate의 정확한 source tree와 wheel에서 전체 필수 gate를 실행한다 | IN_PROGRESS | VERIFIED | `20260925T195834Z-g9-06-621431b7` | `2d7cc517b07c` | FAIL | STALE: test source changed since the run: tests/test_mode_network_service.py |
+| G9-06 | 최종 release candidate의 정확한 source tree와 wheel에서 전체 필수 gate를 실행한다 | IN_PROGRESS | VERIFIED | `20260925T195834Z-g9-06-621431b7` | `2d7cc517b07c` | FAIL | STALE: test source changed since the run: tests/test_gpu_runner_policy.py |
 | G9-07 | validation report를 기계 산출물에서 생성한다 | IMPLEMENTED | SELF | none | none | self | this report's own gate, recorded after the render; judge it with scripts/check_release_gates.py |
 
 ### H1 실제 단일 문제 multi-GPU (HPC, P1)
@@ -170,7 +170,7 @@ Every record written by `scripts/platform_report.py` under `docs/validation/plat
 
 | Platform id | G4 evidence runs recorded on this platform | Other tasks whose newest run was recorded here |
 | --- | --- | --- |
-| rtx3060-win11-lab | G4-01 `20260925T181003Z-g4-01-34391cbe` (platform_id); G4-02 `20260925T181033Z-g4-02-2a8fcb7a` (platform_id); G4-03 `20260925T181052Z-g4-03-bcf97791` (platform_id); G4-04 `20260925T181122Z-g4-04-63d67c63` (platform_id); G4-05 `20260925T181227Z-g4-05-b38e7dd0` (platform_id); G4-06 `20260925T181236Z-g4-06-9f842377` (platform_id) | 67 |
+| rtx3060-win11-lab | G4-01 `20260925T181003Z-g4-01-34391cbe` (platform_id); G4-02 `20260925T181033Z-g4-02-2a8fcb7a` (platform_id); G4-03 `20260925T181052Z-g4-03-bcf97791` (platform_id); G4-04 `20260925T181122Z-g4-04-63d67c63` (platform_id); G4-05 `20260925T181227Z-g4-05-b38e7dd0` (platform_id); G4-06 `20260926T195655Z-g4-06-bc7aad7f` (platform_id) | 67 |
 | rtx3060-wsl2-ubuntu2204 | none | 0 |
 | rtx5880-ada-win11-remote | none | 0 |
 
@@ -305,7 +305,6 @@ Every warning the judge attaches to a task; a warning never passes or fails a ta
 | G4-03 | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |
 | G4-04 | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |
 | G4-05 | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |
-| G4-06 | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |
 | G5-01 | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |
 | G5-02 | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |
 | G5-03 | evidence was recorded on a dirty tree (5 paths); it is not tied to commit 2c5f3754c047 alone |

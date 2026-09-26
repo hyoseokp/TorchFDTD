@@ -516,7 +516,7 @@ def application_record():
 
 
 def application_timeline(ax, p):
-    """Timeline of the recorded streamed driver (panel a of the arXiv figure, a separate figure in the CPC SI)."""
+    """Timeline of the recorded streamed driver (panel a of the figure)."""
     streamed = p['executions']['streamed']
     runs = p['runs']
     phases = [('Forward solve', runs['streamed_forward']['seconds'], BLUE),

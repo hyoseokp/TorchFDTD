@@ -1,5 +1,0 @@
-Fused CUDA FDTD kernels, each paired with a transpose kernel for a discrete adjoint
-Host-streamed slabs keep the field state and checkpoints in host memory
-Validated against analytic solutions, Meep, FDTDX and a coupled-wave solver
-Full forward solves 9.0 to 17.1 times faster than the PyTorch FDTD it extends
-Adjoint of a 54-million-cell lens agrees with finite differences to 0.78%

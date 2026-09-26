@@ -6,7 +6,7 @@ and do not add em dashes or semicolons.
 
 ## Scientific scope
 
-The manuscript is written as a Computer Physics Communications software
+The manuscript is written as a software
 paper: abstract, program summary, numerical method, discrete adjoint,
 execution modes, software structure with two usage listings, validation,
 performance and conclusion. It evaluates GPU-resident and host-DRAM-streamed

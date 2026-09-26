@@ -7,11 +7,9 @@ on:
   push:
     paths-ignore:  # the manuscripts only; tests read the README and the rest of docs/
       - 'docs/paper/**'
-      - 'docs/paper-cpc/**'
   pull_request:
     paths-ignore:
       - 'docs/paper/**'
-      - 'docs/paper-cpc/**'
   workflow_dispatch:
 jobs:
   cpu-and-ui:

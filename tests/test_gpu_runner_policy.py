@@ -31,7 +31,7 @@ def test_workflow_skips_only_the_manuscripts():
     """Tests read the README and documents under docs/ (the validation report, the gate records, the release review),
     so a push that changes only those must still run the suite; only the manuscripts are skipped."""
     ignored = re.findall(r"^\s+- '([^']+)'", workflow_text().split('jobs:', 1)[0], re.MULTILINE)
-    assert ignored and set(ignored) == {'docs/paper/**', 'docs/paper-cpc/**'}, ignored
+    assert ignored and set(ignored) == {'docs/paper/**'}, ignored
 
 
 def test_workflow_runs_the_cpu_pr_suite_only():

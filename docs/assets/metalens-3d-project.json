@@ -1,0 +1,6702 @@
+{
+  "schema_version": 1,
+  "name": "3D metalens pulse focusing",
+  "region": {
+    "dimension": "3d",
+    "size": [
+      8.0,
+      8.0,
+      6.7
+    ],
+    "mesh": 0.05,
+    "mesh_steps": null,
+    "mesh_coordinates": null,
+    "material_sampling": "yee",
+    "interface_method": "staircase",
+    "subpixel_quadrature": 8,
+    "mesh_type": "uniform",
+    "mesh_max": 0.15,
+    "mesh_grading": 1.25,
+    "mesh_ppw": 24.0,
+    "mesh_auto_refine": true,
+    "mesh_refinements": [],
+    "courant_factor": 0.99,
+    "time_step_override": null,
+    "steps": 2500,
+    "run_control": {
+      "auto_shutoff": false,
+      "decay_threshold": 1e-6,
+      "check_interval": 50,
+      "consecutive_checks": 3,
+      "min_steps": 100,
+      "source_tail_amplitude": 1e-8,
+      "after_source_s": 0.0,
+      "divergence_check": true,
+      "growth_limit": 1000000.0,
+      "field_limit": null
+    },
+    "pml_cells": 10,
+    "pml_dispersion": "ade",
+    "boundaries": {
+      "x_min": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "x_max": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "y_min": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "y_max": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "z_min": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "z_max": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      }
+    },
+    "bloch_phase": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "background_index": 1.0,
+    "backend": "cuda",
+    "memory_mode": "resident",
+    "execution_mode": "auto",
+    "tiling": {
+      "size_um": 20.0,
+      "overlap_um": 2.0,
+      "max_angle_deg": 45.0,
+      "propagation_um": null,
+      "allow_approximate": false
+    },
+    "cuda_kernel": "fused",
+    "cuda_monitor_kernel": "fused",
+    "precision": "float32",
+    "snapshot_interval": 5,
+    "field": "Ex",
+    "slice_axis": "y",
+    "slice_position": 0.0,
+    "complex_display": "real"
+  },
+  "materials": [
+    {
+      "name": "Air",
+      "index": 1.0,
+      "color": "#6ca8dd",
+      "model": "dielectric",
+      "epsilon_tensor": [
+        2.25,
+        2.25,
+        2.25,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "epsilon_inf": 1.0,
+      "plasma_rad_s": 2000000000000000.0,
+      "collision_rad_s": 100000000000000.0,
+      "resonance_rad_s": 2000000000000000.0,
+      "linewidth_rad_s": 100000000000000.0,
+      "delta_epsilon": 1.0,
+      "poles": [],
+      "samples": null,
+      "fit_band_um": null,
+      "fit_dt_s": null,
+      "provenance": null
+    },
+    {
+      "name": "Si",
+      "index": 3.48,
+      "color": "#6ca8dd",
+      "model": "dielectric",
+      "epsilon_tensor": [
+        2.25,
+        2.25,
+        2.25,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "epsilon_inf": 1.0,
+      "plasma_rad_s": 2000000000000000.0,
+      "collision_rad_s": 100000000000000.0,
+      "resonance_rad_s": 2000000000000000.0,
+      "linewidth_rad_s": 100000000000000.0,
+      "delta_epsilon": 1.0,
+      "poles": [],
+      "samples": null,
+      "fit_band_um": null,
+      "fit_dt_s": null,
+      "provenance": null
+    }
+  ],
+  "structures": [
+    {
+      "id": "pillar0",
+      "name": "object",
+      "center": [
+        -2.75,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar1",
+      "name": "object",
+      "center": [
+        -2.75,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.10066457836586411,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar2",
+      "name": "object",
+      "center": [
+        -2.75,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.10066457836586411,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar3",
+      "name": "object",
+      "center": [
+        -2.75,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar4",
+      "name": "object",
+      "center": [
+        -2.25,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar5",
+      "name": "object",
+      "center": [
+        -2.25,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.11742648739861875,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar6",
+      "name": "object",
+      "center": [
+        -2.25,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12829305873523766,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar7",
+      "name": "object",
+      "center": [
+        -2.25,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1331644002660223,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar8",
+      "name": "object",
+      "center": [
+        -2.25,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1331644002660223,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar9",
+      "name": "object",
+      "center": [
+        -2.25,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12829305873523766,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar10",
+      "name": "object",
+      "center": [
+        -2.25,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.11742648739861875,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar11",
+      "name": "object",
+      "center": [
+        -2.25,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar12",
+      "name": "object",
+      "center": [
+        -1.75,
+        -2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar13",
+      "name": "object",
+      "center": [
+        -1.75,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12284365013161246,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar14",
+      "name": "object",
+      "center": [
+        -1.75,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.13778755470381535,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar15",
+      "name": "object",
+      "center": [
+        -1.75,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.14712001511823974,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar16",
+      "name": "object",
+      "center": [
+        -1.75,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar17",
+      "name": "object",
+      "center": [
+        -1.75,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar18",
+      "name": "object",
+      "center": [
+        -1.75,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.14712001511823974,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar19",
+      "name": "object",
+      "center": [
+        -1.75,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.13778755470381535,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar20",
+      "name": "object",
+      "center": [
+        -1.75,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12284365013161246,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar21",
+      "name": "object",
+      "center": [
+        -1.75,
+        2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar22",
+      "name": "object",
+      "center": [
+        -1.25,
+        -2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.11742648739861875,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar23",
+      "name": "object",
+      "center": [
+        -1.25,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.13778755470381535,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar24",
+      "name": "object",
+      "center": [
+        -1.25,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar25",
+      "name": "object",
+      "center": [
+        -1.25,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17736710344978487,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar26",
+      "name": "object",
+      "center": [
+        -1.25,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1804865981354149,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar27",
+      "name": "object",
+      "center": [
+        -1.25,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1804865981354149,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar28",
+      "name": "object",
+      "center": [
+        -1.25,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17736710344978487,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar29",
+      "name": "object",
+      "center": [
+        -1.25,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar30",
+      "name": "object",
+      "center": [
+        -1.25,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.13778755470381535,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar31",
+      "name": "object",
+      "center": [
+        -1.25,
+        2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.11742648739861875,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar32",
+      "name": "object",
+      "center": [
+        -0.75,
+        -2.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar33",
+      "name": "object",
+      "center": [
+        -0.75,
+        -2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12829305873523766,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar34",
+      "name": "object",
+      "center": [
+        -0.75,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.14712001511823974,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar35",
+      "name": "object",
+      "center": [
+        -0.75,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17736710344978487,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar36",
+      "name": "object",
+      "center": [
+        -0.75,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18362689014325645,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar37",
+      "name": "object",
+      "center": [
+        -0.75,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18678840106447192,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar38",
+      "name": "object",
+      "center": [
+        -0.75,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18678840106447192,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar39",
+      "name": "object",
+      "center": [
+        -0.75,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18362689014325645,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar40",
+      "name": "object",
+      "center": [
+        -0.75,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17736710344978487,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar41",
+      "name": "object",
+      "center": [
+        -0.75,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.14712001511823974,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar42",
+      "name": "object",
+      "center": [
+        -0.75,
+        2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12829305873523766,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar43",
+      "name": "object",
+      "center": [
+        -0.75,
+        2.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar44",
+      "name": "object",
+      "center": [
+        -0.25,
+        -2.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.10066457836586411,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar45",
+      "name": "object",
+      "center": [
+        -0.25,
+        -2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1331644002660223,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar46",
+      "name": "object",
+      "center": [
+        -0.25,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar47",
+      "name": "object",
+      "center": [
+        -0.25,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1804865981354149,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar48",
+      "name": "object",
+      "center": [
+        -0.25,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18678840106447192,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar49",
+      "name": "object",
+      "center": [
+        -0.25,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1899715669294429,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar50",
+      "name": "object",
+      "center": [
+        -0.25,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1899715669294429,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar51",
+      "name": "object",
+      "center": [
+        -0.25,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18678840106447192,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar52",
+      "name": "object",
+      "center": [
+        -0.25,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1804865981354149,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar53",
+      "name": "object",
+      "center": [
+        -0.25,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar54",
+      "name": "object",
+      "center": [
+        -0.25,
+        2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1331644002660223,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar55",
+      "name": "object",
+      "center": [
+        -0.25,
+        2.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.10066457836586411,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar56",
+      "name": "object",
+      "center": [
+        0.25,
+        -2.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.10066457836586411,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar57",
+      "name": "object",
+      "center": [
+        0.25,
+        -2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1331644002660223,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar58",
+      "name": "object",
+      "center": [
+        0.25,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar59",
+      "name": "object",
+      "center": [
+        0.25,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1804865981354149,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar60",
+      "name": "object",
+      "center": [
+        0.25,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18678840106447192,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar61",
+      "name": "object",
+      "center": [
+        0.25,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1899715669294429,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar62",
+      "name": "object",
+      "center": [
+        0.25,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1899715669294429,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar63",
+      "name": "object",
+      "center": [
+        0.25,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18678840106447192,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar64",
+      "name": "object",
+      "center": [
+        0.25,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1804865981354149,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar65",
+      "name": "object",
+      "center": [
+        0.25,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar66",
+      "name": "object",
+      "center": [
+        0.25,
+        2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1331644002660223,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar67",
+      "name": "object",
+      "center": [
+        0.25,
+        2.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.10066457836586411,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar68",
+      "name": "object",
+      "center": [
+        0.75,
+        -2.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar69",
+      "name": "object",
+      "center": [
+        0.75,
+        -2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12829305873523766,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar70",
+      "name": "object",
+      "center": [
+        0.75,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.14712001511823974,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar71",
+      "name": "object",
+      "center": [
+        0.75,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17736710344978487,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar72",
+      "name": "object",
+      "center": [
+        0.75,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18362689014325645,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar73",
+      "name": "object",
+      "center": [
+        0.75,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18678840106447192,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar74",
+      "name": "object",
+      "center": [
+        0.75,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18678840106447192,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar75",
+      "name": "object",
+      "center": [
+        0.75,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.18362689014325645,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar76",
+      "name": "object",
+      "center": [
+        0.75,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17736710344978487,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar77",
+      "name": "object",
+      "center": [
+        0.75,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.14712001511823974,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar78",
+      "name": "object",
+      "center": [
+        0.75,
+        2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12829305873523766,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar79",
+      "name": "object",
+      "center": [
+        0.75,
+        2.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar80",
+      "name": "object",
+      "center": [
+        1.25,
+        -2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.11742648739861875,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar81",
+      "name": "object",
+      "center": [
+        1.25,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.13778755470381535,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar82",
+      "name": "object",
+      "center": [
+        1.25,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar83",
+      "name": "object",
+      "center": [
+        1.25,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17736710344978487,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar84",
+      "name": "object",
+      "center": [
+        1.25,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1804865981354149,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar85",
+      "name": "object",
+      "center": [
+        1.25,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1804865981354149,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar86",
+      "name": "object",
+      "center": [
+        1.25,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17736710344978487,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar87",
+      "name": "object",
+      "center": [
+        1.25,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar88",
+      "name": "object",
+      "center": [
+        1.25,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.13778755470381535,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar89",
+      "name": "object",
+      "center": [
+        1.25,
+        2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.11742648739861875,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar90",
+      "name": "object",
+      "center": [
+        1.75,
+        -2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar91",
+      "name": "object",
+      "center": [
+        1.75,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12284365013161246,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar92",
+      "name": "object",
+      "center": [
+        1.75,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.13778755470381535,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar93",
+      "name": "object",
+      "center": [
+        1.75,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.14712001511823974,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar94",
+      "name": "object",
+      "center": [
+        1.75,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar95",
+      "name": "object",
+      "center": [
+        1.75,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.17118888795087533,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar96",
+      "name": "object",
+      "center": [
+        1.75,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.14712001511823974,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar97",
+      "name": "object",
+      "center": [
+        1.75,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.13778755470381535,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar98",
+      "name": "object",
+      "center": [
+        1.75,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12284365013161246,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar99",
+      "name": "object",
+      "center": [
+        1.75,
+        2.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar100",
+      "name": "object",
+      "center": [
+        2.25,
+        -1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar101",
+      "name": "object",
+      "center": [
+        2.25,
+        -1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.11742648739861875,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar102",
+      "name": "object",
+      "center": [
+        2.25,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12829305873523766,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar103",
+      "name": "object",
+      "center": [
+        2.25,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1331644002660223,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar104",
+      "name": "object",
+      "center": [
+        2.25,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.1331644002660223,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar105",
+      "name": "object",
+      "center": [
+        2.25,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.12829305873523766,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar106",
+      "name": "object",
+      "center": [
+        2.25,
+        1.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.11742648739861875,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar107",
+      "name": "object",
+      "center": [
+        2.25,
+        1.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar108",
+      "name": "object",
+      "center": [
+        2.75,
+        -0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar109",
+      "name": "object",
+      "center": [
+        2.75,
+        -0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.10066457836586411,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar110",
+      "name": "object",
+      "center": [
+        2.75,
+        0.25,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.10066457836586411,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    },
+    {
+      "id": "pillar111",
+      "name": "object",
+      "center": [
+        2.75,
+        0.75,
+        -1.8124999999999998
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        1.0,
+        1.0,
+        0.6
+      ],
+      "radius": 0.08714617826742921,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Si",
+      "mesh_order": 2
+    }
+  ],
+  "sources": [
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 3.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "sheet",
+      "name": "source",
+      "center": [
+        0.0,
+        0.0,
+        -2.5
+      ],
+      "enabled": true,
+      "kind": "plane",
+      "injection": "soft",
+      "normal": "z",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        5.85,
+        5.9,
+        0.0
+      ],
+      "component": "Ex",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 1.0,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 3.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "edge_x-1",
+      "name": "source",
+      "center": [
+        -2.975,
+        0.0,
+        -2.5
+      ],
+      "enabled": true,
+      "kind": "plane",
+      "injection": "soft",
+      "normal": "z",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        5.9,
+        0.0
+      ],
+      "component": "Ex",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.5,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 3.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "edge_y-1",
+      "name": "source",
+      "center": [
+        0.0,
+        -3.0,
+        -2.5
+      ],
+      "enabled": true,
+      "kind": "plane",
+      "injection": "soft",
+      "normal": "z",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        5.85,
+        0.0,
+        0.0
+      ],
+      "component": "Ex",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.5,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 3.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "edge_x+1",
+      "name": "source",
+      "center": [
+        2.975,
+        0.0,
+        -2.5
+      ],
+      "enabled": true,
+      "kind": "plane",
+      "injection": "soft",
+      "normal": "z",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        5.9,
+        0.0
+      ],
+      "component": "Ex",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.5,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 3.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "edge_y+1",
+      "name": "source",
+      "center": [
+        0.0,
+        3.0,
+        -2.5
+      ],
+      "enabled": true,
+      "kind": "plane",
+      "injection": "soft",
+      "normal": "z",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        5.85,
+        0.0,
+        0.0
+      ],
+      "component": "Ex",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.5,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 3.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "corner_x-1_y-1",
+      "name": "source",
+      "center": [
+        -2.975,
+        -3.0,
+        -2.5
+      ],
+      "enabled": true,
+      "kind": "point",
+      "injection": "soft",
+      "normal": "x",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "component": "Ex",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.25,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 3.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "corner_x-1_y+1",
+      "name": "source",
+      "center": [
+        -2.975,
+        3.0,
+        -2.5
+      ],
+      "enabled": true,
+      "kind": "point",
+      "injection": "soft",
+      "normal": "x",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "component": "Ex",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.25,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 3.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "corner_x+1_y-1",
+      "name": "source",
+      "center": [
+        2.975,
+        -3.0,
+        -2.5
+      ],
+      "enabled": true,
+      "kind": "point",
+      "injection": "soft",
+      "normal": "x",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "component": "Ex",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.25,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 3.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "corner_x+1_y+1",
+      "name": "source",
+      "center": [
+        2.975,
+        3.0,
+        -2.5
+      ],
+      "enabled": true,
+      "kind": "point",
+      "injection": "soft",
+      "normal": "x",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "component": "Ex",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.25,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    }
+  ],
+  "global_source": {
+    "wavelength": 1.55,
+    "pulse": "gaussian",
+    "pulse_cycles": 3.0,
+    "time_definition": "cycles",
+    "pulse_length": 2e-14,
+    "pulse_offset": 5e-14,
+    "signal": null,
+    "wavelength_start": 1.3,
+    "wavelength_stop": 1.8,
+    "optimize_for_short_pulse": true,
+    "eliminate_discontinuities": false,
+    "chirp_bandwidth_hz": 100000000000000.0
+  },
+  "monitors": [
+    {
+      "id": "xz",
+      "name": "xz",
+      "center": [
+        0.0,
+        0.0,
+        0.7250000000000001
+      ],
+      "enabled": true,
+      "kind": "field",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "custom",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [
+          187370286250000.0,
+          193414489032258.06,
+          199861638666666.66
+        ],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "none",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1,
+      "normal": "y",
+      "size": [
+        7.0,
+        0.0,
+        4.25
+      ],
+      "downsample": 1,
+      "downsample_xyz": null,
+      "record_fields": [
+        "Ex",
+        "Ey",
+        "Ez"
+      ],
+      "record_poynting": [],
+      "record_flux": false,
+      "dft_precision": "field",
+      "spatial_interpolation": "specified"
+    },
+    {
+      "id": "yz",
+      "name": "yz",
+      "center": [
+        0.0,
+        0.0,
+        0.7250000000000001
+      ],
+      "enabled": true,
+      "kind": "field",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "custom",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [
+          187370286250000.0,
+          193414489032258.06,
+          199861638666666.66
+        ],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "none",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1,
+      "normal": "x",
+      "size": [
+        0.0,
+        7.0,
+        4.25
+      ],
+      "downsample": 1,
+      "downsample_xyz": null,
+      "record_fields": [
+        "Ex",
+        "Ey",
+        "Ez"
+      ],
+      "record_poynting": [],
+      "record_flux": false,
+      "dft_precision": "field",
+      "spatial_interpolation": "specified"
+    },
+    {
+      "id": "incident",
+      "name": "incident",
+      "center": [
+        0.0,
+        0.0,
+        -1.4
+      ],
+      "enabled": true,
+      "kind": "field",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "custom",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [
+          187370286250000.0,
+          193414489032258.06,
+          199861638666666.66
+        ],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "none",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1,
+      "normal": "z",
+      "size": [
+        6.0,
+        6.0,
+        0.0
+      ],
+      "downsample": 1,
+      "downsample_xyz": null,
+      "record_fields": [
+        "Ex",
+        "Ey",
+        "Ez",
+        "Hx",
+        "Hy",
+        "Hz"
+      ],
+      "record_poynting": [
+        "z"
+      ],
+      "record_flux": true,
+      "dft_precision": "field",
+      "spatial_interpolation": "specified"
+    },
+    {
+      "id": "focal",
+      "name": "focal",
+      "center": [
+        0.0,
+        0.0,
+        1.65
+      ],
+      "enabled": true,
+      "kind": "field",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "custom",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [
+          187370286250000.0,
+          193414489032258.06,
+          199861638666666.66
+        ],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "none",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1,
+      "normal": "z",
+      "size": [
+        7.0,
+        7.0,
+        0.0
+      ],
+      "downsample": 1,
+      "downsample_xyz": null,
+      "record_fields": [
+        "Ex",
+        "Ey",
+        "Ez",
+        "Hx",
+        "Hy",
+        "Hz"
+      ],
+      "record_poynting": [
+        "z"
+      ],
+      "record_flux": true,
+      "dft_precision": "field",
+      "spatial_interpolation": "specified"
+    },
+    {
+      "id": "probe_0",
+      "name": "probe z=-1.2 um",
+      "center": [
+        0.0,
+        0.0,
+        -1.2
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ex",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "probe_1",
+      "name": "probe z=0 um",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ex",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "probe_2",
+      "name": "probe z=1.65 um",
+      "center": [
+        0.0,
+        0.0,
+        1.65
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ex",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "probe_3",
+      "name": "probe z=2.5 um",
+      "center": [
+        0.0,
+        0.0,
+        2.5
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ex",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    }
+  ],
+  "global_monitor": {
+    "sampling": "frequency",
+    "chebyshev_wavelength": false,
+    "chebyshev_nodes": "roots",
+    "use_source_limits": false,
+    "custom_frequencies_hz": [],
+    "wavelength_start": 1.3,
+    "wavelength_stop": 1.8,
+    "frequency_points": 101,
+    "apodization": "none",
+    "apodization_center": 2e-14,
+    "apodization_time_width": 1e-14
+  },
+  "import_provenance": null,
+  "revision": 0,
+  "content_sha256": null
+}

@@ -115,6 +115,12 @@ Each example includes its geometry, run commands and comparison results.
 
 *A pulse in a photonic-crystal line-defect waveguide. Actual 2D FDTD, showing instantaneous signed E<sub>z</sub> with the dielectric rods outlined in gray. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/phc-waveguide.mp4) · [Model and recording details](docs/assets/phc-waveguide.md).*
 
+### 3D metalens focusing
+
+[![A pulse focuses above a 112-pillar metalens in a full 3D TorchFDTD calculation](docs/assets/metalens-3d.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-3d.mp4)
+
+*A pulse passing through a silicon-pillar metalens. Full 3D FDTD, showing instantaneous signed E<sub>x</sub> on two intersecting planes and at the focus, all with one fixed color scale. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-3d.mp4) · [Model and reproduction](docs/assets/metalens-3d.md).*
+
 For gradients and optimization, start with [differentiable FDTD](docs/DIFFERENTIABLE_FDTD.md) and [shape gradients](docs/SHAPE_GRADIENTS.md). For larger studies, see [parameter sweeps](docs/PYTHON_BATCH.md) and [tensor batches](docs/TENSOR_BATCH.md).
 
 ## Core features

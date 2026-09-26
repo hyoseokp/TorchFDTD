@@ -1,0 +1,29 @@
+{
+  "renderer_sha256": "9fc416ad5b4ca09000fd03631a9f07dad25e109959be63e05ea0e1d3cca9f392",
+  "capture_sha256": "cd77b09ab10605048e7bf6097fffbb6b4f734b7aaee2dde4ef214ec187844635",
+  "font": "Arial",
+  "field": "instantaneous signed Ex, one fixed color scale",
+  "panels": "3D pillar geometry with XZ and YZ cuts above the lens, full XZ section, XY focal-plane section",
+  "perspective_plane_spatial_stride": 2,
+  "perspective_face_value": "mean of four corner samples",
+  "temporal_interpolation": "none",
+  "mp4_resolution": [
+    1680,
+    1008
+  ],
+  "gif_resolution": [
+    840,
+    504
+  ],
+  "frames": 294,
+  "fps": 25,
+  "duration_s": 11.76,
+  "poster_time_fs": 84.365937976747,
+  "decode_check": "MP4 and GIF passed",
+  "audio": false,
+  "sha256": {
+    "metalens-3d.mp4": "a6da24350ea3bb92ec58fb1d3bfec43a9b1506a24a8713b8fffe4a4983c639eb",
+    "metalens-3d.gif": "674701c02a3e0399268f0a268168dee9b2b8450c2323b55a1a23b86828b5c9ba",
+    "metalens-3d-poster.png": "713a109d7d047f7b9baecd7ec1717968b0e7deeb1da442ece1e2669ead307277"
+  }
+}

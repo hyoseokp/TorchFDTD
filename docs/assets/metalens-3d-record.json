@@ -1,0 +1,131 @@
+{
+  "schema": "torchfdtd-metalens-3d-movie-v1",
+  "solver_commit": "fee4672df5541d64069aeb3a0d25dedd1b0aaaca",
+  "generator_sha256": "cd77b09ab10605048e7bf6097fffbb6b4f734b7aaee2dde4ef214ec187844635",
+  "fixture": "examples/meep_comparison/metalens/geometry_3d.json",
+  "fixture_sha256": "6c318b9c25c31652c3036d9d0f0f5bfaef3f22ce3becb0ae8e20689033843034",
+  "model": "112 silicon cylinders in air, full 3D resident Yee/CPML FDTD, unchanged Meep-comparison fixture",
+  "backend": "cuda",
+  "kernel": "fused",
+  "device": "NVIDIA GeForce RTX 3060",
+  "precision": "float32",
+  "grid": [
+    160,
+    160,
+    134
+  ],
+  "steps": 2500,
+  "dt_fs": 0.09532874347655028,
+  "wavelength_um": 1.55,
+  "raw_frames": 500,
+  "recording": {
+    "every_steps": 5,
+    "sample_interval_fs": 0.4766437173827514,
+    "samples_per_optical_period": 10.847186875683878,
+    "xz_plane_y_um": 0.0,
+    "yz_plane_x_um": 0.0,
+    "yz_x_interpolation_right_weight": 0.5,
+    "xy_plane_z_um": 1.65,
+    "public_snapshot_max_abs_error": 0.0,
+    "public_compared_frames": 100,
+    "uninstrumented_exact_match": {
+      "electric": true,
+      "magnetic": true,
+      "signals": true,
+      "frames": true,
+      "frame_steps": true,
+      "dft_fields": true
+    },
+    "probe_spectral_fraction_above_snapshot_nyquist": [
+      1.5724392893351738e-12,
+      2.397679729972951e-13,
+      1.7642308611060762e-13,
+      2.1491615489543738e-13
+    ],
+    "probe_z_um": [
+      -1.2,
+      0.0,
+      1.65,
+      2.5
+    ],
+    "probe_envelope_peak_fs": [
+      76.45365226819332,
+      77.78825467686504,
+      82.07804813330979,
+      84.46126672022356
+    ]
+  },
+  "display": {
+    "field": "instantaneous signed Ex",
+    "temporal_interpolation": "none",
+    "frames": 294,
+    "fps": 25,
+    "duration_s": 11.76,
+    "window_fs": [
+      20.01903613007556,
+      159.67564532322174
+    ],
+    "fixed_Emax_reduced_units": 2.999603748321533,
+    "transverse_crop_um": [
+      -3.15,
+      3.15
+    ],
+    "z_crop_um": [
+      -2.7,
+      2.7
+    ]
+  },
+  "spectral_checks_against_existing_fixture": [
+    {
+      "wavelength_um": 1.6,
+      "actual": {
+        "axis_peak_z_um": 1.717409470752094,
+        "fwhm_x_um": 1.3747535004547884,
+        "fwhm_y_um": 1.1612190063965384,
+        "efficiency": 0.6159089351549956
+      },
+      "absolute_difference_vs_committed": {
+        "axis_peak_z_um": 0.0,
+        "fwhm_x_um": 0.0,
+        "fwhm_y_um": 0.0,
+        "efficiency": 0.0
+      }
+    },
+    {
+      "wavelength_um": 1.55,
+      "actual": {
+        "axis_peak_z_um": 1.606069042316264,
+        "fwhm_x_um": 1.3228512793156564,
+        "fwhm_y_um": 1.1239250930860134,
+        "efficiency": 0.6232254843549955
+      },
+      "absolute_difference_vs_committed": {
+        "axis_peak_z_um": 0.0,
+        "fwhm_x_um": 0.0,
+        "fwhm_y_um": 0.0,
+        "efficiency": 0.0
+      }
+    },
+    {
+      "wavelength_um": 1.5,
+      "actual": {
+        "axis_peak_z_um": 1.3986979166666695,
+        "fwhm_x_um": 1.2548460651207782,
+        "fwhm_y_um": 1.0959946110958074,
+        "efficiency": 0.6262852471349954
+      },
+      "absolute_difference_vs_committed": {
+        "axis_peak_z_um": 0.0,
+        "fwhm_x_um": 0.0,
+        "fwhm_y_um": 0.0,
+        "efficiency": 0.0
+      }
+    }
+  ],
+  "scope": "3D transient field visualization, not an optimized-lens or new performance claim",
+  "source_sha256": {
+    "torchfdtd/solver.py": "553996374e6d2b3932abaec174b5816021202162e4f34d8bf2a5f01db2899509",
+    "torchfdtd/cuda_kernels.py": "ca35a4860df5b22d20e9841810f9263645923d50b89583fb216b66c5ebbe5bb0",
+    "torchfdtd/boundaries.py": "eba3d42ba70d5a490979c467272b72b1b5bb53863b523aa6b97c29e9ffeca548"
+  }
+}

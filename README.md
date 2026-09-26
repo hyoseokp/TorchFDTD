@@ -1,13 +1,120 @@
-![TorchFDTD](docs/assets/hero.png)
-
 # TorchFDTD
 
 [![arXiv](https://img.shields.io/badge/arXiv-2609.30039-b31b1b.svg)](https://arxiv.org/abs/2609.30039)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22928834.svg)](https://doi.org/10.5281/zenodo.22928834)
 
-GPU FDTD for photonics: a browser CAD workbench, a Python project API and Torch-differentiable simulations on NVIDIA CUDA. MIT licensed.
+Open-source GPU FDTD for photonics, with PyTorch gradients and a browser workbench. MIT licensed.
+
+Build a device in Python or in the browser, simulate its electromagnetic fields, and use discrete adjoints with PyTorch autograd for inverse design.
+
+[Quick start](#quick-start) · [Examples](#examples) · [Validation](docs/MEEP_COMPARISON.md) · [Documentation](#documentation) · [Paper](https://arxiv.org/abs/2609.30039)
+
+[![A pulse propagating through a photonic-crystal waveguide, computed with 2D TorchFDTD](docs/assets/phc-waveguide.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/phc-waveguide.mp4)
+
+*A pulse in a photonic-crystal line-defect waveguide. Actual 2D FDTD fields, with the dielectric rods outlined in gray. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/phc-waveguide.mp4) · [Model and recording details](docs/assets/phc-waveguide.md).*
+
+- **Run on your NVIDIA GPU.** Fused CUDA kernels and CUDA Graphs accelerate field updates. CPU execution is available too.
+- **Differentiate your simulation.** Discrete adjoints connect material, geometry and source parameters to PyTorch autograd.
+- **Work in Python or the browser.** Both use the same project format. Save a browser-built device and run it from Python, or open a Python-built project in the workbench.
+
+## Quick start
+
+### Install and open the workbench
+
+Use Python 3.10 or 3.12. The [release wheel](https://github.com/hyoseokp/TorchFDTD/releases/latest) includes the browser workbench, so you do not need Node.js or a source checkout.
+
+**Windows / PowerShell, NVIDIA GPU:**
+
+```powershell
+python -m venv torchfdtd-env
+torchfdtd-env/Scripts/python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu126
+torchfdtd-env/Scripts/python.exe -m pip install "torchfdtd[cuda-kernels] @ https://github.com/hyoseokp/TorchFDTD/releases/download/v0.17.1/torchfdtd-0.17.1-py3-none-any.whl"
+torchfdtd-env/Scripts/torchfdtd doctor
+torchfdtd-env/Scripts/torchfdtd serve
+```
+
+Open **http://127.0.0.1:8765** in your browser. `torchfdtd doctor` checks the installation, CUDA device and fused-kernel launch before you start.
+
+For a CPU-only installation, use the PyTorch index `https://download.pytorch.org/whl/cpu` and omit `[cuda-kernels]` from the wheel command. The `cuda-kernels` extra installs CuPy for the fused CUDA path. See [installation and tested versions](docs/INSTALL.md) for requirements and troubleshooting.
+
+The server listens on loopback only. Use SSH forwarding for a remote GPU. The default workbench limit is 8 million resident cells. For larger local projects, see [memory admission and server limits](docs/SECURITY.md#memory-admission).
+
+### Run from Python
+
+This example runs a 3D waveguide on the fused CUDA path and saves both the project and its result:
+
+<!-- readme-example: cuda -->
+```python
+from torchfdtd import Project, Region, Structure, Source, Monitor, Simulation
+
+project = Project(
+    name="My waveguide",
+    region=Region(dimension="3d", size=(8, 6, 2), mesh=0.05, steps=1000,
+                  backend="cuda", cuda_kernel="fused"),
+    structures=[Structure(name="core", size=(8, 0.65, 0.4))],
+    sources=[Source(center=(-2.5, 0, 0), wavelength=1.55)],
+    monitors=[Monitor(name="output", center=(2, 0, 0))],
+)
+project.save("project.json")          # opens in the browser
+result = Simulation(project).run()
+result.save("results/run.npz")
+```
+
+Lengths are in µm and time arrays in seconds. `dimension` defaults to `"2d"` and `cuda_kernel` to `"torch"`, so this example selects both explicitly. It needs an NVIDIA GPU and the `cuda-kernels` extra. `Project.load()` runs browser-made scenes.
+
+<details>
+<summary>2D example for CPU or GPU, with result loading</summary>
+
+The 2D default runs on any install:
+
+```python
+from torchfdtd import Project, Structure, Source, Monitor, Simulation, Result
+
+project = Project(name="Any install", structures=[Structure(name="core", size=(8, 0.65, 0.4))],
+                  sources=[Source(center=(-2.5, 0, 0), wavelength=1.55)],
+                  monitors=[Monitor(name="output", center=(2, 0, 0))])
+result = Simulation(project).run()    # 2D, on the CPU or the CUDA device torch reports
+result.save("results/first.npz")
+print(Result.load("results/first.npz").summary["backend"])
+```
+
+</details>
+
+<details>
+<summary>Develop from a source checkout</summary>
+
+Clone the repository and enter its directory first. Node.js 20.19+ / 22.12+ is needed to rebuild the browser assets:
+
+```powershell
+git clone https://github.com/hyoseokp/TorchFDTD.git
+cd TorchFDTD
+python -m venv --system-site-packages .venv
+.venv/Scripts/python.exe -m pip install -e ".[dev,cuda-kernels]"
+npm.cmd ci
+npm.cmd run build
+.venv/Scripts/python.exe -m torchfdtd.cli serve
+```
+
+This route reuses packages available in the base Python environment. Install a suitable [PyTorch build](https://pytorch.org/get-started/locally/) first. The [installation guide](docs/INSTALL.md) also covers wheel builds and clean-install checks.
+
+</details>
+
+## Examples
+
+Each example includes its geometry, run commands and comparison results.
+
+| Example | What to explore |
+|---|---|
+| [Microring resonator](examples/meep_comparison/microring) | A bus-coupled ring, transmission spectra and resonance positions compared with Meep |
+| [2D and 3D metalenses](examples/meep_comparison/metalens) | Focusing fields and efficiency compared with Meep |
+| [Metagrating](examples/meep_comparison/metagrating) | Diffraction-order efficiencies compared with Meep and an RCWA reference |
+
+For gradients and optimization, start with [differentiable FDTD](docs/DIFFERENTIABLE_FDTD.md) and [shape gradients](docs/SHAPE_GRADIENTS.md). For larger studies, see [parameter sweeps](docs/PYTHON_BATCH.md) and [tensor batches](docs/TENSOR_BATCH.md).
 
 ## Core features
+
+<details>
+<summary>Materials, boundaries, sources, gradients and memory modes</summary>
 
 - **Native CUDA engine.** Fused Yee and CPML kernels, CUDA Graphs, FP32/FP64, complex Bloch fields, CPU fallback.
 - **Browser workbench.** Objects tree, XY/XZ/YZ and perspective CAD views, materials, simulation region, layout/analysis modes, field viewer, monitor traces, Python export.
@@ -16,6 +123,15 @@ GPU FDTD for photonics: a browser CAD workbench, a Python project API and Torch-
 - **Beyond VRAM.** Streamed execution across VRAM, DRAM and NVMe with measured memory reservations, a metadata planner and a crash-resumable journal.
 - **Physics.** 3D and 2D Yee grids, uniform or graded mesh, per-face CPML, periodic/Bloch, PEC/PMC/symmetry, Drude/Lorentz dispersion with passive fitting, anisotropic tensors, subpixel interfaces, point/sheet/plane/one-way/TFSF/mode sources, DFT monitors, mode ports, near-to-far field, diffraction orders.
 - **Interoperability.** GDS import/export with holes, etch layers, sidewall angles and port markers.
+
+</details>
+
+## Performance and validation
+
+The repository includes analytical tests, convergence and gradient checks, and comparisons with Meep, FDTDX and RCWA. Start with the [worked device comparisons](docs/MEEP_COMPARISON.md) or the [cross-solver benchmarks](docs/CROSS_SOLVER_COMPARISON.md). Hardware, precision and problem size are recorded alongside the results.
+
+<details>
+<summary>Detailed benchmarks, execution modes and solver comparisons</summary>
 
 ## How much faster
 
@@ -69,65 +185,7 @@ Ahead: browser CAD, same-GPU structure batches, beyond-VRAM streaming with resta
 Equal: nonuniform meshes, dispersive materials, anisotropic materials, boundaries, mode sources and ports, far-field projection, differentiable physics with fixed eigenmodes.
 Behind: single-problem multi-GPU (verified with CPU ranks only). Row-by-row evidence: [docs/FDTDX_PARITY_KO.md](docs/FDTDX_PARITY_KO.md).
 
-## Quick start
-
-Python 3.10 or 3.12 and a [PyTorch](https://pytorch.org/get-started/locally/) build for the machine: CUDA for GPU execution, CPU otherwise. The versions that were installed and run are listed in [docs/INSTALL.md](docs/INSTALL.md). The `cuda-kernels` extra installs CuPy, which the fused CUDA kernels and the real-field CUDA adjoint use; without it the `torch` kernel runs.
-
-Install the wheel; it carries the built browser workbench, so no Node.js and no checkout are needed:
-
-```powershell
-python -m venv torchfdtd-env
-torchfdtd-env/Scripts/python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu126
-torchfdtd-env/Scripts/python.exe -m pip install "torchfdtd-0.17.1-py3-none-any.whl[cuda-kernels]"
-torchfdtd-env/Scripts/torchfdtd doctor
-torchfdtd-env/Scripts/torchfdtd serve
-```
-
-`torchfdtd doctor` reports Python, torch, CuPy, the CUDA runtime and driver, the device, a fused-kernel launch and the backend a project will use, with one message per unsupported situation. Open http://127.0.0.1:8765 (loopback only; use SSH forwarding for a remote GPU).
-
-The workbench server applies fixed size limits to every request (8 million resident cells, 1000 structures and others, [docs/SECURITY.md](docs/SECURITY.md#size-limits-of-the-server)). `torchfdtd serve --memory-admission` admits scenes by the memory estimate instead, as the Python API does, and keeps the input limits; it is meant for a single user on their own machine ([docs/SECURITY.md](docs/SECURITY.md#memory-admission)).
-
-To develop from a checkout instead, Node.js 20.19+ / 22.12+ rebuilds the workbench assets under `torchfdtd/web`:
-
-```powershell
-python -m venv --system-site-packages .venv
-.venv/Scripts/python.exe -m pip install -e ".[dev,cuda-kernels]"
-npm.cmd ci
-npm.cmd run build
-.venv/Scripts/python.exe -m torchfdtd.cli serve
-```
-
-<!-- readme-example: cuda -->
-```python
-from torchfdtd import Project, Region, Structure, Source, Monitor, Simulation
-
-project = Project(
-    name="My waveguide",
-    region=Region(dimension="3d", size=(8, 6, 2), mesh=0.05, steps=1000,
-                  backend="cuda", cuda_kernel="fused"),
-    structures=[Structure(name="core", size=(8, 0.65, 0.4))],
-    sources=[Source(center=(-2.5, 0, 0), wavelength=1.55)],
-    monitors=[Monitor(name="output", center=(2, 0, 0))],
-)
-project.save("project.json")          # opens in the browser
-result = Simulation(project).run()
-result.save("results/run.npz")
-```
-
-Lengths are in µm and time arrays in seconds. `dimension` defaults to `"2d"` and `cuda_kernel` to `"torch"`, so the example sets both to run the measured 3D fused path; it needs a CUDA device and the `cuda-kernels` extra. The 2D default runs on any install, and `Result.load()` restores a saved result:
-
-```python
-from torchfdtd import Project, Structure, Source, Monitor, Simulation, Result
-
-project = Project(name="Any install", structures=[Structure(name="core", size=(8, 0.65, 0.4))],
-                  sources=[Source(center=(-2.5, 0, 0), wavelength=1.55)],
-                  monitors=[Monitor(name="output", center=(2, 0, 0))])
-result = Simulation(project).run()    # 2D, on the CPU or the CUDA device torch reports
-result.save("results/first.npz")
-print(Result.load("results/first.npz").summary["backend"])
-```
-
-`Project.load()` runs browser-made scenes.
+</details>
 
 ## Documentation
 
@@ -144,7 +202,7 @@ python -m pytest -q
 npm run test:ui
 ```
 
-Validation uses analytic solutions and independently authored CPU/CUDA references; no commercial solver results are used.
+Validation uses analytical solutions, independently authored CPU/CUDA references, and the open-source solver comparisons linked above. No commercial solver results are used.
 
 ## Citing TorchFDTD
 

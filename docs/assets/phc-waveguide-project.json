@@ -1,0 +1,10243 @@
+{
+  "schema_version": 1,
+  "name": "Photonic-crystal line-defect waveguide | 2D TMz",
+  "region": {
+    "dimension": "2d",
+    "size": [
+      9.9,
+      5.5,
+      1.0
+    ],
+    "mesh": 0.019642857142857146,
+    "mesh_steps": null,
+    "mesh_coordinates": null,
+    "material_sampling": "yee",
+    "interface_method": "staircase",
+    "subpixel_quadrature": 8,
+    "mesh_type": "uniform",
+    "mesh_max": 0.15,
+    "mesh_grading": 1.25,
+    "mesh_ppw": 24.0,
+    "mesh_auto_refine": true,
+    "mesh_refinements": [],
+    "courant_factor": 0.99,
+    "time_step_override": null,
+    "steps": 3936,
+    "run_control": {
+      "auto_shutoff": false,
+      "decay_threshold": 1e-6,
+      "check_interval": 50,
+      "consecutive_checks": 3,
+      "min_steps": 100,
+      "source_tail_amplitude": 1e-8,
+      "after_source_s": 0.0,
+      "divergence_check": true,
+      "growth_limit": 1000000.0,
+      "field_limit": null
+    },
+    "pml_cells": 28,
+    "pml_dispersion": "ade",
+    "boundaries": {
+      "x_min": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "x_max": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "y_min": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "y_max": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "z_min": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "z_max": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      }
+    },
+    "bloch_phase": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "background_index": 1.0,
+    "backend": "cpu",
+    "memory_mode": "resident",
+    "execution_mode": "resident",
+    "tiling": {
+      "size_um": 20.0,
+      "overlap_um": 2.0,
+      "max_angle_deg": 45.0,
+      "propagation_um": null,
+      "allow_approximate": false
+    },
+    "cuda_kernel": "torch",
+    "cuda_monitor_kernel": "torch",
+    "precision": "float32",
+    "snapshot_interval": 20,
+    "field": "Ez",
+    "slice_axis": "z",
+    "slice_position": 0.0,
+    "complex_display": "real"
+  },
+  "materials": [
+    {
+      "name": "Dielectric rods (epsilon 12)",
+      "index": 3.4641016151377544,
+      "color": "#6ca8dd",
+      "model": "dielectric",
+      "epsilon_tensor": [
+        2.25,
+        2.25,
+        2.25,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "epsilon_inf": 1.0,
+      "plasma_rad_s": 2000000000000000.0,
+      "collision_rad_s": 100000000000000.0,
+      "resonance_rad_s": 2000000000000000.0,
+      "linewidth_rad_s": 100000000000000.0,
+      "delta_epsilon": 1.0,
+      "poles": [],
+      "samples": null,
+      "fit_band_um": null,
+      "fit_dt_s": null,
+      "provenance": null
+    }
+  ],
+  "structures": [
+    {
+      "id": "rod-0-0",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-0-1",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-0-2",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-0-3",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-0-4",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-0-6",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-0-7",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-0-8",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-0-9",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-0-10",
+      "name": "Dielectric rod",
+      "center": [
+        -4.95,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-0",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-1",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-2",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-3",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-4",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-6",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-7",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-8",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-9",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-1-10",
+      "name": "Dielectric rod",
+      "center": [
+        -4.4,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-0",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-1",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-2",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-3",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-4",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-6",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-7",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-8",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-9",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-2-10",
+      "name": "Dielectric rod",
+      "center": [
+        -3.8500000000000005,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-0",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-1",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-2",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-3",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-4",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-6",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-7",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-8",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-9",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-3-10",
+      "name": "Dielectric rod",
+      "center": [
+        -3.3000000000000003,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-0",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-1",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-2",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-3",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-4",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-6",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-7",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-8",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-9",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-4-10",
+      "name": "Dielectric rod",
+      "center": [
+        -2.75,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-0",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-1",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-2",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-3",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-4",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-6",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-7",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-8",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-9",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-5-10",
+      "name": "Dielectric rod",
+      "center": [
+        -2.2,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-0",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-1",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-2",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-3",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-4",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-6",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-7",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-8",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-9",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-6-10",
+      "name": "Dielectric rod",
+      "center": [
+        -1.6500000000000001,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-0",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-1",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-2",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-3",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-4",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-6",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-7",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-8",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-9",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-7-10",
+      "name": "Dielectric rod",
+      "center": [
+        -1.1,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-0",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-1",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-2",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-3",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-4",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-6",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-7",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-8",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-9",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-8-10",
+      "name": "Dielectric rod",
+      "center": [
+        -0.55,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-0",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-1",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-2",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-3",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-4",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-6",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-7",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-8",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-9",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-9-10",
+      "name": "Dielectric rod",
+      "center": [
+        0.0,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-0",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-1",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-2",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-3",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-4",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-6",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-7",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-8",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-9",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-10-10",
+      "name": "Dielectric rod",
+      "center": [
+        0.55,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-0",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-1",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-2",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-3",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-4",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-6",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-7",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-8",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-9",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-11-10",
+      "name": "Dielectric rod",
+      "center": [
+        1.1,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-0",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-1",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-2",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-3",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-4",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-6",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-7",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-8",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-9",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-12-10",
+      "name": "Dielectric rod",
+      "center": [
+        1.6500000000000001,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-0",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-1",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-2",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-3",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-4",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-6",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-7",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-8",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-9",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-13-10",
+      "name": "Dielectric rod",
+      "center": [
+        2.2,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-0",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-1",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-2",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-3",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-4",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-6",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-7",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-8",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-9",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-14-10",
+      "name": "Dielectric rod",
+      "center": [
+        2.75,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-0",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-1",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-2",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-3",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-4",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-6",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-7",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-8",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-9",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-15-10",
+      "name": "Dielectric rod",
+      "center": [
+        3.3000000000000003,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-0",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-1",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-2",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-3",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-4",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-6",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-7",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-8",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-9",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-16-10",
+      "name": "Dielectric rod",
+      "center": [
+        3.8500000000000005,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-0",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-1",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-2",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-3",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-4",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-6",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-7",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-8",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-9",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-17-10",
+      "name": "Dielectric rod",
+      "center": [
+        4.4,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-0",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        -2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-1",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        -2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-2",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        -1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-3",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        -1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-4",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        -0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-6",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        0.55,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-7",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        1.1,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-8",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        1.6500000000000001,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-9",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        2.2,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    },
+    {
+      "id": "rod-18-10",
+      "name": "Dielectric rod",
+      "center": [
+        4.95,
+        2.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "circle",
+      "size": [
+        0.22000000000000003,
+        0.22000000000000003,
+        1.0
+      ],
+      "radius": 0.11000000000000001,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "Dielectric rods (epsilon 12)",
+      "mesh_order": 2
+    }
+  ],
+  "sources": [
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 2.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "pulse",
+      "name": "source",
+      "center": [
+        -3.8500000000000005,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "injection": "soft",
+      "normal": "x",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "component": "Ez",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 1.0,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    }
+  ],
+  "global_source": {
+    "wavelength": 1.55,
+    "pulse": "gaussian",
+    "pulse_cycles": 3.0,
+    "time_definition": "cycles",
+    "pulse_length": 2e-14,
+    "pulse_offset": 5e-14,
+    "signal": null,
+    "wavelength_start": 1.3,
+    "wavelength_stop": 1.8,
+    "optimize_for_short_pulse": true,
+    "eliminate_discontinuities": false,
+    "chirp_bandwidth_hz": 100000000000000.0
+  },
+  "monitors": [
+    {
+      "id": "probe-0",
+      "name": "monitor",
+      "center": [
+        -2.75,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "probe-1",
+      "name": "monitor",
+      "center": [
+        -1.1,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "probe-2",
+      "name": "monitor",
+      "center": [
+        0.55,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "probe-3",
+      "name": "monitor",
+      "center": [
+        2.2,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "probe-4",
+      "name": "monitor",
+      "center": [
+        3.3000000000000003,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    }
+  ],
+  "global_monitor": {
+    "sampling": "frequency",
+    "chebyshev_wavelength": false,
+    "chebyshev_nodes": "roots",
+    "use_source_limits": false,
+    "custom_frequencies_hz": [],
+    "wavelength_start": 1.3,
+    "wavelength_stop": 1.8,
+    "frequency_points": 101,
+    "apodization": "none",
+    "apodization_center": 2e-14,
+    "apodization_time_width": 1e-14
+  },
+  "import_provenance": null,
+  "revision": 0,
+  "content_sha256": null
+}

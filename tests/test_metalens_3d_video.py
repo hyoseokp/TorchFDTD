@@ -94,5 +94,7 @@ def test_recorded_checks_and_media_are_reproducible(capture):
 
 def test_readme_keeps_existing_movies_visible():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    for name in ("microring-pulse", "phc-waveguide", "metalens-3d"):
+    for name in ("microring-pulse", "phc-waveguide", "metalens-volume"):
         assert f"](docs/assets/{name}.gif)" in readme
+    volume_doc = (ROOT / "docs/assets/metalens-volume.md").read_text(encoding="utf-8")
+    assert "metalens-3d.md" in volume_doc

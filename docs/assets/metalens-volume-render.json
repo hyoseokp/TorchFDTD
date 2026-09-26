@@ -1,0 +1,75 @@
+{
+  "renderer_sha256": "72f523bfcdbb607163ca4e34d050bd153b3e7eb539ee407b04d3db6cdab15f2a",
+  "capture_sha256": "fee57fcb9acf3ff636f993919cd726e7cc2d869b42f9680d95e692d6d19205c9",
+  "pyvista": "0.48.4",
+  "vtk": "9.6.2",
+  "font": "arial.ttf",
+  "method": "CPU fixed-point composite ray casting of actual native 3D field samples",
+  "field": "instantaneous signed Ex",
+  "fixed_field_max": 2.995635986328125,
+  "spatial_interpolation": "trilinear",
+  "scalar_range": [
+    -1,
+    1
+  ],
+  "opacity_knots_for_field_magnitude": [
+    [
+      0.0,
+      0.0
+    ],
+    [
+      0.1,
+      0.0
+    ],
+    [
+      0.2,
+      0.01
+    ],
+    [
+      0.35,
+      0.07
+    ],
+    [
+      0.6,
+      0.26
+    ],
+    [
+      1.0,
+      0.6
+    ]
+  ],
+  "opacity_unit_distance_um": 0.5,
+  "ray_sample_distance_um": 0.05,
+  "camera": "fixed orthographic, no rotation",
+  "isosurfaces": [
+    {
+      "normalized_field": -0.55,
+      "opacity": 0.14
+    },
+    {
+      "normalized_field": 0.55,
+      "opacity": 0.14
+    }
+  ],
+  "camera_parallel_scale_um": 4.1,
+  "mp4_resolution": [
+    1440,
+    1080
+  ],
+  "gif_resolution": [
+    800,
+    600
+  ],
+  "temporal_interpolation": "none",
+  "frames": 231,
+  "fps": 25,
+  "duration_s": 9.24,
+  "poster_time_fs": 81.98271938983324,
+  "decode_check": "MP4 and GIF passed",
+  "audio": false,
+  "sha256": {
+    "metalens-volume.mp4": "8e9541a1e79efaeee1100df84fbe5f64e585a3ab77b3934e349898cb69455938",
+    "metalens-volume.gif": "0e2b3e4cf13f95a26b7ce4ba9adb6959c6fb2ae1ceb6388372390c3b1b721719",
+    "metalens-volume-poster.png": "184ecfc5cc01d59c01bd9b55833d79a7b0f8ca4fec73072d096e2c1da329a633"
+  }
+}

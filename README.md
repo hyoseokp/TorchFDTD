@@ -117,9 +117,9 @@ Each example includes its geometry, run commands and comparison results.
 
 ### 3D metalens focusing
 
-[![A pulse focuses above a 112-pillar metalens in a full 3D TorchFDTD calculation](docs/assets/metalens-3d.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-3d.mp4)
+[![Translucent 3D electric-field wavefronts above a 112-pillar metalens, computed with TorchFDTD](docs/assets/metalens-volume.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-volume.mp4)
 
-*A pulse passing through a silicon-pillar metalens. Full 3D FDTD, showing instantaneous signed E<sub>x</sub> on two intersecting planes and at the focus, all with one fixed color scale. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-3d.mp4) · [Model and reproduction](docs/assets/metalens-3d.md).*
+*A pulse focusing above a silicon-pillar metalens. Full 3D FDTD, rendered as a translucent volume of instantaneous E<sub>x</sub>. Red and blue indicate opposite field signs, with one fixed scale throughout. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-volume.mp4) · [Model and reproduction](docs/assets/metalens-volume.md).*
 
 For gradients and optimization, start with [differentiable FDTD](docs/DIFFERENTIABLE_FDTD.md) and [shape gradients](docs/SHAPE_GRADIENTS.md). For larger studies, see [parameter sweeps](docs/PYTHON_BATCH.md) and [tensor batches](docs/TENSOR_BATCH.md).
 

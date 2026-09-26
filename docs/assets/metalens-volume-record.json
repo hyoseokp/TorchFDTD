@@ -1,0 +1,95 @@
+{
+  "schema": "torchfdtd-metalens-volume-v1",
+  "solver_commit": "e57b22e70277a76ef3d280e6a1a3dc9106f8b325",
+  "generator_sha256": "fee57fcb9acf3ff636f993919cd726e7cc2d869b42f9680d95e692d6d19205c9",
+  "reference_capture_sha256": "cd77b09ab10605048e7bf6097fffbb6b4f734b7aaee2dde4ef214ec187844635",
+  "fixture_sha256": "6c318b9c25c31652c3036d9d0f0f5bfaef3f22ce3becb0ae8e20689033843034",
+  "model": "Unchanged 112-pillar 3D Meep-comparison fixture, full resident Yee/CPML FDTD",
+  "grid": [
+    160,
+    160,
+    134
+  ],
+  "steps": 2500,
+  "backend": "cuda",
+  "kernel": "fused",
+  "device": "NVIDIA GeForce RTX 3060",
+  "precision": "float32",
+  "dt_fs": 0.09532874347655028,
+  "raw_frames": 500,
+  "volume_shape": [
+    63,
+    63,
+    43
+  ],
+  "recording": {
+    "component": "Ex on native Yee coordinates",
+    "spatial_stride": 2,
+    "every_steps": 5,
+    "samples_per_optical_period": 10.847186875683878,
+    "crop_bounds_um": [
+      [
+        -3.125,
+        3.0750000000000006
+      ],
+      [
+        -3.1,
+        3.1000000000000005
+      ],
+      [
+        -1.5,
+        2.7000000000000006
+      ]
+    ],
+    "public_compared_frames": 100,
+    "public_snapshot_max_abs_error": 0.0,
+    "uninstrumented_exact_match": {
+      "electric": true,
+      "magnetic": true,
+      "signals": true,
+      "frames": true,
+      "frame_steps": true,
+      "dft_fields": true
+    },
+    "probe_envelope_peak_fs": [
+      76.45365226819332,
+      77.78825467686504,
+      82.07804813330979,
+      84.46126672022356
+    ]
+  },
+  "rms_reference": {
+    "quantity": "sqrt of one-central-optical-period mean Ex^2, used to select the poster time and for optional RMS rendering",
+    "period_fs": 5.170243475571357,
+    "averaging_weights": [
+      0.008270872560745853,
+      0.07687502272316016,
+      0.09218980104802088,
+      0.09218980104802088,
+      0.09218980104802088,
+      0.09218980104802088,
+      0.09218980104802088,
+      0.09218980104802088,
+      0.09218980104802088,
+      0.09218980104802088,
+      0.09218980104802088,
+      0.07687502272316016,
+      0.008270872560745855
+    ],
+    "mean_method": "exact integral of piecewise-linear interpolation of recorded Ex^2",
+    "fixed_RMS_max": 2.1194498538970947,
+    "poster_index": 171,
+    "frames": 231,
+    "fps": 25,
+    "window_fs": [
+      25.262117021285825,
+      134.89017201931864
+    ]
+  },
+  "source_sha256": {
+    "torchfdtd/solver.py": "553996374e6d2b3932abaec174b5816021202162e4f34d8bf2a5f01db2899509",
+    "torchfdtd/cuda_kernels.py": "ca35a4860df5b22d20e9841810f9263645923d50b89583fb216b66c5ebbe5bb0",
+    "torchfdtd/boundaries.py": "eba3d42ba70d5a490979c467272b72b1b5bb53863b523aa6b97c29e9ffeca548"
+  },
+  "scope": "3D field-envelope visualization, not total intensity, holography or a new lens-performance claim"
+}

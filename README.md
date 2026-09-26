@@ -9,9 +9,9 @@ Build a device in Python or in the browser, simulate its electromagnetic fields,
 
 [Quick start](#quick-start) · [Examples](#examples) · [Validation](docs/MEEP_COMPARISON.md) · [Documentation](#documentation) · [Paper](https://arxiv.org/abs/2609.30039)
 
-[![A pulse propagating through a photonic-crystal waveguide, computed with 2D TorchFDTD](docs/assets/phc-waveguide.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/phc-waveguide.mp4)
+[![An optical pulse couples into a microring and circulates, computed with 2D TorchFDTD](docs/assets/microring-pulse.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/microring-pulse.mp4)
 
-*A pulse in a photonic-crystal line-defect waveguide. Actual 2D FDTD fields, with the dielectric rods outlined in gray. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/phc-waveguide.mp4) · [Model and recording details](docs/assets/phc-waveguide.md).*
+*A pulse couples into a microring, circulates and leaks back into the bus waveguide. Actual 2D FDTD, showing optical-cycle RMS E<sub>z</sub> with a fixed color scale. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/microring-pulse.mp4) · [Model and reproduction](docs/assets/microring-pulse.md).*
 
 - **Run on your NVIDIA GPU.** Fused CUDA kernels and CUDA Graphs accelerate field updates. CPU execution is available too.
 - **Differentiate your simulation.** Discrete adjoints connect material, geometry and source parameters to PyTorch autograd.
@@ -108,6 +108,8 @@ Each example includes its geometry, run commands and comparison results.
 | [Microring resonator](examples/meep_comparison/microring) | A bus-coupled ring, transmission spectra and resonance positions compared with Meep |
 | [2D and 3D metalenses](examples/meep_comparison/metalens) | Focusing fields and efficiency compared with Meep |
 | [Metagrating](examples/meep_comparison/metagrating) | Diffraction-order efficiencies compared with Meep and an RCWA reference |
+
+Animations: [microring pulse circulation](docs/assets/microring-pulse.md) · [photonic-crystal waveguide](docs/assets/phc-waveguide.md).
 
 For gradients and optimization, start with [differentiable FDTD](docs/DIFFERENTIABLE_FDTD.md) and [shape gradients](docs/SHAPE_GRADIENTS.md). For larger studies, see [parameter sweeps](docs/PYTHON_BATCH.md) and [tensor batches](docs/TENSOR_BATCH.md).
 

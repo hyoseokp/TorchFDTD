@@ -1,0 +1,25 @@
+{
+  "generator_sha256": "941e2dbf8b3b148d37213cb659fc9bbfb43742c9a0ae317c1c6563b5be70b66d",
+  "font": "Arial",
+  "field": "optical-cycle RMS Ez",
+  "normalization": "linear, one global maximum",
+  "mp4_resolution": [
+    1296,
+    1128
+  ],
+  "gif_resolution": [
+    648,
+    564
+  ],
+  "frames": 488,
+  "fps": 25,
+  "duration_s": 19.52,
+  "temporal_interpolation": "none",
+  "decode_check": "MP4 and GIF passed",
+  "audio": false,
+  "sha256": {
+    "microring-pulse.mp4": "c422ae8edb9498879d99e76aed6b91623b3fedae3de5a72c13b0cb20d110543d",
+    "microring-pulse.gif": "810a62aee2a2a664401c882f594b67338cdae5c2d101caf639fb84e58a5b1cb2",
+    "microring-pulse-poster.png": "45cce5890ad67f4646942314a1cad3f03d200a674191a0c90024c8d6610d7256"
+  }
+}

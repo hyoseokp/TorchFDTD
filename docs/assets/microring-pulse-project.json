@@ -1,0 +1,598 @@
+{
+  "schema_version": 1,
+  "name": "Microring pulse circulation | 2D Ez",
+  "region": {
+    "dimension": "2d",
+    "size": [
+      18.0,
+      15.024,
+      1.0
+    ],
+    "mesh": 0.024,
+    "mesh_steps": null,
+    "mesh_coordinates": null,
+    "material_sampling": "yee",
+    "interface_method": "staircase",
+    "subpixel_quadrature": 8,
+    "mesh_type": "uniform",
+    "mesh_max": 0.15,
+    "mesh_grading": 1.25,
+    "mesh_ppw": 24.0,
+    "mesh_auto_refine": true,
+    "mesh_refinements": [],
+    "courant_factor": 0.99,
+    "time_step_override": null,
+    "steps": 16000,
+    "run_control": {
+      "auto_shutoff": false,
+      "decay_threshold": 1e-6,
+      "check_interval": 50,
+      "consecutive_checks": 3,
+      "min_steps": 100,
+      "source_tail_amplitude": 1e-8,
+      "after_source_s": 0.0,
+      "divergence_check": true,
+      "growth_limit": 1000000.0,
+      "field_limit": null
+    },
+    "pml_cells": 42,
+    "pml_dispersion": "ade",
+    "boundaries": {
+      "x_min": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "x_max": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "y_min": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "y_max": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "z_min": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      },
+      "z_max": {
+        "kind": "pml",
+        "layers": null,
+        "sigma_scale": 1.0,
+        "kappa": 1.0,
+        "alpha": 1e-8,
+        "polynomial": 3.0,
+        "alpha_polynomial": 0.0
+      }
+    },
+    "bloch_phase": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "background_index": 1.444,
+    "backend": "cuda",
+    "memory_mode": "resident",
+    "execution_mode": "auto",
+    "tiling": {
+      "size_um": 20.0,
+      "overlap_um": 2.0,
+      "max_angle_deg": 45.0,
+      "propagation_um": null,
+      "allow_approximate": false
+    },
+    "cuda_kernel": "fused",
+    "cuda_monitor_kernel": "fused",
+    "precision": "float32",
+    "snapshot_interval": 8,
+    "field": "Ez",
+    "slice_axis": "z",
+    "slice_position": 0.0,
+    "complex_display": "real"
+  },
+  "materials": [
+    {
+      "name": "core",
+      "index": 2.83,
+      "color": "#6ca8dd",
+      "model": "dielectric",
+      "epsilon_tensor": [
+        2.25,
+        2.25,
+        2.25,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "epsilon_inf": 1.0,
+      "plasma_rad_s": 2000000000000000.0,
+      "collision_rad_s": 100000000000000.0,
+      "resonance_rad_s": 2000000000000000.0,
+      "linewidth_rad_s": 100000000000000.0,
+      "delta_epsilon": 1.0,
+      "poles": [],
+      "samples": null,
+      "fit_band_um": null,
+      "fit_dt_s": null,
+      "provenance": null
+    },
+    {
+      "name": "clad",
+      "index": 1.444,
+      "color": "#6ca8dd",
+      "model": "dielectric",
+      "epsilon_tensor": [
+        2.25,
+        2.25,
+        2.25,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "epsilon_inf": 1.0,
+      "plasma_rad_s": 2000000000000000.0,
+      "collision_rad_s": 100000000000000.0,
+      "resonance_rad_s": 2000000000000000.0,
+      "linewidth_rad_s": 100000000000000.0,
+      "delta_epsilon": 1.0,
+      "poles": [],
+      "samples": null,
+      "fit_band_um": null,
+      "fit_dt_s": null,
+      "provenance": null
+    }
+  ],
+  "structures": [
+    {
+      "id": "bus",
+      "name": "bus",
+      "center": [
+        0.0,
+        -5.304,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "rectangle",
+      "size": [
+        18.0,
+        0.5,
+        1.0
+      ],
+      "radius": 0.5,
+      "inner_radius": 0.3,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "core",
+      "mesh_order": 2
+    },
+    {
+      "id": "ring",
+      "name": "ring",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "ring",
+      "size": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "radius": 5.0,
+      "inner_radius": 4.5,
+      "rotation": 0.0,
+      "rotation_axes": [
+        "z",
+        "x",
+        "y"
+      ],
+      "rotation_angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "make_ellipsoid": false,
+      "radius_2": 0.5,
+      "radius_3": 0.5,
+      "inner_radius_2": 0.3,
+      "theta_start": 0.0,
+      "theta_stop": 360.0,
+      "vertices": [
+        [
+          -0.5,
+          -0.5
+        ],
+        [
+          0.5,
+          -0.5
+        ],
+        [
+          0.0,
+          0.5
+        ]
+      ],
+      "holes": [],
+      "material": "core",
+      "mesh_order": 2
+    }
+  ],
+  "sources": [
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 4.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "line",
+      "name": "line",
+      "center": [
+        -7.5120000000000005,
+        -5.304,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "plane",
+      "injection": "soft",
+      "normal": "x",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        1.44,
+        0.0
+      ],
+      "component": "Ez",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 1.0,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 4.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "end_low",
+      "name": "end_low",
+      "center": [
+        -7.5120000000000005,
+        -6.048,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "injection": "soft",
+      "normal": "x",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "component": "Ez",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.5,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    },
+    {
+      "wavelength": 1.55,
+      "pulse": "gaussian",
+      "pulse_cycles": 4.0,
+      "time_definition": "cycles",
+      "pulse_length": 2e-14,
+      "pulse_offset": 5e-14,
+      "signal": null,
+      "wavelength_start": 1.3,
+      "wavelength_stop": 1.8,
+      "optimize_for_short_pulse": true,
+      "eliminate_discontinuities": false,
+      "chirp_bandwidth_hz": 100000000000000.0,
+      "id": "end_high",
+      "name": "end_high",
+      "center": [
+        -7.5120000000000005,
+        -4.56,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "injection": "soft",
+      "normal": "x",
+      "direction": "+",
+      "incident_pml_cells": 96,
+      "size": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "component": "Ez",
+      "theta": null,
+      "phi": 0.0,
+      "amplitude": 0.5,
+      "phase": 0.0,
+      "use_global_source": false,
+      "extend_through_pml": false
+    }
+  ],
+  "global_source": {
+    "wavelength": 1.55,
+    "pulse": "gaussian",
+    "pulse_cycles": 3.0,
+    "time_definition": "cycles",
+    "pulse_length": 2e-14,
+    "pulse_offset": 5e-14,
+    "signal": null,
+    "wavelength_start": 1.3,
+    "wavelength_stop": 1.8,
+    "optimize_for_short_pulse": true,
+    "eliminate_discontinuities": false,
+    "chirp_bandwidth_hz": 100000000000000.0
+  },
+  "monitors": [
+    {
+      "id": "bus_in",
+      "name": "bus_in",
+      "center": [
+        -6.0,
+        -5.304,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "ring_bottom",
+      "name": "ring_bottom",
+      "center": [
+        0.0,
+        -4.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "ring_right",
+      "name": "ring_right",
+      "center": [
+        4.75,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "ring_top",
+      "name": "ring_top",
+      "center": [
+        0.0,
+        4.75,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "ring_left",
+      "name": "ring_left",
+      "center": [
+        -4.75,
+        0.0,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    },
+    {
+      "id": "bus_out",
+      "name": "bus_out",
+      "center": [
+        6.0,
+        -5.304,
+        0.0
+      ],
+      "enabled": true,
+      "kind": "point",
+      "component": "Ez",
+      "spectrum": {
+        "sampling": "fft",
+        "chebyshev_wavelength": false,
+        "chebyshev_nodes": "roots",
+        "use_source_limits": false,
+        "custom_frequencies_hz": [],
+        "wavelength_start": 1.3,
+        "wavelength_stop": 1.8,
+        "frequency_points": 101,
+        "apodization": "hann",
+        "apodization_center": 2e-14,
+        "apodization_time_width": 1e-14
+      },
+      "use_global_monitor": false,
+      "inherit_apodization": true,
+      "time_downsample": 1
+    }
+  ],
+  "global_monitor": {
+    "sampling": "frequency",
+    "chebyshev_wavelength": false,
+    "chebyshev_nodes": "roots",
+    "use_source_limits": false,
+    "custom_frequencies_hz": [],
+    "wavelength_start": 1.3,
+    "wavelength_stop": 1.8,
+    "frequency_points": 101,
+    "apodization": "none",
+    "apodization_center": 2e-14,
+    "apodization_time_width": 1e-14
+  },
+  "import_provenance": null,
+  "revision": 0,
+  "content_sha256": null
+}

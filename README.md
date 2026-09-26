@@ -109,7 +109,11 @@ Each example includes its geometry, run commands and comparison results.
 | [2D and 3D metalenses](examples/meep_comparison/metalens) | Focusing fields and efficiency compared with Meep |
 | [Metagrating](examples/meep_comparison/metagrating) | Diffraction-order efficiencies compared with Meep and an RCWA reference |
 
-Animations: [microring pulse circulation](docs/assets/microring-pulse.md) · [photonic-crystal waveguide](docs/assets/phc-waveguide.md).
+### Photonic-crystal waveguide
+
+[![A pulse propagating through a photonic-crystal waveguide, computed with 2D TorchFDTD](docs/assets/phc-waveguide.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/phc-waveguide.mp4)
+
+*A pulse in a photonic-crystal line-defect waveguide. Actual 2D FDTD, showing instantaneous signed E<sub>z</sub> with the dielectric rods outlined in gray. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/phc-waveguide.mp4) · [Model and recording details](docs/assets/phc-waveguide.md).*
 
 For gradients and optimization, start with [differentiable FDTD](docs/DIFFERENTIABLE_FDTD.md) and [shape gradients](docs/SHAPE_GRADIENTS.md). For larger studies, see [parameter sweeps](docs/PYTHON_BATCH.md) and [tensor batches](docs/TENSOR_BATCH.md).
 

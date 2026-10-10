@@ -17,8 +17,7 @@ closure difference. Licence strings, versions, group membership and extra
 components differ between wheel builds, so they are reported in the
 ``closure_difference`` block as information, never judged there. Nothing here is a legal opinion: an item whose
 licence or distribution right is not settled is listed under open items with
-BLOCKED_EXTERNAL semantics, never omitted. This is the G9-02 tool of
-docs/COMPLETION_PROGRAM_KO.md.
+BLOCKED_EXTERNAL semantics, never omitted. This is the G9-02 tool.
 """
 import argparse
 import datetime
@@ -48,7 +47,7 @@ GROUPS = ['runtime', 'gds', 'hdf5', 'cuda-kernels', 'dev', 'benchmark']
 # Non-pip material in the tracked tree and in the wheel. status is 'cleared'
 # when the licence and the right to redistribute are documented, 'own' for the
 # project's own work, and 'open' for an item that needs an owner or expert
-# decision recorded in docs/RELEASE_REVIEW.md (BLOCKED_EXTERNAL, G9-03).
+# decision (BLOCKED_EXTERNAL, G9-03).
 ASSETS = [
     dict(name='three.js', version='0.180.0 (r180)', license='MIT', status='cleared',
          source='https://github.com/mrdoob/three.js', paths=['torchfdtd/web/assets/index-*.js'],
@@ -82,7 +81,7 @@ ASSETS = [
          paths=['docs/validation/open-source-flaport.json', 'docs/validation/fdtdx_*.json', 'docs/validation/cr-full-torcwa-*.json'],
          notes='Comparison numbers produced by running those tools on synthetic fixtures; no source code of theirs is included.'),
     dict(name='Colour-router application records', version=None, license='MIT (project licence)', status='own',
-         source='docs/CR_VALIDATION_PLAN.md', paths=['docs/validation/cr-*.json'],
+         source=None, paths=['docs/validation/cr-*.json'],
          notes='The author\'s own research fixtures and native results, published with the repository on 2026-09-21. New application runs are outside the completion program.'),
     dict(name='Examples and test fixtures', version=None, license='MIT (project licence)', status='own',
          source=None, paths=['examples/*.json', 'tests/**'],
@@ -90,15 +89,12 @@ ASSETS = [
     dict(name='Installed-API property catalogue', version='collected 2026-09-18', license='unclear', status='open',
          source='names queried from a locally installed vendor API',
          paths=['docs/validation/installed-property-catalog.json', 'torchfdtd/feature_inventory.json', 'benchmarks/build_feature_inventory.py'],
-         notes='Object and property names of a commercial solver, turned into the feature inventory that the wheel ships and /api/capabilities serves. docs/RELEASE_REVIEW.md lists the permitted use of this extraction as an unresolved decision.'),
+         notes='Object and property names of a commercial solver, turned into the feature inventory that the wheel ships and /api/capabilities serves. The permitted use of this extraction is an unresolved decision.'),
     dict(name='FSP layout support', version=None, license='unclear', status='open',
          source='independently observed file layout, docs/FSP_BINARY.md',
          paths=['torchfdtd/fsp_binary.py', 'torchfdtd/fsp_native.py', 'torchfdtd/fsp_geometry.py', 'torchfdtd/fsp_objects.py',
                 'torchfdtd/fsp_instruments.py', 'torchfdtd/fsp_settings.py', 'torchfdtd/fsp_service.py', 'docs/FSP*.md'],
-         notes='Reader and writer of a documented subset of a vendor project format. docs/RELEASE_REVIEW.md gate 1 keeps the contract and interoperability question open.'),
-    dict(name='Aggregate commercial timing table', version=None, license='unclear', status='open',
-         source='docs/RELEASE_REVIEW.md, timing-table exception', paths=['README.md'],
-         notes='Three paired timing facts against a commercial solver, kept by the owner\'s instruction; the public academic-use terms restrict benchmarking and the governing agreement is unknown.'),
+         notes='Reader and writer of a documented subset of a vendor project format. The contract and interoperability question stays open.'),
 ]
 
 # The Hangul account name is spelled with escapes so this file never carries it verbatim.
@@ -320,7 +316,7 @@ def build(audit):
     else:
         vulnerability_audit = previous.get('vulnerability_audit') or dict(tool='pip-audit', status='NOT_RUN', reason='run with --audit')
     open_items = [dict(name=a['name'], paths=a['paths'], why=a['notes'], state='BLOCKED_EXTERNAL',
-                       decision='owner or counsel decision recorded in docs/RELEASE_REVIEW.md; tracked by gate task G9-03')
+                       decision='owner or counsel decision; tracked by gate task G9-03')
                   for a in ASSETS if a['status'] == 'open']
     open_items += [dict(name=f"pip: {c['name']} {c['version'] or '(not installed)'}", paths=[], state='BLOCKED_EXTERNAL',
                         why='the installed metadata declares no licence' if c['installed'] else 'the distribution is not installed, so its licence was not read',
@@ -372,7 +368,7 @@ def markdown(sbom):
                      f"{', '.join('`' + p + '`' for p in a['paths'])} | {cell(a['notes'])} |")
     lines += ['', '## Open items (BLOCKED_EXTERNAL)', '',
               'These need a decision that this program cannot make. They stay listed until',
-              '[RELEASE_REVIEW.md](RELEASE_REVIEW.md) records it; gate task G9-03 tracks them.', '']
+              'the owner records it; gate task G9-03 tracks them.', '']
     for item in sbom['open_items']:
         lines.append(f"- **{item['name']}** ({', '.join('`' + p + '`' for p in item['paths'])}): {item['why']} State: {item['state']}; {item['decision']}.")
     scan = sbom['scan']

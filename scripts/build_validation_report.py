@@ -265,7 +265,7 @@ def section_header(root, gates, runs_dir, versions, provisional, dirty):
         if evidence and (newest is None or evidence['recorded_at'] > newest['recorded_at']):
             newest = evidence
     lines = ['# TorchFDTD internal validation report', '',
-             'Internal validation report of the completion program ([COMPLETION_PROGRAM_KO.md](COMPLETION_PROGRAM_KO.md)), rendered by '
+             'Validation report, rendered by '
              '`scripts/build_validation_report.py` from the machine outputs named in each section: the gate file and its evidence runs, the '
              'platform, clean-install, physics, cross-solver and Meep comparison records, the suite policy in `scripts/run_suite.py`, the '
              'version strings, and the known-limitations list (a hand-maintained JSON whose entries cite their records). No number here is typed '

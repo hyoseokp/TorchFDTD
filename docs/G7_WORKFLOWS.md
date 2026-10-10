@@ -1,7 +1,6 @@
 # G7 application workflows: declared fixtures, criteria and measurements
 
-This page fixes, before any G7 run, the three application workflows of section 9 of the
-[completion program](COMPLETION_PROGRAM_KO.md), the independent-solver comparison and the cost
+This page fixes, before any G7 run, the three application workflows, the independent-solver comparison and the cost
 measurements. The case files `docs/validation/cases/G7-01.json` to `G7-05.json` carry the same
 declarations in machine-readable form; a later change to a fixed quantity is a revised case and
 needs the owner's approval. Every workflow runs from the installed wheel in an environment outside

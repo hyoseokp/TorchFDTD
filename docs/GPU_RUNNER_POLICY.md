@@ -1,6 +1,5 @@
 # GPU runner policy and test suites
 
-Tasks G4-05 and G4-06 of the [completion program](COMPLETION_PROGRAM_KO.md).
 This document declares the three test suites, which hosts run them, and the
 rule that keeps untrusted code away from the lab GPU hosts.
 `tests/test_gpu_runner_policy.py` checks the workflow file and this document;

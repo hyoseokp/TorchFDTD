@@ -107,7 +107,7 @@ marks the evidence STALE when a watched file changed or disappeared, when a
 file now matches a pattern but was absent at recording, or when the task has
 `watch_paths` and the evidence predates them. Outputs of the recording and
 rendering cycle are never watched (the gate file, this directory, the G3
-records the fixtures write, `DEVELOPMENT_HANDOFF.md`, `RELEASE_SCOPE.md`,
+records the fixtures write, `RELEASE_SCOPE.md`,
 `VALIDATION_REPORT.md`); watching them would make evidence stale by
 construction.
 

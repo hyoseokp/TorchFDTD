@@ -190,4 +190,4 @@ and a directly driven discrete D/E measurement. Fitted materials also run on
 CPU/CUDA and independent/tensor-cohort paths. This establishes those cases,
 not a general measured-material accuracy guarantee. The next replacement gate
 is interface accuracy with subpixel mesh convergence, followed by modes and
-port observables. See the [ordered priorities](IMPLEMENTATION_PRIORITIES.md).
+port observables.

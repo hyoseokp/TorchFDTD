@@ -1,4 +1,4 @@
-> Legacy compatibility-derived implementation. Publication review remains open. No vendor waveform measurements are included or used as current validation evidence. See [release review](RELEASE_REVIEW.md).
+> Legacy compatibility-derived implementation. Publication review remains open. No vendor waveform measurements are included or used as current validation evidence.
 
 # Automatic wavelength/frequency sources and chirped pulses
 

@@ -4,7 +4,7 @@ The README animation shows an actual 2D TorchFDTD calculation, recorded at commi
 [`82c3924`](https://github.com/hyoseokp/TorchFDTD/commit/82c392401acd967c18978b261f79dd0f7bfd6ff3).
 It is not an AI-generated field animation or a browser recording.
 
-- [Full-resolution MP4](phc-waveguide.mp4): 1920 × 1050, 30 frames/s, 328 frames, no audio.
+- [Full-resolution MP4](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/phc-waveguide.mp4): 1920 × 1050, 30 frames/s, 328 frames, no audio.
 - [README GIF](phc-waveguide.gif): a 640-pixel-wide, 32-color preview of all 328 frames at 25 frames/s. The lower playback rate accommodates GIF timing without dropping physical snapshots.
 - [Project JSON](phc-waveguide-project.json): geometry, materials, source and solver settings.
 

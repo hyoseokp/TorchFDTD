@@ -41,7 +41,7 @@ The [1.1.2 validation scope](RELEASE112_VALIDATION.md) records completed
 checks and omitted full-suite work. It does not claim a new complete
 WORKSTATION or G9-06 pass.
 
-Task G9-06 of the [completion program](COMPLETION_PROGRAM_KO.md) requires every
+Task G9-06 requires every
 required gate to be run on the exact source tree and wheel of the release
 candidate. A pass recorded at an earlier commit, combined with partial checks
 after it, is not a pass of the candidate; long-run evidence is reused only when
@@ -54,8 +54,7 @@ Preconditions on the RTX 3060 host: a clean checkout of the candidate commit at
 [GPU_RUNNER_POLICY.md](GPU_RUNNER_POLICY.md) describes), the development
 interpreter `D:/TorchFDTD/.venv/Scripts/python.exe`, `TMP` and `TEMP` set to
 `D:/TorchFDTD/.local/tmp`, a local wheel cache under `D:/TorchFDTD/.local/wheels`,
-no other GPU work on the host, and the [RELEASE_REVIEW.md](RELEASE_REVIEW.md)
-gates read. Every command below runs from the checkout root in PowerShell.
+and no other GPU work on the host. Every command below runs from the checkout root in PowerShell.
 
 ## 1. Fix the candidate
 
@@ -294,9 +293,8 @@ candidate is called RC_READY.
   the technical gates hold on this tree and this wheel. It is recorded in the
   handoff entry with the commit, the wheel hash and the run ids.
 - `PUBLIC_RELEASE_AUTHORIZED` is a separate decision of the owner that no file
-  in this repository grants; the open gates of
-  [RELEASE_REVIEW.md](RELEASE_REVIEW.md) (contract and provenance questions,
-  G9-03) are not closed by a passing judge.
+  in this repository grants; the open distribution questions (G9-03) are not
+  closed by a passing judge.
 - The validation report is an internal record of what was run. It is not an
   attestation by a third party and does not state that the solver is correct
   for problems outside the recorded fixtures.

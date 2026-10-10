@@ -1,13 +1,13 @@
 # 3D metalens pulse focusing
 
-[![Full 3D FDTD fields above a silicon-pillar metalens](metalens-3d.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-3d.mp4)
+[![Full 3D FDTD fields above a silicon-pillar metalens](metalens-3d-poster.png)](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/metalens-3d.mp4)
 
 An x-polarized pulse passes through 112 silicon pillars and focuses above the
 array. The perspective view shows the actual pillar geometry and intersecting
 XZ and YZ field cuts. The right panels show the full XZ cut at y = 0 and the
 XY focal-plane cut at z = 1.65 µm. All panels advance through the same time steps.
 
-[Full-resolution MP4](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-3d.mp4)
+[Full-resolution MP4](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/metalens-3d.mp4)
 · [Project JSON](metalens-3d-project.json)
 · [Calculation and checks](metalens-3d-record.json)
 · [Rendering record](metalens-3d-render.json)

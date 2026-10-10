@@ -56,7 +56,7 @@ def main():
         dependencies.append(dict(name=name,version=d.version,license_label=license.splitlines()[0][:160] if license else None,
                                  license_classifiers=classifiers,
                                  licence_files=[str(p) for p in d.files or [] if 'license' in str(p).lower() and '.dist-info' in str(p)]))
-    report=dict(status='PUBLIC_REPOSITORY_CONTRACT_GATE_OPEN',reason='The repository is public since 21 September 2026 by decision of the author. The interoperability contract question of RELEASE_REVIEW.md gate 1 remains open.',
+    report=dict(status='PUBLIC_REPOSITORY_CONTRACT_GATE_OPEN',reason='The repository is public since 21 September 2026 by decision of the author. The interoperability contract question remains open.',
                 scan_scope='Exact current source-archive allowlist. Pattern scan is not proof of absence of all secrets or intellectual-property issues.',
                 dependency_scope='Direct Python dependencies are installed separately, not bundled in the source archive. Frontend notices retained. This is not a complete transitive SBOM.',
                 dependencies=dependencies,findings=checks,

@@ -135,8 +135,7 @@ the same version; a client that targets `/api/...` pins the package version.
   result NPZ is still read whole except through the radiation loaders, streamed, tensor-batch
   and mode-network results keep their own loaders, and the workbench downloads NPZ only.
 - The workbench server is loopback-only and unauthenticated ([SECURITY.md](SECURITY.md)).
-- The distribution questions of [RELEASE_REVIEW.md](RELEASE_REVIEW.md) are open;
-  [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) lists them as `BLOCKED_EXTERNAL` items.
+- [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) lists the open distribution questions as `BLOCKED_EXTERNAL` items.
 
 ## Numerical bug severity
 

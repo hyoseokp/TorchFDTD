@@ -76,4 +76,5 @@ def test_published_record_and_assets_match_generator(movie):
     assert record["display"]["frames"] == rendered["frames"] == 488
     assert rendered["duration_s"] == rendered["frames"] / rendered["fps"]
     for name, digest in rendered["sha256"].items():
-        assert hashlib.sha256((assets / name).read_bytes()).hexdigest() == digest
+        if (assets / name).is_file():  # videos are release attachments, not tracked files
+            assert hashlib.sha256((assets / name).read_bytes()).hexdigest() == digest

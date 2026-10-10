@@ -63,8 +63,7 @@ Dispersive tensors, PEC/PMC mixing, spatial streaming, nonuniform grids,
 subpixel homogenization and automatic shutoff remain outside this native
 workflow. A common-node tensor interface is not the scalar solver's independent
 Yee-component material sampling, so discontinuous geometry is not claimed to
-match the scalar rasterizer. The [tensor operator validation](ANISOTROPY_IMPLEMENTATION_PLAN.md)
-documents the underlying numerical scope and remaining physical acceptance.
+match the scalar rasterizer.
 
 ## Measured native workflow checks
 

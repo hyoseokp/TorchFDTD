@@ -20,7 +20,7 @@
   "host": {
     "os": "Windows",
     "platform": "Windows-10-10.0.26200-SP0",
-    "machine": ""
+    "machine": "AMD64"
   },
   "declared_dependencies": {
     "runtime": [
@@ -54,7 +54,7 @@
   "summary": {
     "components": 52,
     "installed": 52,
-    "open_items": 3,
+    "open_items": 2,
     "scan_findings": 0
   },
   "components": [
@@ -1311,7 +1311,7 @@
       "version": null,
       "license": "MIT (project licence)",
       "status": "own",
-      "source": "docs/CR_VALIDATION_PLAN.md",
+      "source": null,
       "paths": [
         "docs/validation/cr-*.json"
       ],
@@ -1340,7 +1340,7 @@
         "torchfdtd/feature_inventory.json",
         "benchmarks/build_feature_inventory.py"
       ],
-      "notes": "Object and property names of a commercial solver, turned into the feature inventory that the wheel ships and /api/capabilities serves. docs/RELEASE_REVIEW.md lists the permitted use of this extraction as an unresolved decision."
+      "notes": "Object and property names of a commercial solver, turned into the feature inventory that the wheel ships and /api/capabilities serves. The permitted use of this extraction is an unresolved decision."
     },
     {
       "name": "FSP layout support",
@@ -1358,18 +1358,7 @@
         "torchfdtd/fsp_service.py",
         "docs/FSP*.md"
       ],
-      "notes": "Reader and writer of a documented subset of a vendor project format. docs/RELEASE_REVIEW.md gate 1 keeps the contract and interoperability question open."
-    },
-    {
-      "name": "Aggregate commercial timing table",
-      "version": null,
-      "license": "unclear",
-      "status": "open",
-      "source": "docs/RELEASE_REVIEW.md, timing-table exception",
-      "paths": [
-        "README.md"
-      ],
-      "notes": "Three paired timing facts against a commercial solver, kept by the owner's instruction; the public academic-use terms restrict benchmarking and the governing agreement is unknown."
+      "notes": "Reader and writer of a documented subset of a vendor project format. The contract and interoperability question stays open."
     }
   ],
   "open_items": [
@@ -1380,9 +1369,9 @@
         "torchfdtd/feature_inventory.json",
         "benchmarks/build_feature_inventory.py"
       ],
-      "why": "Object and property names of a commercial solver, turned into the feature inventory that the wheel ships and /api/capabilities serves. docs/RELEASE_REVIEW.md lists the permitted use of this extraction as an unresolved decision.",
+      "why": "Object and property names of a commercial solver, turned into the feature inventory that the wheel ships and /api/capabilities serves. The permitted use of this extraction is an unresolved decision.",
       "state": "BLOCKED_EXTERNAL",
-      "decision": "owner or counsel decision recorded in docs/RELEASE_REVIEW.md; tracked by gate task G9-03"
+      "decision": "owner or counsel decision; tracked by gate task G9-03"
     },
     {
       "name": "FSP layout support",
@@ -1396,18 +1385,9 @@
         "torchfdtd/fsp_service.py",
         "docs/FSP*.md"
       ],
-      "why": "Reader and writer of a documented subset of a vendor project format. docs/RELEASE_REVIEW.md gate 1 keeps the contract and interoperability question open.",
+      "why": "Reader and writer of a documented subset of a vendor project format. The contract and interoperability question stays open.",
       "state": "BLOCKED_EXTERNAL",
-      "decision": "owner or counsel decision recorded in docs/RELEASE_REVIEW.md; tracked by gate task G9-03"
-    },
-    {
-      "name": "Aggregate commercial timing table",
-      "paths": [
-        "README.md"
-      ],
-      "why": "Three paired timing facts against a commercial solver, kept by the owner's instruction; the public academic-use terms restrict benchmarking and the governing agreement is unknown.",
-      "state": "BLOCKED_EXTERNAL",
-      "decision": "owner or counsel decision recorded in docs/RELEASE_REVIEW.md; tracked by gate task G9-03"
+      "decision": "owner or counsel decision; tracked by gate task G9-03"
     }
   ],
   "scan": {
@@ -1430,8 +1410,8 @@
       "docs/validation/sbom.json",
       "tests/test_provenance_inventory.py"
     ],
-    "files_scanned": 2955,
-    "tracked_files": 3035,
+    "files_scanned": 2948,
+    "tracked_files": 3032,
     "findings": []
   },
   "history_note": {

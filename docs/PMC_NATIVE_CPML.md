@@ -14,8 +14,7 @@ The restrictions below apply to this forward dispatch only and are checked
 when `Simulation.run()` or `estimate()` is called, not by Project validation.
 `DifferentiableSimulation`, `StreamedSimulation` and `run_tensor_batch` run
 PMC/symmetric faces with the ordinary scalar-Yee CPML, including independent
-per-face `layers`, `sigma_scale`, `kappa`, `alpha` and `polynomial`; see the
-[general Yee admission](PMC_IMPLEMENTATION_PLAN.md#general-yee-admission-adjoint-streamed-and-tensor-batch).
+per-face `layers`, `sigma_scale`, `kappa`, `alpha` and `polynomial`.
 
 ## Admitted project
 

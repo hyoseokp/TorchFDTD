@@ -1,6 +1,6 @@
 # How TorchFDTD works: animated overview
 
-[![Animated overview of TorchFDTD: tiles, stitched near field and angular-spectrum propagation of a 1 mm metalens](torchfdtd-explainer.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/torchfdtd-explainer.mp4)
+[![Animated overview of TorchFDTD: tiles, stitched near field and angular-spectrum propagation of a 1 mm metalens](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/torchfdtd-explainer.gif)](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/torchfdtd-explainer.mp4)
 
 A 1 min 55 s animation (1920 × 1080, 60 frames/s, no audio) of the ideas behind the package:
 

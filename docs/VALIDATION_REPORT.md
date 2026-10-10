@@ -1,6 +1,6 @@
 # TorchFDTD internal validation report
 
-Internal validation report of the completion program ([COMPLETION_PROGRAM_KO.md](COMPLETION_PROGRAM_KO.md)), rendered by `scripts/build_validation_report.py` from the machine outputs named in each section: the gate file and its evidence runs, the platform, clean-install, physics, cross-solver and Meep comparison records, the suite policy in `scripts/run_suite.py`, the version strings, and the known-limitations list (a hand-maintained JSON whose entries cite their records). No number here is typed into this file; `tests/test_validation_report.py` renders it again and compares. It records what was run and what those runs produced. It is not an attestation by a third party, and a passing gate is evidence for that gate only, never a general statement that the solver is correct for every problem.
+Validation report, rendered by `scripts/build_validation_report.py` from the machine outputs named in each section: the gate file and its evidence runs, the platform, clean-install, physics, cross-solver and Meep comparison records, the suite policy in `scripts/run_suite.py`, the version strings, and the known-limitations list (a hand-maintained JSON whose entries cite their records). No number here is typed into this file; `tests/test_validation_report.py` renders it again and compares. It records what was run and what those runs produced. It is not an attestation by a third party, and a passing gate is evidence for that gate only, never a general statement that the solver is correct for every problem.
 
 Package version `1.1.7` (pyproject.toml). Gate file adopted at commit `f3efd3409aaa` with 83 tasks in 11 stages; newest evidence run `20260929T192043Z-g1-05-526a88ee` recorded 2026-09-29T19:20:43+00:00 at commit `e1ff41e16eb7`.
 
@@ -11,8 +11,8 @@ Technical readiness of a release candidate (every required task VERIFIED with ev
 
 | Profile | Required stages | Scope status | Pass | Fail | Optional | FAILED outside the profile | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| WORKSTATION | G0, G1, G2, G3, G4, G5, G6, G7, G8, G9 | DRAFT_PENDING_RECONCILIATION_WITH_EXISTING_REQUIREMENTS | 65 | 11 | 0 | none | NOT RELEASABLE |
-| HPC | G0, G1, G2, G3, G4, G5, G6, G7, G8, G9, H1 | DRAFT_PENDING_RECONCILIATION_WITH_EXISTING_REQUIREMENTS | 65 | 17 | 0 | none | NOT RELEASABLE |
+| WORKSTATION | G0, G1, G2, G3, G4, G5, G6, G7, G8, G9 | DRAFT_PENDING_RECONCILIATION_WITH_EXISTING_REQUIREMENTS | 57 | 19 | 0 | none | NOT RELEASABLE |
+| HPC | G0, G1, G2, G3, G4, G5, G6, G7, G8, G9, H1 | DRAFT_PENDING_RECONCILIATION_WITH_EXISTING_REQUIREMENTS | 57 | 25 | 0 | none | NOT RELEASABLE |
 
 A task passes when it is VERIFIED by an evidence run whose source commit is an ancestor of the current commit and whose test sources, fixture and criteria files are unchanged, with no failed, errored, skipped or absent required test and no external blocker; stale evidence is a failure here, as in `scripts/check_release_gates.py` without `--allow-stale`.
 
@@ -24,11 +24,11 @@ One row per task of [validation/completion_gates.json](validation/completion_gat
 
 | Task | Title | Implementation | Verification | Newest run | Source commit | Judgement | Reason |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| G0-01 | 실제 HEAD/dirty tree/기존 계획/자원·권한 확인 | IMPLEMENTED | VERIFIED | `20260929T185956Z-g0-01-6622edf9` | `e1ff41e16eb7` | PASS | evidence matches the current checkout |
-| G0-02 | RELEASE_SCOPE와 기능·검증 상태 분리 | IMPLEMENTED | VERIFIED | `20260929T190005Z-g0-02-0c30df2b` | `e1ff41e16eb7` | PASS | evidence matches the current checkout |
-| G0-03 | 기존 완료 계획·gate·fixture·raw evidence 단일 추적 | IMPLEMENTED | VERIFIED | `20260929T190013Z-g0-03-8ea047c4` | `e1ff41e16eb7` | PASS | evidence matches the current checkout |
-| G0-04 | 필수 누락/실패/skip/source 불일치에서 출고 실패 판정기 | IMPLEMENTED | VERIFIED | `20260929T190134Z-g0-04-4d0ea8ef` | `e1ff41e16eb7` | PASS | evidence matches the current checkout |
-| G0-05 | 판정기 자체 failure injection과 세션 인계 구조 | IMPLEMENTED | VERIFIED | `20260929T190301Z-g0-05-b96311b0` | `e1ff41e16eb7` | PASS | evidence matches the current checkout |
+| G0-01 | 실제 HEAD/dirty tree/기존 계획/자원·권한 확인 | IMPLEMENTED | VERIFIED | `20260929T185956Z-g0-01-6622edf9` | `e1ff41e16eb7` | FAIL | STALE: test source changed since the run: tests/test_completion_program_documents.py |
+| G0-02 | RELEASE_SCOPE와 기능·검증 상태 분리 | IMPLEMENTED | VERIFIED | `20260929T190005Z-g0-02-0c30df2b` | `e1ff41e16eb7` | FAIL | STALE: test source changed since the run: tests/test_completion_program_documents.py |
+| G0-03 | 기존 완료 계획·gate·fixture·raw evidence 단일 추적 | IMPLEMENTED | VERIFIED | `20260929T190013Z-g0-03-8ea047c4` | `e1ff41e16eb7` | FAIL | STALE: test source changed since the run: tests/test_completion_program_documents.py |
+| G0-04 | 필수 누락/실패/skip/source 불일치에서 출고 실패 판정기 | IMPLEMENTED | VERIFIED | `20260929T190134Z-g0-04-4d0ea8ef` | `e1ff41e16eb7` | FAIL | STALE: watched file changed since the run: scripts/release_audit.py |
+| G0-05 | 판정기 자체 failure injection과 세션 인계 구조 | IMPLEMENTED | VERIFIED | `20260929T190301Z-g0-05-b96311b0` | `e1ff41e16eb7` | FAIL | STALE: watched file changed since the run: scripts/release_audit.py |
 
 ### G1 과거 리뷰 회귀 및 수정 (WORKSTATION, P0)
 
@@ -72,18 +72,18 @@ One row per task of [validation/completion_gates.json](validation/completion_gat
 | G3-14 | 무차원 small discrete CPU/Torch/CUDA/VJP 수치 비교 | IMPLEMENTED | VERIFIED | `20260928T002626Z-g3-14-0ede5b19` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit a5ae4ef4bec3 alone |
 | G3-15 | full-autograd·directional VJP·FD sweep·Taylor 검사 | IMPLEMENTED | VERIFIED | `20260928T002714Z-g3-15-f5a28ccc` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit a5ae4ef4bec3 alone |
 | G3-16 | 실제 shape/material 파라미터의 물리 gradient 수렴 | IMPLEMENTED | VERIFIED | `20260928T002802Z-g3-16-32a7d8ca` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit a5ae4ef4bec3 alone |
-| G3-17 | oracle 독립성·정밀도·시간·PML 오차 budget 확인 | IMPLEMENTED | VERIFIED | `20260928T002809Z-g3-17-0ad77147` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit a5ae4ef4bec3 alone |
+| G3-17 | oracle 독립성·정밀도·시간·PML 오차 budget 확인 | IMPLEMENTED | VERIFIED | `20260928T002809Z-g3-17-0ad77147` | `a5ae4ef4bec3` | FAIL | STALE: watched file changed since the run: docs/ORACLE_BUDGET.md |
 
 ### G4 CUDA·CI·환경 검증 (WORKSTATION, P0)
 
 | Task | Title | Implementation | Verification | Newest run | Source commit | Judgement | Reason |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| G4-01 | 보유한 실제 GPU와 OS·driver·runtime부터 확인한다 | IMPLEMENTED | VERIFIED | `20260928T002829Z-g4-01-ee0a45ce` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit a5ae4ef4bec3 alone |
+| G4-01 | 보유한 실제 GPU와 OS·driver·runtime부터 확인한다 | IMPLEMENTED | VERIFIED | `20260928T002829Z-g4-01-ee0a45ce` | `a5ae4ef4bec3` | FAIL | STALE: watched file changed since the run: docs/PLATFORM_MATRIX.md |
 | G4-02 | torch/fused, CUDA graph on/off, fused/reference monitor, FP32/FP64, real/complex, standard/nondefault stream의 valid 경로를 비교한다. | IMPLEMENTED | VERIFIED | `20260928T002900Z-g4-02-b8213496` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit a5ae4ef4bec3 alone |
 | G4-03 | noncontiguous tensors, duplicate observers, multiple calls/backward, input lifetime, stream synchronization, cancellation, allocator cleanup을 검사한다 | IMPLEMENTED | VERIFIED | `20260928T002919Z-g4-03-a2b27829` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit a5ae4ef4bec3 alone |
 | G4-04 | 최소 격자·홀수 크기·부분 slab·비정렬 tile·index boundary·강한 material contrast·ADE/CPML memory를 무작위/경계 fixture에 포함한다 | IMPLEMENTED | VERIFIED | `20260928T002951Z-g4-04-6675fbe0` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit a5ae4ef4bec3 alone |
 | G4-05 | CPU PR suite, 신뢰한 코드의 GPU 정기 suite, 실제 release의 전체 GPU suite를 분리한다 | IMPLEMENTED | VERIFIED | `20260928T003105Z-g4-05-bfc80143` | `a5ae4ef4bec3` | FAIL | STALE: watched file changed since the run: pyproject.toml |
-| G4-06 | public fork PR의 untrusted code를 개인/연구실 GPU host에서 자동 실행하지 않는다 | IMPLEMENTED | VERIFIED | `20260928T003116Z-g4-06-845de1d9` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (5 paths); it is not tied to commit a5ae4ef4bec3 alone |
+| G4-06 | public fork PR의 untrusted code를 개인/연구실 GPU host에서 자동 실행하지 않는다 | IMPLEMENTED | VERIFIED | `20260928T003116Z-g4-06-845de1d9` | `a5ae4ef4bec3` | FAIL | STALE: watched file changed since the run: docs/GPU_RUNNER_POLICY.md |
 
 ### G5 메모리·재시작·장기 안정성 (WORKSTATION, P0)
 
@@ -140,8 +140,8 @@ One row per task of [validation/completion_gates.json](validation/completion_gat
 | Task | Title | Implementation | Verification | Newest run | Source commit | Judgement | Reason |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | G9-01 | local server의 loopback 기본값, origin/host 검증, 허용된 파일 경로, 업로드 크기, path traversal, 악성/손상 JSON/NPZ/GDS, 압축 폭탄과 unsafe pickle을 검사한다 | IMPLEMENTED | VERIFIED | `20260928T011752Z-g9-01-5126a045` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (11 paths); it is not tied to commit a5ae4ef4bec3 alone |
-| G9-02 | 코드와 번들 데이터의 출처·license·third-party notices·SBOM·dependency/security scan을 수행한다 | IMPLEMENTED | VERIFIED | `20260928T011835Z-g9-02-e797c557` | `a5ae4ef4bec3` | FAIL | STALE: watched file changed since the run: docs/THIRD_PARTY_NOTICES.md |
-| G9-03 | RELEASE_REVIEW의 미해결 계약/배포 질문을 실제 문서에 따라 추적한다 | IMPLEMENTED | VERIFIED | `20260929T042356Z-g9-03-01f0dcda` | `a67e9d08241d` | FAIL | STALE: watched file changed since the run: README.md |
+| G9-02 | 코드와 번들 데이터의 출처·license·third-party notices·SBOM·dependency/security scan을 수행한다 | IMPLEMENTED | VERIFIED | `20260928T011835Z-g9-02-e797c557` | `a5ae4ef4bec3` | FAIL | STALE: test source changed since the run: tests/test_provenance_inventory.py |
+| G9-03 | RELEASE_REVIEW의 미해결 계약/배포 질문을 실제 문서에 따라 추적한다 | IMPLEMENTED | VERIFIED | `20260929T042356Z-g9-03-01f0dcda` | `a67e9d08241d` | FAIL | STALE: test source changed since the run: tests/test_release_review.py |
 | G9-04 | API stability/deprecation, project/result/checkpoint version compatibility, changelog, 알려진 한계, bug template, minimal repro, numerical bug severity, release rollback/결과 영향 공지를 준비한다. | IMPLEMENTED | VERIFIED | `20260928T011855Z-g9-04-8424e9ff` | `a5ae4ef4bec3` | FAIL | STALE: watched file changed since the run: docs/CHANGELOG.md |
 | G9-05 | 독립 사용자 또는 독립 설치 환경에서 세 대표 workflow를 실행하고, 실제 발견 이슈를 정리한다 | IMPLEMENTED | VERIFIED | `20260928T011908Z-g9-05-89c5c08e` | `a5ae4ef4bec3` | PASS | evidence was recorded on a dirty tree (11 paths); it is not tied to commit a5ae4ef4bec3 alone |
 | G9-06 | 최종 release candidate의 정확한 source tree와 wheel에서 전체 필수 gate를 실행한다 | IN_PROGRESS | VERIFIED | `20260928T025801Z-g9-06-5712adb4` | `ab6488b57bfe` | FAIL | STALE: test source changed since the run: tests/test_capability_pairs.py |
@@ -386,7 +386,7 @@ Each check compares two sources of the same fact; a MISMATCH is reported here an
 | README row check `test_readme_restart_row_matches_the_restart_record` | ok | reproduced from its record |
 | README "Compared with Meep" block | ok | equals the renderer output for the committed records |
 | MEEP_COMPARISON.md | ok | equals the renderer output for the committed records |
-| third-party notices and SBOM | ok | committed SBOM taken on win32, Python 3.10.2, Windows-10-10.0.26200-SP0: 52 components (52 installed there), 3 open items, 0 scan findings; check: passed against the tracked tree |
+| third-party notices and SBOM | ok | committed SBOM taken on win32, Python 3.10.2, Windows-10-10.0.26200-SP0: 52 components (52 installed there), 2 open items, 0 scan findings; check: passed against the tracked tree |
 | RELEASE_SCOPE.md support claims | ok | 22 verification cells and the stage-status block rendered from the gate file |
 | attestation wording | ok | no line uses the words that tests/test_validation_report.py forbids |
 

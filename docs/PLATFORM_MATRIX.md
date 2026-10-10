@@ -1,6 +1,6 @@
 # Platform matrix (WORKSTATION profile)
 
-Task G4-01 of the [completion program](COMPLETION_PROGRAM_KO.md). A row lists a
+A row lists a
 platform's GPU, driver, CUDA runtime, Torch, CuPy, Python and OS only when a
 record written by `scripts/platform_report.py` exists under
 `validation/platforms/`; every other cell of a platform without a record reads

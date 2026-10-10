@@ -6,7 +6,7 @@ An independent, MIT-licensed photonics workbench: visual structure editing in th
 
 The interface follows the familiar FDTD workflow: Objects Tree, XY/XZ/YZ and perspective CAD views, object properties, material database, simulation region, Layout/Analysis modes, field visualizer, monitor traces, and Python export. It is not affiliated with Ansys and does not implement the full Lumerical feature set.
 
-**Comparison guide:** **[Lumerical FDTD speed comparison](#primary-speed-comparison-lumerical-fdtd)**, [capabilities and batch support](#capability-comparison), [mixed-grid ensembles](#mixed-meshes-and-durations-in-one-python-batch), [single-case measurements](#measured-cuda-comparisons), [remaining competitiveness work](OPEN_SOURCE_COMPARISON_KO.md#비교우위-개발-프로젝트의-현재-작업). Measured gains below establish a specific forward-workflow advantage against flaport/fdtd, not leadership over every CUDA solver.
+**Comparison guide:** [capabilities and batch support](#capability-comparison), [mixed-grid ensembles](#mixed-meshes-and-durations-in-one-python-batch), [single-case measurements](#measured-cuda-comparisons), remaining competitiveness work. Measured gains below establish a specific forward-workflow advantage against flaport/fdtd, not leadership over every CUDA solver.
 
 [Trainable source waveforms](DIFFERENTIABLE_SOURCES.md) now connect multiple
 soft electric/magnetic sources and dielectric parameters to checkpointed Torch
@@ -60,7 +60,7 @@ Streamed `PeriodicLayerResponse` avoids both global 3D epsilon and epsilon-VJP
 arrays. Host, file and asynchronous CUDA numerical checks pass. Its large-grid
 throughput is still unmeasured.
 
-The experimental [exact-endpoint PMC API](PMC_IMPLEMENTATION_PLAN.md) now
+The experimental [exact-endpoint PMC API](PMC_NATIVE_CPML.md) now
 connects real FP32 CPU/CUDA fields, point-source waveforms and material gradients
 through bounded binomial checkpoint replay. Closed PEC/PMC projects also run
 through the browser, JSON, CLI and ordinary `Simulation` API, with six-face
@@ -74,7 +74,7 @@ equal uniform spacing, a common PML depth/strength and an explicitly supported
 profile. A [homogeneous normal-incidence pulse gate](PMC_CPML_ABSORPTION.md)
 passes a 1% reflected-field criterion for two tested PML depths. General
 absorption accuracy and throughput remain pending. A separate
-[bulk tensor dielectric API](ANISOTROPY_IMPLEMENTATION_PLAN.md) supports
+[bulk tensor dielectric API](TENSOR_NATIVE.md) supports
 periodic/Bloch CPU/CUDA fields and full symmetric tensor gradients. An
 isotropic fixed CPML exterior now encloses interior tensor materials, with
 its collar excluded from design gradients. The [native tensor workflow](TENSOR_NATIVE.md)
@@ -115,7 +115,7 @@ connects explicit full-cell TEXT markers to the opposing-port network and a
 caller-sampled native material tensor. The native dipole angular-pattern error decreases from 1.03%
 to 0.23% over three FP32 meshes. The [stored-plane diffraction workflow](RADIATION_WORKFLOW.md)
 adds browser order tables, matched-reference efficiencies and NPZ/Python
-postprocessing without another FDTD run. See the [FDTDX parity completion gates](FDTDX_PARITY_KO.md)
+postprocessing without another FDTD run. See [RELEASE_SCOPE.md](RELEASE_SCOPE.md)
 for verified scope and remaining work. This does not establish overall FDTDX
 parity or a speed advantage over it.
 
@@ -297,42 +297,6 @@ Replay now releases recursive closure references after backward, so completed re
 
 With the same fused forward, [fused complex backward](COMPLEX_CUDA_ADJOINT.md#selected-cr-objective-and-gradient-measurement) reduced a complete selected-CR objective/VJP call from **50.20 s to 32.40 s (1.55x)** on RTX 3060. Peak Torch allocation was **360 MB vs 328 MB**, with a maximum density-gradient difference of 2.17e-19. This is a separate matched-backend measurement, not a full-pupil or competitor comparison.
 
-<!-- BEGIN LUMERICAL TIMING COMPARISON -->
-## Primary speed comparison: Lumerical FDTD
-
-**Historical measurements, not a validated current-release speedup.** The primary comparison target is Lumerical FDTD. The available paired records below compare its **CPU engine configured for one process and 16 threads** with earlier TorchFDTD GPU builds on the **RTX 5880 Ada** workstation. Each value is the median of three recorded runs. These rows do not establish equal optical accuracy or performance against Lumerical GPU execution.
-
-### Recorded run wall time
-
-| Historical case | Lumerical CPU, 16 threads (s) | TorchFDTD RTX 5880 (s) | Lumerical CPU / TorchFDTD GPU |
-|---|---:|---:|---:|
-| Sphere, earlier build, 64³ / 1,000 steps | 3.997 | 0.613 | **6.52×** |
-| Sphere, earlier build, 128³ / 2,000 steps | 30.736 | 3.119 | **9.85×** |
-| Sphere, later CPML revision, 128³ / 2,000 steps | 30.233 | 1.990 | **15.19×** |
-
-Run wall time includes Lumerical meshing, engine launch and file I/O. TorchFDTD timing includes allocation, graph preparation, stepping and final host transfer, excluding optional NPZ compression. These are differently scoped workflow timers. The ratio is Lumerical time divided by TorchFDTD time.
-
-### Recorded engine and stepping time
-
-| Historical case | Lumerical logged FDTD time (s) | TorchFDTD stepping time (s) | Lumerical CPU / TorchFDTD GPU |
-|---|---:|---:|---:|
-| Sphere, earlier build, 64³ / 1,000 steps | 1.897 | 0.561 | 3.38× |
-| Sphere, earlier build, 128³ / 2,000 steps | 28.186 | 3.027 | 9.31× |
-| Sphere, later CPML revision, 128³ / 2,000 steps | 28.288 | 1.924 | 14.71× |
-
-The fixture is an index-2 sphere of radius 0.6 µm in air, in a 6 × 6 × 6 µm computational domain, with a 1.55 µm Gaussian dipole excitation and one point monitor. Total cell counts and actual time steps were checked in the original paired runs. Native precision was float32. The archived Lumerical API version string is `8.31.3633` from the v241 installation. Its numerical precision, exact CPU model, explicit warmup policy and source hashes for those earlier native builds are not established by these records.
-
-**Accuracy qualification:** dipole normalization, field staggering/interpolation and absorbing boundaries differ. The historical optical traces were not equivalent. These timing ratios must not be presented as same-accuracy speedups or multiplied by later native optimization gains. The two 128³ rows are successive development measurements of the same fixture, not two different workloads.
-
-| Primary comparison still required | Status |
-|---|---|
-| Current TorchFDTD vs Lumerical CPU, common accuracy target | Pending new matched validation |
-| Current TorchFDTD vs Lumerical GPU on the same RTX 5880 | Not measured |
-| Multi-structure batch / inverse-design throughput vs Lumerical | Not measured |
-
-Only aggregate timing facts are included here. No commercial field arrays, spectra, screenshots, project files or engine logs are redistributed with this table. The reproducible open-source comparisons below are secondary benchmarks.
-<!-- END LUMERICAL TIMING COMPARISON -->
-
 ## Capability comparison
 
 Reviewed external public source on 19 September 2026. TorchFDTD implementation status updated on 20 September 2026. A feature distinction is not a measured speed advantage. Unknown or unmeasured batch behavior is not marked unsupported.
@@ -348,7 +312,7 @@ Reviewed external public source on 19 September 2026. TorchFDTD implementation s
 FDTDX provides single-problem sharding and broader anisotropic material
 workflows. TorchFDTD's bulk tensor API supports nondispersive periodic/Bloch
 domains and a fixed isotropic CPML exterior. We have not demonstrated a speed advantage against
-FDTDX, fdtdz or fdtd3d. [Pinned sources and limitations](OPEN_SOURCE_COMPARISON_KO.md).
+FDTDX, fdtdz or fdtd3d.
 
 A first [matched FDTDX correctness gate](FDTDX_MATCHED_CORRECTNESS.md)
 uses the same Linux RTX 3060, a 16³ periodic dielectric grid, 64 FP32 steps,
@@ -383,16 +347,15 @@ ranking. Ambient desktop activity prevented the primary quiet timing criterion.
 | Radiation | Differentiable Bloch orders, closed-box homogeneous far fields, native FP32 mesh convergence, stored-plane browser/NPZ diffraction and six-face closed-box UI | Layered/periodic-lattice far fields and broader physical convergence |
 | Boundaries / tensors / multi-GPU | PEC, native closed-PMC and restricted PMC+CPML GUI/CLI/API, endpoint CPU/CUDA adjoints, tensor adjoints with fixed isotropic CPML exterior | General PML profiles/absorption, streaming combinations and verified single-problem multi-GPU |
 
-The [complete row-by-row parity gates](FDTDX_PARITY_KO.md) retain failed,
-partial and unmeasured conditions instead of treating API presence as full parity.
+The table keeps failed, partial and unmeasured conditions instead of treating API presence as full parity.
 
-**Current development, 0.14:** closed normal-incidence [TFSF boxes](TFSF_SOURCES.md) separate incident and scattered fields around isolated structures. Python, UI previews, CPU/CUDA and shared CUDA batches use a live incident Yee line and sparse face corrections. Independent discrete references and analytic Mie sphere comparisons are recorded, including non-monotonic mesh errors. A 3D FSP source subset is mapped, while oblique incidence and general FSP compatibility remain open. Version 0.13 added [one-way periodic-cell planes](ONEWAY_SOURCES.md), while 0.12 added [electric/magnetic vector sources](DIPOLE_SOURCES.md). Python controls fixed-duration ensembles, objectives and native field results through [`run_tensor_batch`](TENSOR_BATCH.md). Automatic decay termination, full-domain divergence checks, coupled passive multipole materials and matched-reference mesh studies remain available in single/process runs. See the [ordered implementation priorities](IMPLEMENTATION_PRIORITIES.md).
+**Current development, 0.14:** closed normal-incidence [TFSF boxes](TFSF_SOURCES.md) separate incident and scattered fields around isolated structures. Python, UI previews, CPU/CUDA and shared CUDA batches use a live incident Yee line and sparse face corrections. Independent discrete references and analytic Mie sphere comparisons are recorded, including non-monotonic mesh errors. A 3D FSP source subset is mapped, while oblique incidence and general FSP compatibility remain open. Version 0.13 added [one-way periodic-cell planes](ONEWAY_SOURCES.md), while 0.12 added [electric/magnetic vector sources](DIPOLE_SOURCES.md). Python controls fixed-duration ensembles, objectives and native field results through [`run_tensor_batch`](TENSOR_BATCH.md). Automatic decay termination, full-domain divergence checks, coupled passive multipole materials and matched-reference mesh studies remain available in single/process runs. See the ordered implementation priorities.
 
 Six-component frequency planes, reference-normalized flux, global/custom monitor frequencies, independent process batches and black-box inverse design are also available. Read the [Python and batch guide](PYTHON_BATCH.md), run the [slab example](../examples/flux_slab.py) or [design example](../examples/inverse_design.py), and see the [technical manuscript by Hyoseok Park](paper/torchfdtd-manuscript.pdf) ([LaTeX source](paper/manuscript.tex), [build and Overleaf guide](paper/README.md)). The manuscript is a draft, not a peer-reviewed publication.
 
 **Spectral batch development:** selectable shared CUDA plane interpolation and DFT accumulation now cover single runs and independent cohorts. Set `region.cuda_monitor_kernel="fused"`, or use **Frequency monitor kernel** in the FDTD panel. The new tables separate monitor improvements, cohort scheduling and an external baseline given the same fused observation adapter. [Complete Python example](../examples/spectral_batch.py), [algorithm and limits](CUDA_SPECTRA.md).
 
-**Measured-material fitting:** import your optical samples through Python or Materials, fit passive Drude/Lorentz poles, inspect measured/fitted n/k and continuous/FDTD errors, then retain the data and coefficients in your project. Unmet tolerances stay explicit. [Workflow, algorithm and limits](MATERIAL_FITTING.md), [Python example](../examples/material_fitting.py). The main development priorities are Torch differentiable design and hierarchical memory execution, with interface accuracy and normalized mode/port objectives as required validation, as recorded in the [priority plan](IMPLEMENTATION_PRIORITIES.md).
+**Measured-material fitting:** import your optical samples through Python or Materials, fit passive Drude/Lorentz poles, inspect measured/fitted n/k and continuous/FDTD errors, then retain the data and coefficients in your project. Unmet tolerances stay explicit. [Workflow, algorithm and limits](MATERIAL_FITTING.md), [Python example](../examples/material_fitting.py). The main development priorities are Torch differentiable design and hierarchical memory execution, with interface accuracy and normalized mode/port objectives as required validation, as recorded in the priority plan.
 
 **Torch differentiation and memory:** experimental adjoint APIs connect diagonal epsilon, fixed real/Bloch boundaries and selected Torch geometry maps to point signals, spectra and fixed detection planes, `loss.backward()` and Adam. Native CUDA forward and backward use a discrete Yee/CPML adjoint with bounded replay checkpoints and optional asynchronous host/disk staging. The [resident dispersive API](DISPERSIVE_ADJOINT.md) also differentiates explicit Drude/Lorentz parameters using Torch or fused CUDA updates. [`StreamedSimulation`](STREAMED_FDTD.md) keeps nondispersive global state in DRAM or files and transposes space-time slab dependencies, with reusable packets and optional asynchronous transfers. [Material-aware tuning](STREAMED_POLICY.md) selects dielectric or ADE policies using two measured durations, bounded gradient-reference memory and budget-fitted default tile/checkpoint proposals. A [54 GiB complex-FP64 E/H forward/backward run](BEYOND_VRAM_VALIDATION.md) exceeded physical VRAM for ten steps. The [real-FP32 capacity gate](BEYOND_VRAM_FP32.md) has now passed. Useful-duration large applications, a unified memory policy, all-physics differentiation and general port-normalized design remain pending. [API and limits](DIFFERENTIABLE_FDTD.md), [complete example](../examples/differentiable_design.py), [measured development results](validation/ADJOINT_REPORT.md), [hierarchy plan](HIERARCHICAL_EXECUTION.md).
 
@@ -406,7 +369,7 @@ Six-component frequency planes, reference-normalized flux, global/custom monitor
 
 **Ensemble follow-up:** `tune_tensor_batch()` measures cohort sizes with output-equivalence checks and reports the full selection cost. `optimize(execution="tensor")` evaluates differential-evolution populations through shared CUDA launches. The tables below include four 16-case workloads, complete design loops and timing-selection regressions. [Executable Python example](../examples/tuned_inverse_design.py).
 
-**Experimental fused CUDA:** select `Region(backend="cuda", cuda_kernel="fused")`, or the **CUDA kernel** control in the UI, after installing `pip install -e ".[cuda-kernels]"`. The earlier native 64³/96³/128³ tests show **3.67–5.76×** full-wall improvement over our PyTorch reference path with bitwise E/H/traces. The cross-library and batch measurements below use their own stated baselines. Current fixed-Bloch forward and first-order real-epsilon adjoints have separate [support limits and validation](COMPLEX_CUDA_ADJOINT.md). [Development milestones](OPEN_SOURCE_COMPARISON_KO.md).
+**Experimental fused CUDA:** select `Region(backend="cuda", cuda_kernel="fused")`, or the **CUDA kernel** control in the UI, after installing `pip install -e ".[cuda-kernels]"`. The earlier native 64³/96³/128³ tests show **3.67–5.76×** full-wall improvement over our PyTorch reference path with bitwise E/H/traces. The cross-library and batch measurements below use their own stated baselines. Current fixed-Bloch forward and first-order real-epsilon adjoints have separate [support limits and validation](COMPLEX_CUDA_ADJOINT.md). Development milestones.
 
 **Measured RTX 5880 ensemble:** four native 64³ sphere cases at 800 steps take 47.04 s with one NumPy CPU worker and 1.175 s with one CUDA worker, approximately 40.0x faster. This is the full batch wall time after warm-up, including setup, transfers and IPC. Two/four concurrent GPU workers take 1.182/1.204 s and do not improve this case. This is not a commercial CPU solver comparison. [Reproduction and raw measurements](validation/BATCH_REPORT.md).
 

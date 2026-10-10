@@ -270,7 +270,7 @@ HEADER = ['# Physics validation records (stage G3)', '',
           'Sections between the `g3-a begin` and `g3-a end` HTML comment markers are rendered by `scripts/render_physics_validation.py` from '
           '`docs/validation/g3/<task>.json`, which `tests/test_physics_g3_a.py` writes before it asserts; other agents\' sections carry their own markers '
           'and are preserved by this script. Every number below comes from those records; none is typed by hand. The fixtures and limits were declared in '
-          '`docs/validation/cases/` before the recorded run (see [COMPLETION_PROGRAM_KO.md](COMPLETION_PROGRAM_KO.md) section 5). '
+          '`docs/validation/cases/` before the recorded run. '
           'A **FAIL** is a finding against a pre-declared limit and is kept as such.', '']
 
 

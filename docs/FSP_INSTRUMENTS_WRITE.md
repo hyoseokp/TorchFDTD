@@ -20,8 +20,7 @@ compatibility or agreement with a commercial solver.
 New sources use explicit standard pulses, frequency/wavelength ranges or local
 sampled time/amplitude/phase arrays. Native cycle-based pulses, continuous waves,
 soft sheet sources and Hann postprocessing have no mapping and are rejected.
-Automatic ranged-source conventions retain the provenance caveat in the
-[distribution review](RELEASE_REVIEW.md). Use explicit pulse settings when their
+Automatic ranged-source conventions retain a provenance caveat. Use explicit pulse settings when their
 definition is the desired native input.
 
 ## Python and CLI

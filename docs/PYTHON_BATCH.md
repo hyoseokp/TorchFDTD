@@ -54,7 +54,6 @@ Every case in `BatchRunner` can select its own kernel through the same field.
 This is a forward-only accelerator. A separate [`run_tensor_batch`](TENSOR_BATCH.md)
 API shares E/H/source/point-trace launches across compatible real-field cases.
 Neither path supplies adjoint gradients.
-See [measured scope and limitations](OPEN_SOURCE_COMPARISON_KO.md).
 
 
 [`examples/flux_slab.py`](../examples/flux_slab.py) is a complete executable example.

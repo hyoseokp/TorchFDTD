@@ -14,9 +14,9 @@ Build a device in Python or in the browser, simulate its electromagnetic fields,
 
 [Quick start](#quick-start) · [Adjoint inverse design](#adjoint-inverse-design) · [Paper designs](#paper-designs-e1-e2-e3) · [Examples](#examples) · [Validation](docs/MEEP_COMPARISON.md) · [Documentation](#documentation) · [Paper](https://arxiv.org/abs/2609.30039)
 
-[![An optical pulse couples into a microring and circulates, computed with 2D TorchFDTD](docs/assets/microring-pulse.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/microring-pulse.mp4)
+[![An optical pulse couples into a microring and circulates, computed with 2D TorchFDTD](docs/assets/microring-pulse.gif)](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/microring-pulse.mp4)
 
-*A pulse couples into a microring, circulates and leaks back into the bus waveguide. Actual 2D FDTD, showing optical-cycle RMS E<sub>z</sub> with a fixed color scale. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/microring-pulse.mp4) · [Model and reproduction](docs/assets/microring-pulse.md).*
+*A pulse couples into a microring, circulates and leaks back into the bus waveguide. Actual 2D FDTD, showing optical-cycle RMS E<sub>z</sub> with a fixed color scale. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/microring-pulse.mp4) · [Model and reproduction](docs/assets/microring-pulse.md).*
 
 - **Run on your NVIDIA GPU.** Fused CUDA kernels and CUDA Graphs accelerate field updates. CPU execution is available too.
 - **Differentiate your simulation.** Discrete adjoints connect material, geometry and source parameters to PyTorch autograd.
@@ -184,15 +184,15 @@ metagrating, finite metalens and photonic integrated circuit, with fixed seeds a
 
 ### Photonic-crystal waveguide
 
-[![A pulse propagating through a photonic-crystal waveguide, computed with 2D TorchFDTD](docs/assets/phc-waveguide.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/phc-waveguide.mp4)
+[![A pulse propagating through a photonic-crystal waveguide, computed with 2D TorchFDTD](docs/assets/phc-waveguide.gif)](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/phc-waveguide.mp4)
 
-*A pulse in a photonic-crystal line-defect waveguide. Actual 2D FDTD, showing instantaneous signed E<sub>z</sub> with the dielectric rods outlined in gray. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/phc-waveguide.mp4) · [Model and recording details](docs/assets/phc-waveguide.md).*
+*A pulse in a photonic-crystal line-defect waveguide. Actual 2D FDTD, showing instantaneous signed E<sub>z</sub> with the dielectric rods outlined in gray. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/phc-waveguide.mp4) · [Model and recording details](docs/assets/phc-waveguide.md).*
 
 ### 3D metalens focusing
 
-[![Translucent 3D electric-field wavefronts above a 112-pillar metalens, computed with TorchFDTD](docs/assets/metalens-volume.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-volume.mp4)
+[![Translucent 3D electric-field wavefronts above a 112-pillar metalens, computed with TorchFDTD](docs/assets/metalens-volume.gif)](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/metalens-volume.mp4)
 
-*A pulse focusing above a silicon-pillar metalens. Full 3D FDTD, rendered as a translucent volume of instantaneous E<sub>x</sub>. Red and blue indicate opposite field signs, with one fixed scale throughout. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-volume.mp4) · [Model and reproduction](docs/assets/metalens-volume.md).*
+*A pulse focusing above a silicon-pillar metalens. Full 3D FDTD, rendered as a translucent volume of instantaneous E<sub>x</sub>. Red and blue indicate opposite field signs, with one fixed scale throughout. [Full-resolution video](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/metalens-volume.mp4) · [Model and reproduction](docs/assets/metalens-volume.md).*
 
 For gradients and optimization, start with [differentiable FDTD](docs/DIFFERENTIABLE_FDTD.md) and [shape gradients](docs/SHAPE_GRADIENTS.md). For larger studies, see [parameter sweeps](docs/PYTHON_BATCH.md) and [tensor batches](docs/TENSOR_BATCH.md).
 
@@ -268,7 +268,7 @@ The workbench's FDTD panel has a **GPU** switch and a **Memory** selector; `/api
 
 Ahead: browser CAD, same-GPU structure batches, beyond-VRAM streaming with restart, GDS export and browser import, shape derivatives on top of density parameterization.
 Equal: nonuniform meshes, dispersive materials, anisotropic materials, boundaries, mode sources and ports, far-field projection, differentiable physics with fixed eigenmodes.
-Behind: single-problem multi-GPU (verified with CPU ranks only). Row-by-row evidence: [docs/FDTDX_PARITY_KO.md](docs/FDTDX_PARITY_KO.md).
+Behind: single-problem multi-GPU (verified with CPU ranks only).
 
 </details>
 

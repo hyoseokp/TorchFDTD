@@ -89,13 +89,14 @@ def test_volume_provenance_and_files(capture):
     assert rendered["temporal_interpolation"] == "none"
     assert rendered["fixed_field_max"] > 0
     for name, digest in rendered["sha256"].items():
-        assert hashlib.sha256((assets / name).read_bytes()).hexdigest() == digest
+        if (assets / name).is_file():  # videos are release attachments, not tracked files
+            assert hashlib.sha256((assets / name).read_bytes()).hexdigest() == digest
 
 
 def test_volume_readme_links_and_old_slices_are_preserved():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for name in ("microring-pulse", "phc-waveguide", "metalens-volume"):
         assert f"](docs/assets/{name}.gif)" in readme
-    for suffix in ("gif", "mp4", "md", "-record.json", "-render.json"):
+    for suffix in ("md", "-record.json", "-render.json"):
         name = "metalens-3d" + (suffix if suffix.startswith("-") else "." + suffix)
         assert (ROOT / "docs/assets" / name).is_file()

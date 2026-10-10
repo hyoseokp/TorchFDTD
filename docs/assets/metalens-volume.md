@@ -1,13 +1,13 @@
 # 3D metalens field volume
 
-[![Translucent electric-field wavefronts above a silicon-pillar metalens](metalens-volume.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-volume.mp4)
+[![Translucent electric-field wavefronts above a silicon-pillar metalens](metalens-volume.gif)](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/metalens-volume.mp4)
 
 A pulse passes through 112 silicon pillars and focuses above the array.
 The red and blue volumes show opposite signs of the instantaneous electric
 field Ex. All three spatial dimensions are sampled from a full 3D FDTD solve.
 There are no XZ/YZ display sheets, extruded 2D fields or hand-drawn beam paths.
 
-[MP4](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/metalens-volume.mp4)
+[MP4](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/metalens-volume.mp4)
 · [Project](metalens-3d-project.json)
 · [Capture and validation](metalens-volume-record.json)
 · [Rendering record](metalens-volume-render.json)

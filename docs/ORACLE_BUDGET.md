@@ -1,7 +1,6 @@
 # Oracle independence and error budgets of the G3 fixtures
 
-Bookkeeping for stage G3 of [COMPLETION_PROGRAM_KO.md](COMPLETION_PROGRAM_KO.md)
-section 5. For every fixture that a G3 case file under
+Bookkeeping for stage G3 of the physics validation. For every fixture that a G3 case file under
 `docs/validation/cases/` names, this document records what the oracle is, how
 independent it is of the code under test, the precision floor of the
 comparison, and the time-window and PML budgets as they were recorded. It

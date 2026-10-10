@@ -6,8 +6,7 @@ recorded by `scripts/record_gate_evidence.py --fixture <case>` stores the file's
 SHA-256, and `scripts/check_release_gates.py` refuses evidence whose case file
 has changed since the run. Editing a case after the run therefore invalidates
 that evidence; a scientific correction to a limit is a new case file, with the
-old file and its failing evidence preserved, as
-[COMPLETION_PROGRAM_KO.md](../../COMPLETION_PROGRAM_KO.md) section 1 rule 7 requires.
+old file and its failing evidence preserved.
 Commit the case before the run: the recorder refuses an uncommitted case file
 (unless `--allow-dirty`, which the judge fails) and stores
 `declared_before_run_verified` from the case's first commit against the suite

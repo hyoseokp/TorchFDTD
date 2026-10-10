@@ -1,12 +1,12 @@
 # A pulse circulating in a microring
 
-[![Optical-cycle RMS electric field in a bus-coupled microring](microring-pulse.gif)](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/microring-pulse.mp4)
+[![Optical-cycle RMS electric field in a bus-coupled microring](microring-pulse.gif)](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/microring-pulse.mp4)
 
 A pulse enters along the lower waveguide. Part couples into the ring, travels
 counterclockwise and returns to the coupling region, where it leaks back into
 the bus. The clip follows about two and a half round trips after initial coupling.
 
-[Full-resolution MP4](https://github.com/hyoseokp/TorchFDTD/raw/refs/heads/main/docs/assets/microring-pulse.mp4)
+[Full-resolution MP4](https://github.com/hyoseokp/TorchFDTD/releases/download/v1.1.7/microring-pulse.mp4)
 · [Project JSON](microring-pulse-project.json)
 · [Recording checks](microring-pulse-record.json)
 · [Rendering record](microring-pulse-render.json)

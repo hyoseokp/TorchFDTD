@@ -185,7 +185,7 @@ def test_sbom_covers_every_declared_dependency_with_licence_and_source():
     assets = {a['name']: a for a in sbom['assets']}
     assert assets['three.js']['version'].startswith(lock['node_modules/three']['version'])
     assert assets['lucide']['version'] == lock['node_modules/lucide']['version']
-    assert {item['name'] for item in sbom['open_items']} >= {'Installed-API property catalogue', 'FSP layout support', 'Aggregate commercial timing table'}
+    assert {item['name'] for item in sbom['open_items']} >= {'Installed-API property catalogue', 'FSP layout support'}
     assert all(item['state'] == 'BLOCKED_EXTERNAL' for item in sbom['open_items'])
     assert sbom['scan']['findings'] == []
     assert sbom['history_note']['commits'] and all(len(c['commit']) == 12 for c in sbom['history_note']['commits'])

@@ -3,7 +3,7 @@
 ## FDTDX parity round and public repository, 21 September 2026
 
 Seven feature branches were merged on one day to bring every row of the
-[FDTDX comparison](FDTDX_PARITY_KO.md) except single-problem multi-GPU to equal
+FDTDX comparison except single-problem multi-GPU to equal
 or ahead: GDS polygons with holes, layer etching, staircased sidewalls, browser
 hole rendering and one-call two-port networks (bf9978c, b750d3e, 6b072e7),
 finite-distance near-zone projection, observation grids, TFSF admission, lossy
@@ -417,9 +417,7 @@ batches. These checks do not establish general anisotropic PML reflection,
 long-time stability, streamed PMC or a large-grid memory measurement.
 The fixed-slab material derivative meets its predeclared 2% continuum criterion
 and its actual descent step improves both native and continuum objectives.
-See [the physical record](MODE_NETWORK_GRADIENT_ACCEPTANCE.md),
-[PMC integration](PMC_IMPLEMENTATION_PLAN.md) and
-[tensor CPML contract](ANISOTROPY_IMPLEMENTATION_PLAN.md).
+See [the physical record](MODE_NETWORK_GRADIENT_ACCEPTANCE.md).
 The follow-up at `99c61c7` connects explicit full-cell GDS ports to native
 mode-network S parameters and material gradients. Its independently checked
 rotated-tensor slab reduces complex transmission error from 1.0088% to
@@ -454,7 +452,7 @@ and complete checkpoint payload halves in the recorded geometry. The final
 CUDA case exercises both electric and magnetic auxiliary families. Its peak
 Torch allocation was 107,520 bytes within a 297,428-byte plan. The initial
 allocation undercount and corrected fixture remain documented in
-[the PMC record](PMC_IMPLEMENTATION_PLAN.md).
+[PMC_NATIVE_CPML.md](PMC_NATIVE_CPML.md).
 
 Stored native six-field planes also connect to browser diffraction and bounded
 NPZ/Python postprocessing. Two actual CPU API/adapter tests and one actual-run
@@ -582,7 +580,7 @@ The manuscript remains 35 pages, with its new reconstruction subsection
 rendered and reviewed. This remains private development delivery, not public
 release clearance or a performance-leadership claim.
 
-The current feature-by-feature status is in [FDTDX parity gates](FDTDX_PARITY_KO.md).
+The current feature-by-feature status is in [RELEASE_SCOPE.md](RELEASE_SCOPE.md).
 The earlier acceptance snapshot below is retained as historical evidence.
 Linux CI [35533483790](https://github.com/hyoseokp/TorchFDTD/actions/runs/35533483790)
 passed 1,180 Python tests and 28 browser tests at revision `ec3a28f`, with
@@ -592,7 +590,7 @@ foundations, opposing mode network, native endpoint Project adapter and
 distributed launcher. Its JUnit artifact confirms three actual Linux
 two/three-process Gloo tests passed. The two-GPU NCCL test was skipped.
 Their targeted checks and physical evidence are documented in
-[mode networks](MODE_NETWORK.md), [PMC](PMC_IMPLEMENTATION_PLAN.md) and
+[mode networks](MODE_NETWORK.md), [PMC](PMC_NATIVE_CPML.md) and
 [domain decomposition](DOMAIN_DECOMPOSITION.md). A clean wheel from `ec3a28f`
 was built and installed with exact package-source verification. The source
 audit checked 748 allowlisted files without pattern findings. Neither these
@@ -609,16 +607,11 @@ general physical-gradient convergence. See the [slab oracle record](MODE_NETWORK
 
 Development snapshot: 0.14.0.dev0, 19 September 2026. The required-workflow checklist objective is **not complete**. Conditional
 features are developed only for concrete use cases and excluded replication
-items are not implementation targets. Public publication remains conditional on completion and the
-[distribution review](RELEASE_REVIEW.md).
+items are not implementation targets.
 
 Active numerical validation uses analytic solutions and independently authored
 native CPU/CUDA projects. Earlier vendor field/spectrum comparison artifacts
 remain outside source release directories and are not release validation.
-The latest user instruction permits a historical aggregate timing table in the
-local README, with Lumerical as the primary comparison. That table is explicitly
-qualified and does not establish current-version or same-accuracy performance,
-nor public-release clearance. See the [timing exception](RELEASE_REVIEW.md#timing-table-exception-and-publication-status).
 
 ## Implemented native workflows
 
@@ -1046,8 +1039,7 @@ and machine-independent test summaries.
 ## Private GitHub development preview
 
 The [private development repository](https://github.com/hyoseokp/TorchFDTD)
-holds the experimental 0.14.0.dev0 delivery. Its [release scope](PREVIEW_RELEASE.md)
-keeps the complete replacement goal and public-release conditions open.
+holds the experimental 0.14.0.dev0 delivery.
 A wheel built from fresh staging contains exactly the 42 current package files,
 including the current browser assets. A separate virtual environment installed
 that wheel and verified package import outside the source checkout, nonzero
@@ -1067,8 +1059,7 @@ SHA-256.
 ## Remaining gates
 
 The [feature checklist](FEATURE_CHECKLIST.md) has 1658 rows: 160 implemented within
-their stated scope, 225 partial and 1273 missing or unverified. All rows have
-[importance and scope decisions](IMPLEMENTATION_PRIORITIES.md). Counts are not
+their stated scope, 225 partial and 1273 missing or unverified. Counts are not
 completion percentages. Major gaps include oblique/finite-aperture injection, mode sources,
 S-parameters, subpixel interfaces, further materials and
 boundaries, near-to-far fields, adjoint differentiation, complete graphical
@@ -1086,7 +1077,7 @@ and licences require review after product scope and provenance issues are resolv
 
 ## Required-workflow priorities and optical-data fitting, 20 September 2026
 
-The revised [priority plan](IMPLEMENTATION_PRIORITIES.md) implements required
+The revised priorities implement required
 linear-photonics capabilities before conditional format expansion and excludes
 product-specific replication. The remaining order is interface accuracy,
 mode ports and S-parameters, adjoint design, then measured accuracy-matched

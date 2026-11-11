@@ -10,7 +10,7 @@ against gate task G9-04. User-visible changes are listed in [CHANGELOG.md](CHANG
 ## Public API surface
 
 The public API is exactly the set of names exported by `torchfdtd/__init__.py` through
-`__all__`: 236 names at this version, listed below by area and defining module.
+`__all__`: 241 names at this version, listed below by area and defining module.
 Anything else, including every `torchfdtd.<module>` not named here, the `torchfdtd.server`
 routes, the CLI flags and the browser workbench, is an internal interface that may change
 without a deprecation period. The HTTP routes are stable only for the bundled workbench of
@@ -68,7 +68,7 @@ the same version; a client that targets `/api/...` pins the package version.
 | Tensor media | `torchfdtd.anisotropy` | `TensorDielectricSimulation` |
 | PMC faces | `torchfdtd.pmc_simulation` | `EndpointSimulation` |
 | Tensor media | `torchfdtd.tensor_project` | `TensorProject`, `tensor_from_project` |
-| Domain decomposition (HPC, blocked) | `torchfdtd.domain_decomposition` | `DistributedYeeDomain`, `SlabOwnership`, `distributed_capabilities`, `plan_domain_decomposition` |
+| Domain decomposition (HPC, blocked) | `torchfdtd.domain_decomposition` | `DistributedYeeDomain`, `SlabOwnership`, `distributed_capabilities`, `plan_domain_decomposition`, `SlabDecomposition`, `ProcessGroupTransport`, `ThreadTransport`, `init_process_group_from_env`, `spawn_local` |
 | PMC faces | `torchfdtd.endpoint_project` | `EndpointProject`, `endpoint_from_project` |
 | Mode networks | `torchfdtd.mode_network` | `FixedModePort`, `ModeNetwork`, `ModeNetworkResult` |
 | PMC faces | `torchfdtd.pmc_cpml` | `EndpointCPMLSimulation` |

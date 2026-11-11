@@ -78,10 +78,10 @@ class SourceWaveformSimulation(DifferentiableSimulation):
     Columns follow enabled source order then native polarization term order.
     Complex fields accept real or complex increments. Positions are not trainable.
     """
-    def __init__(self,project,options=None):
+    def __init__(self,project,options=None,*,decomposition=None):
         if options is not None and not isinstance(options,AdjointOptions):
             raise ValueError('Source waveform derivatives require resident AdjointOptions.')
-        super().__init__(project,options)
+        super().__init__(project,options,decomposition=decomposition)
         from .boundaries import reject_pmc_faces
         reject_pmc_faces(self.project.region,'SourceWaveformSimulation')
         layout=[]

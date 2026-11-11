@@ -63,8 +63,8 @@ def test_index_rejection_precedes_boundary_arrays_and_memory_query(monkeypatch):
 def test_history_index_limit_can_be_avoided_with_bounded_spectral_seeds():
     p=scene(steps=100000)
     with pytest.raises(ValueError,match='observation indexing'):
-        _cuda_index_contract(p.region,50000,100000)
-    _cuda_index_contract(p.region,50000,32)
+        _cuda_index_contract(p.region,p.region.shape,50000,100000)
+    _cuda_index_contract(p.region,p.region.shape,50000,32)
 
 
 @pytest.mark.parametrize('dispersive',[False,True])

@@ -224,6 +224,7 @@ class SlabBlockOperator:
         local.pmc = host.pmc
         local.epsilon = rows(epsilon)
         local.region = SimpleNamespace(shape=(len(indices), *host.region.shape[1:]))
+        local.shape, local.decomposition = local.region.shape, None
         local.current_step = 0
         grid = local.grid = _Grid()
         grid.E, grid.H = [self._phase_value(rows(s), phase) for s in state[:2]]

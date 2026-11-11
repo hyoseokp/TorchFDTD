@@ -1,4 +1,5 @@
 """Online linear DFT observations and their real-input discrete transpose."""
+import copy
 from dataclasses import dataclass
 
 import torch
@@ -45,6 +46,14 @@ class SpectralObservation:
         # Convert the original values directly, avoiding a default-FP32 roundtrip
         # when a Python sequence is used for an FP64 calculation.
         return torch.as_tensor(value,device=self.device,dtype=self.dtype).detach().clone()
+
+    def restricted(self, columns):
+        """The same observation for the listed component columns only, e.g. one slab's samples."""
+        local = copy.copy(self)
+        local.components = tuple(self.components[i] for i in columns)
+        local.groups = {family: [i for i, c in enumerate(local.components) if c[0] == family] for family in ('E', 'H')}
+        local._index_tensors = {}
+        return local
 
     def zeros(self):
         return torch.zeros((self.frequency.numel(), len(self.components)), dtype=self.complex_dtype, device=self.device)

@@ -164,7 +164,7 @@ def interior_indices(system, mat, components, periodic):
 class LorentzReconstructionCUDA:
     def __init__(self, system, mat, gradient, signal_bar, *, periodic=False, options=None, report=None):
         from .adjoint_memory import _cuda_index_contract
-        _cuda_index_contract(system.region, 0, 0)
+        _cuda_index_contract(system.region, system.shape, 0, 0)
         self.system, self.mat, self.gradient = system, mat, gradient
         if (signal_bar.ndim != 2 or signal_bar.shape[1] != len(system.monitors)
                 or signal_bar.dtype != torch.float32 or signal_bar.device != system.device

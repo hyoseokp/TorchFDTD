@@ -36,7 +36,7 @@ class FusedComplexAdjointCUDA(FusedAdjointCUDA):
 
     def source(self,forward,phase):
         system=self.system;g=system.grid
-        shape=system.region.shape
+        shape=system.shape
         strides=(shape[1]*shape[2],shape[2],1)
         real='double' if g.E.dtype==torch.complex128 else 'float'
         cn=f'(({real})({g.courant_number:.17g}))'

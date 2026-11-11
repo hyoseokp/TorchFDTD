@@ -43,10 +43,10 @@ def test_field_offset_guard_before_any_allocation(complex_fields, monkeypatch):
     boundary = (2**31+lanes-1)//lanes
     monkeypatch.setattr(torch, 'empty', lambda *a, **k: pytest.fail('allocation before rejection'))
     region = SimpleNamespace(shape=(1, 1, boundary-1), complex_fields=complex_fields)
-    _cuda_index_contract(region, 0, 0)
+    _cuda_index_contract(region, region.shape, 0, 0)
     region.shape = (1, 1, boundary)
     with pytest.raises(ValueError, match='signed 32-bit'):
-        _cuda_index_contract(region, 0, 0)
+        _cuda_index_contract(region, region.shape, 0, 0)
     with pytest.raises(ValueError, match='signed 32-bit'):
         multicell_source('', 'unused', 2**31, 4)
 

@@ -130,9 +130,11 @@ __all__ += ["TensorDielectricSimulation", "EndpointSimulation"]
 __all__ += ["TensorProject", "tensor_from_project"]
 
 from .domain_decomposition import (DistributedYeeDomain, SlabOwnership,
-    distributed_capabilities, plan_domain_decomposition)
+    distributed_capabilities, plan_domain_decomposition, SlabDecomposition, ProcessGroupTransport,
+    ThreadTransport, init_process_group_from_env, spawn_local)
 __all__ += ["DistributedYeeDomain", "SlabOwnership", "distributed_capabilities",
-            "plan_domain_decomposition"]
+            "plan_domain_decomposition", "SlabDecomposition", "ProcessGroupTransport",
+            "ThreadTransport", "init_process_group_from_env", "spawn_local"]
 
 from .endpoint_project import EndpointProject, endpoint_from_project
 from .mode_network import FixedModePort, ModeNetwork, ModeNetworkResult

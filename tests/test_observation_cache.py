@@ -15,6 +15,7 @@ from test_reversible_cpml_planes import fixture
 def map_system(observers, cache, shape=(3, 4, 5)):
     system = _System.__new__(_System)
     system.region = SimpleNamespace(shape=shape)
+    system.shape = shape
     system.grid = SimpleNamespace(pmc_blocks={'E': [], 'H': []})
     system.device = torch.device('cpu')
     system.monitors = observers

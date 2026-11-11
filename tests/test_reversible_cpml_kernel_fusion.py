@@ -95,7 +95,7 @@ def test_fused_inverse_vjp_is_bitwise_equal(diagonal, complex_fields, source_kin
 
 
 def test_interior_cuda_index_and_launch_contract_without_allocation():
-    system = SimpleNamespace(region=SimpleNamespace(shape=(6, 7, 20), complex_fields=False))
+    system = SimpleNamespace(shape=(6, 7, 20), region=SimpleNamespace(complex_fields=False))
     for block in (64, 128, 256, 512, 1024):
         _interior_launch_contract(system, block)
     for block in (True, 0, 2048, 128.0):
@@ -104,8 +104,8 @@ def test_interior_cuda_index_and_launch_contract_without_allocation():
     for complex_fields in (False, True):
         lanes = 2 if complex_fields else 1
         system.region.complex_fields = complex_fields
-        system.region.shape = (1, 1, (2**31-1)//(3*lanes))
+        system.shape = (1, 1, (2**31-1)//(3*lanes))
         _interior_launch_contract(system, 128)
-        system.region.shape = (1, 1, (2**31-1)//(3*lanes)+1)
+        system.shape = (1, 1, (2**31-1)//(3*lanes)+1)
         with pytest.raises(ValueError, match='32-bit'):
             _interior_launch_contract(system, 128)

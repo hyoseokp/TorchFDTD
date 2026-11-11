@@ -8,7 +8,7 @@ This module does not promise derivatives for unsupported scene features.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from functools import cached_property
 import math
 from pathlib import Path
@@ -102,9 +102,13 @@ class _System:
     _pmc_faces=True
 
     def __init__(self, project, epsilon, *, prepare_updates=True, observation_monitors=None,
-                 prepare_kernels=True, prepare_permittivity=True, observation_cache=None):
+                 prepare_kernels=True, prepare_permittivity=True, observation_cache=None, decomposition=None):
         self.project=project
         self.region=r=project.region
+        # A SlabDecomposition makes every array this rank's slab plus halo rows;
+        # sources, CPML and observations are restricted to the owned rows.
+        self.decomposition=decomposition
+        self.shape=tuple(r.shape) if decomposition is None else decomposition.shape
         self.epsilon=epsilon
         self.device,self.dtype=epsilon.device,epsilon.dtype
         self.field_dtype=(torch.complex128 if self.dtype==torch.float64 else torch.complex64) if r.complex_fields else self.dtype
@@ -118,21 +122,29 @@ class _System:
         # field or touch fdtd's process-global backend.
         reject_pml_dispersion(project,type(self).__name__)
         template=BoundaryDescription(r)
+        if decomposition is not None:decomposition.localize(template)
         # PMC/symmetric walls: lower walls mirror inside the volume arrays,
         # upper walls keep their tangential E, normal H and E edges in stored
         # blocks. Epsilon then carries one extra sampled row per upper wall.
         self.pmc=bool(template.pmc_lower or template.pmc_upper)
         if self.pmc and not type(self).__dict__.get('_pmc_faces',False):
             raise ValueError(f'PMC/symmetric faces are not implemented by {type(self).__name__}; only the plain and dispersive Yee systems carry the stored face topology.')
-        if tuple(epsilon.shape[:3])!=material_shape(r) or epsilon.ndim not in (3,4) or (epsilon.ndim==4 and epsilon.shape[3]!=3):
-            raise ValueError(f'epsilon shape must be {material_shape(r)} or {material_shape(r,True)}, including stored upper PMC rows.')
+        grid_shape=material_shape(r) if decomposition is None else self.shape
+        if tuple(epsilon.shape[:3])!=grid_shape or epsilon.ndim not in (3,4) or (epsilon.ndim==4 and epsilon.shape[3]!=3):
+            raise ValueError(f'epsilon shape must be {grid_shape} or {grid_shape+(3,)}, including stored upper PMC rows.')
         from .injection import source_terms,validate_oneway_materials
         # Prepared source terms and the stored-face contract precede every field allocation.
         terms=[(source,list(source_terms(project,source))) for source in project.sources]
+        if decomposition is not None:
+            if any(s.enabled and s.injection=='oneway' for s in project.sources):
+                raise ValueError('One-way sources validate the global material; slab decomposition supports soft sources.')
+            terms=[(source,[(component,local,waveform,profile) for component,loc,waveform,profile in items
+                            if (local:=decomposition.localize_source(loc)) is not None])
+                   for source,items in terms]
         if self.pmc:
             for source,items in terms:
                 for component,loc,waveform,profile in items:
-                    if any((sl.stop if isinstance(sl,slice) else sl+1)>n for sl,n in zip(loc,r.shape)) and not all(isinstance(sl,int) for sl in loc):
+                    if any((sl.stop if isinstance(sl,slice) else sl+1)>n for sl,n in zip(loc,self.shape)) and not all(isinstance(sl,int) for sl in loc):
                         raise ValueError(f'{source.name}: only point sources may address a stored upper PMC/symmetric face; plane sources must end below the wall.')
         volume=self._volume(epsilon)
         self.eps4=volume[...,None] if epsilon.ndim==3 else volume
@@ -140,7 +152,7 @@ class _System:
         def initial(shape):
             if not prepare_updates:return torch.zeros((),device=self.device,dtype=self.field_dtype).expand(shape)
             return torch.zeros(shape,device=self.device,dtype=self.field_dtype)
-        g.E=initial((*r.shape,3))
+        g.E=initial((*self.shape,3))
         g.H=initial(g.E.shape)
         g.inverse_permeability=torch.ones(1,device=self.device,dtype=self.dtype)
         g.is_torch=True
@@ -153,7 +165,7 @@ class _System:
         g.pmc_upper=template.pmc_upper.copy()
         g.pmc_blocks=template.pmc_blocks
         g.faces={family:[initial(shape) for _,_,shape in blocks] for family,blocks in g.pmc_blocks.items()}
-        self.face_slices=[tuple(slice(n,n+1) if a in upper else slice(0,n) for a,n in enumerate(r.shape))
+        self.face_slices=[tuple(slice(n,n+1) if a in upper else slice(0,n) for a,n in enumerate(self.shape))
                           for _,upper,_ in g.pmc_blocks['E']]
         if prepare_updates and prepare_permittivity:self.configure_material()
         else:g.inverse_permittivity=None;g.face_inverse_permittivity=[]
@@ -177,8 +189,8 @@ class _System:
         for source,items in terms:
             for component,loc,waveform,profile in items:
                 family=component[0];comp='xyz'.index(component[1].lower())
-                if self.pmc and any((sl.stop if isinstance(sl,slice) else sl+1)>n for sl,n in zip(loc,r.shape)):
-                    block,index=face_index(g.pmc_blocks,r.shape,family,comp,loc)
+                if self.pmc and any((sl.stop if isinstance(sl,slice) else sl+1)>n for sl,n in zip(loc,self.shape)):
+                    block,index=face_index(g.pmc_blocks,self.shape,family,comp,loc)
                     self.face_sources[family].append((block,loc,index,self.tensor(waveform)))
                     continue
                 self.sources[family].append((loc,comp,self.tensor(waveform),None if profile is None else self.tensor(profile)))
@@ -192,6 +204,10 @@ class _System:
             self.monitors=(observation_monitors if observation_cache is not None
                            and isinstance(observation_monitors,tuple)
                            else list(observation_monitors))
+        # Global columns of the observations this system samples.
+        self.monitor_columns=list(range(len(self.monitors)))
+        if decomposition is not None:
+            self.monitor_columns,self.monitors=decomposition.localize_monitors(self.monitors)
         self.prepare_observations()
         self.kernel=None
         if prepare_kernels and self.device.type=='cuda' and not r.complex_fields:
@@ -204,7 +220,7 @@ class _System:
     def _volume(self,epsilon):
         """Cell-indexed material rows, excluding stored upper PMC rows."""
         if not self.pmc:return epsilon
-        n=self.region.shape
+        n=self.shape
         return epsilon[:n[0],:n[1],:n[2]]
 
     def face_epsilon(self,epsilon,position):
@@ -236,7 +252,7 @@ class _System:
                 or not isinstance(self.monitors,tuple)
                 or any(self.grid.pmc_blocks.get(family) for family in ('E','H'))):
             return None
-        return kind,tuple(self.region.shape)
+        return kind,self.shape
 
     def prepare_observations(self):
         key=self.observation_cache_key('prepare')
@@ -248,7 +264,7 @@ class _System:
         build_device=self.device if key is None else torch.device('cpu')
         self.observation_maps=[]
         self.face_observation_maps=[]
-        shape=self.region.shape
+        shape=self.shape
         groups={}
         for family in ('E','H'):
             positions=[];indices=[]
@@ -330,6 +346,7 @@ class _System:
         """Yee curl on volume arrays plus stored PMC faces, with CPML memories."""
         g=self.grid;shape=tuple(field.shape[:3])
         source,target=('E','H') if forward else ('H','E')
+        if self.decomposition is not None:self.decomposition.fill_halo(field,forward)
         inputs=self._extended(field,faces,source,shape)
         result,outputs=self._outputs(field,target,shape)
         updated=list(psis)
@@ -391,6 +408,9 @@ class _System:
                 derivative[sl]=value*seg['inv_k']+seg['c']*memory_bar
             metric=g.metric.get((forward,axis))
             if metric:derivative=derivative*metric[0]
+            if self.decomposition is not None and axis==self.decomposition.axis:
+                # The neighbour owns the CPML memory of its boundary row.
+                self.decomposition.fill_derivative_halo(derivative,forward)
             src[_slice(axis,slice(1,n))]+=derivative
             src[_slice(axis,slice(0,n-1))]-=derivative
             if axis in g.wrap:
@@ -439,13 +459,20 @@ class _System:
         fh=self.inject_faces([f-courant*v for f,v in zip(fh,cf)],'H',step,functional=True)
         return (e,h,*psis,*fe,*fh)
 
+    def update(self,family,step):
+        """One native half step: the halo row it reads, the fused kernel, then the step's sources."""
+        g=self.grid
+        if self.decomposition is not None:self.decomposition.fill_halo(g.H if family=='E' else g.E,family=='H')
+        if family=='E':self.kernel.update_E()
+        else:self.kernel.update_H()
+        self.inject(g.E if family=='E' else g.H,family,step);self.inject_faces(g.faces[family],family,step)
+
     def advance(self,start,end):
         if self.grid.inverse_permittivity is None:
             raise RuntimeError('Storage-only initial states cannot be advanced in place. Use a tile operator.')
         for step in range(start,end):
             if self.kernel is not None:
-                self.kernel.update_E();self.inject(self.grid.E,'E',step);self.inject_faces(self.grid.faces['E'],'E',step)
-                self.kernel.update_H();self.inject(self.grid.H,'H',step);self.inject_faces(self.grid.faces['H'],'H',step)
+                self.update('E',step);self.update('H',step)
             else:
                 new=self.reference_step(self.state(),step,self.epsilon)
                 for target,value in zip(self.state(),new):target.copy_(value)
@@ -478,7 +505,7 @@ class _System:
         if self.epsilon.ndim==3:volume=volume[...,0]
         if self.pmc:
             gradient=torch.zeros(self.epsilon.shape,device=self.device,dtype=self.dtype)
-            n=self.region.shape
+            n=self.shape
             gradient[:n[0],:n[1],:n[2]]=volume
             for position,(component,_,_) in enumerate(self.grid.pmc_blocks['E']):
                 part=-courant*(fe_bar[position].conj()*curl_faces[position]).real/self.face_epsilon(self.epsilon,position).square()
@@ -731,13 +758,19 @@ class DifferentiableSimulation(torch.nn.Module):
     Epsilon has shape (Nx,Ny,Nz), or (Nx,Ny,Nz,3) for diagonal Yee values.
     Geometry uses the existing micrometre convention. This is an experimental
     fixed-mesh design API, not a claim that every forward feature differentiates.
+
+    With a ``decomposition`` (torchfdtd.domain_decomposition.SlabDecomposition)
+    every rank passes only its owned epsilon rows and receives the complete
+    signals or spectra. Each rank must then compute the same objective; its
+    backward returns the gradient of its owned rows (torch transpose).
     """
     _explicit_dispersive_parameters = False
 
-    def __init__(self,project: Project,options: AdjointOptions | None=None):
+    def __init__(self,project: Project,options: AdjointOptions | None=None,*,decomposition=None):
         super().__init__()
         self.project=Project.model_validate(project.model_dump())
         self.options=options or AdjointOptions()
+        self.decomposition=decomposition
         p=self.project;r=p.region
         if r.interface_method!='staircase':
             raise ValueError('DifferentiableSimulation currently requires staircase coefficients.')
@@ -778,47 +811,67 @@ class DifferentiableSimulation(torch.nn.Module):
              pole_count=0,material_parameter_elements=0):
         check_snapshot(self.project,self._plan_snapshot,type(self).__name__)
         r=self.project.region
+        d=self.decomposition
         from .adjoint_memory import _resident_contract
-        _resident_contract(r,self.options)
-        if not isinstance(epsilon,torch.Tensor) or epsilon.dtype not in (torch.float32,torch.float64):
-            raise ValueError('epsilon must be a real float32 or float64 torch Tensor.')
-        if epsilon.device.type not in ('cpu','cuda'):
-            raise ValueError('Only CPU and CUDA tensors are supported.')
-        from .endpoint_native import uses_endpoint
-        pmc=uses_endpoint(r)
-        if pmc and self.options.backward_kernel=='fused':
-            raise ValueError('The fused CUDA backward kernel does not implement PMC/symmetric faces. Use backward_kernel="auto" or "torch".')
-        if epsilon.device.type!='cuda' and self.options.backward_kernel=='fused':
-            raise ValueError('The fused backward requires a CUDA tensor.')
-        if epsilon.device.type!='cuda' and self.options.checkpoint_transfers=='async':
-            raise ValueError('Asynchronous checkpoints require a CUDA tensor.')
-        if tuple(epsilon.shape) not in (material_shape(r),material_shape(r,True)):
-            raise ValueError('epsilon shape must match the scene grid plus one stored row on every upper PMC/symmetric axis, optionally with three Yee components.'
-                             if pmc else 'epsilon shape must match the scene grid, optionally with three Yee components.')
-        if not bool(torch.isfinite(epsilon).all()) or bool((epsilon<1).any()):
-            raise ValueError('This conservative CFL contract requires finite epsilon >= 1.')
-        if (epsilon.dtype==torch.float64)!=(r.precision=='float64'):
-            raise ValueError('epsilon dtype must match the project precision.')
-        # Check GPU, CPU working memory and checkpoint tiers before creating
-        # native fields. The public estimator uses this same calculation.
-        from .adjoint_memory import _resident_reservation
-        reservation=_resident_reservation(self.project,self.options,epsilon.device,spectral,
-            pole_count=pole_count,parameter_elements=material_parameter_elements)
+        from .domain_decomposition import collective_errors
+        with collective_errors(d):
+            _resident_contract(r,self.options)
+            if not isinstance(epsilon,torch.Tensor) or epsilon.dtype not in (torch.float32,torch.float64):
+                raise ValueError('epsilon must be a real float32 or float64 torch Tensor.')
+            if epsilon.device.type not in ('cpu','cuda'):
+                raise ValueError('Only CPU and CUDA tensors are supported.')
+            from .endpoint_native import uses_endpoint
+            pmc=uses_endpoint(r)
+            if pmc and self.options.backward_kernel=='fused':
+                raise ValueError('The fused CUDA backward kernel does not implement PMC/symmetric faces. Use backward_kernel="auto" or "torch".')
+            if epsilon.device.type!='cuda' and self.options.backward_kernel=='fused':
+                raise ValueError('The fused backward requires a CUDA tensor.')
+            if epsilon.device.type!='cuda' and self.options.checkpoint_transfers=='async':
+                raise ValueError('Asynchronous checkpoints require a CUDA tensor.')
+            if d is not None and (system_factory is not None or self.options.backward_kernel=='fused'):
+                raise ValueError('Slab decomposition supports nondispersive scalar/diagonal epsilon with backward_kernel="auto" or "torch".')
+            grid=material_shape(r) if d is None else d.owned_shape
+            if tuple(epsilon.shape) not in (grid,grid+(3,)):
+                raise ValueError('epsilon shape must match the scene grid plus one stored row on every upper PMC/symmetric axis, optionally with three Yee components.'
+                                 if pmc else 'epsilon shape must match the scene grid (the owned slab rows with a decomposition), optionally with three Yee components.')
+            if not bool(torch.isfinite(epsilon).all()) or bool((epsilon<1).any()):
+                raise ValueError('This conservative CFL contract requires finite epsilon >= 1.')
+            if (epsilon.dtype==torch.float64)!=(r.precision=='float64'):
+                raise ValueError('epsilon dtype must match the project precision.')
+            # Check GPU, CPU working memory and checkpoint tiers before creating
+            # native fields. The public estimator uses this same calculation.
+            from .adjoint_memory import _resident_reservation
+            reservation=_resident_reservation(self.project,self.options,epsilon.device,spectral,
+                pole_count=pole_count,parameter_elements=material_parameter_elements,decomposition=d)
+        # Slabs exchange halo derivatives inside the torch transpose.
+        options=self.options if d is None else replace(self.options,backward_kernel='torch')
         report=dict(experimental=True,adjoint='discrete Yee/CPML',higher_order=False,
                     spatial_streaming=False,full_time_autograd=False,steps=r.steps,
                     forward_backend='fused CUDA' if epsilon.is_cuda and (not r.complex_fields or r.cuda_kernel=='fused') else 'torch CUDA' if epsilon.is_cuda else 'torch CPU',
-                    backward_backend='fused CUDA complex transpose' if epsilon.is_cuda and r.complex_fields and self.options.backward_kernel=='fused' else 'fused CUDA transpose' if epsilon.is_cuda and not r.complex_fields and not pmc and self.options.backward_kernel!='torch' else 'torch explicit transpose',
+                    backward_backend='fused CUDA complex transpose' if epsilon.is_cuda and r.complex_fields and options.backward_kernel=='fused' else 'fused CUDA transpose' if epsilon.is_cuda and not r.complex_fields and not pmc and options.backward_kernel!='torch' else 'torch explicit transpose',
                     pmc_faces=pmc,
-                    checkpoint_transfers=self.options.checkpoint_transfers,**reservation)
+                    checkpoint_transfers=options.checkpoint_transfers,**reservation)
+        observers=None if spectral is None else spectral.observers
+        if d is not None:
+            report['decomposition']=d.report()
+            # The halo rows are the neighbours' material and carry no gradient.
+            epsilon=d.extend(epsilon)
         # A later wavelength/ray configuration must not alter an earlier graph's replay.
-        factory=system_factory or _System
-        with torch.no_grad():system=factory(self.project.model_copy(deep=True),epsilon,observation_monitors=None if spectral is None else spectral.observers)
+        with torch.no_grad():
+            if d is None:
+                system=(system_factory or _System)(self.project.model_copy(deep=True),epsilon,observation_monitors=observers)
+            else:
+                system=_System(self.project.model_copy(deep=True),epsilon,observation_monitors=observers,decomposition=d)
         # Check host/disk admission before spending the forward compute time.
-        admission=_Checkpoints(system,self.options,report,admission=True)
+        admission=_Checkpoints(system,options,report,admission=True)
         admission.close()
         report['observation_storage']='time_history' if spectral is None else 'online_spectrum'
         if spectral is not None:report.update(spectral.reservation(spectral.block_size),spectral_block_size=spectral.block_size)
-        signals=_FDTD.apply(epsilon if autograd_input is None else autograd_input,system,self.options,report,spectral)
+        observation=spectral if spectral is None or d is None else spectral.restricted(system.monitor_columns)
+        signals=_FDTD.apply(epsilon if autograd_input is None else autograd_input,system,options,report,observation)
+        if d is not None:
+            signals=d.gather(signals,system.monitor_columns,
+                             sum(m.enabled for m in self.project.monitors) if spectral is None else len(spectral.components))
         if spectral is not None:return spectral.result(signals,report)
         return DifferentiableResult(signals,r.time_step,tuple(m.component for m in self.project.monitors if m.enabled),report)
 

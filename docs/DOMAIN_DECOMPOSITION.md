@@ -5,7 +5,9 @@ propagator for one electromagnetic problem split into nonoverlapping x slabs.
 Each process supplies only its owned E, H and scalar or diagonal epsilon.
 There is no replicated global field/material allocation and no gather API.
 This is an experimental foundation, not a complete distributed `Simulation`
-or `PeriodicLayerResponse` execution route.
+or `PeriodicLayerResponse` execution route. Slabs with CPML, walls, sources,
+observations and the differentiable and reversible solvers use
+`SlabDecomposition` instead; see [DISTRIBUTED.md](DISTRIBUTED.md).
 
 ## Supported contract
 

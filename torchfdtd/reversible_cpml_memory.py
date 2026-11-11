@@ -13,7 +13,8 @@ class _TraceAdmissionError(ValueError):
     """A complete reservation was denied, rather than invalid physics/metadata."""
 
 
-def _cpml_reversible_reservation(project, options, device, interval, *, material_components=1, spectral=None):
+def _cpml_reversible_reservation(project, options, device, interval, *, material_components=1, spectral=None,
+                                 decomposition=None):
     """Resolve storage using complete reservations, before any solver allocation.
 
     Keep the device-first choice local to this invocation. The existing CUDA
@@ -22,6 +23,7 @@ def _cpml_reversible_reservation(project, options, device, interval, *, material
     pinned/device staging and all other solver allocations. Explicit budgets
     bound this solver, not a shared pool or memory reserved for future calls.
     No graph/trace keeper, field offload, partial archive or OOM retry is added.
+    A SlabDecomposition admits this rank's slab, trace and halo rows.
     """
     device = torch.device(device)
     requested = options.trace_storage
@@ -29,7 +31,7 @@ def _cpml_reversible_reservation(project, options, device, interval, *, material
     if requested != 'auto':
         result = _fixed_cpml_reversible_reservation(project, options, device, interval,
             material_components=material_components, spectral=spectral,
-            storage=requested, transfers=transfers)
+            storage=requested, transfers=transfers, decomposition=decomposition)
         result.update(trace_storage_requested=requested, trace_transfers_requested=transfers)
         return result
     if device.type not in ('cpu', 'cuda'):
@@ -44,7 +46,7 @@ def _cpml_reversible_reservation(project, options, device, interval, *, material
         try:
             result = _fixed_cpml_reversible_reservation(project, options, device, interval,
                 material_components=material_components, spectral=spectral,
-                storage=storage, transfers=resolved_transfers)
+                storage=storage, transfers=resolved_transfers, decomposition=decomposition)
         except _TraceAdmissionError as error:
             attempts.append(dict(storage=storage, transfers=resolved_transfers,
                                  admitted=False, reason=str(error)))
@@ -59,7 +61,8 @@ def _cpml_reversible_reservation(project, options, device, interval, *, material
 
 
 def _fixed_cpml_reversible_reservation(project, options, device, interval, *,
-                                     material_components=1, spectral=None, storage, transfers):
+                                     material_components=1, spectral=None, storage, transfers,
+                                     decomposition=None):
     from .adjoint_memory import _resident_reservation
     from .differentiable import AdjointOptions
     from .memory_profile import host_memory
@@ -88,7 +91,7 @@ def _fixed_cpml_reversible_reservation(project, options, device, interval, *,
     spectral_layout = getattr(spectral, 'layout_reservation_bytes', 0) if spectral is not None else 0
     if type(spectral_layout) is not int or spectral_layout < 0:
         raise ValueError('Spectral layout_reservation_bytes must be a nonnegative integer.')
-    shape = project.region.shape
+    shape = project.region.shape if decomposition is None else decomposition.shape
     if (len(interval) != 2 or any(type(x) is not int for x in interval)
             or not 0 <= interval[0] <= interval[1] < shape[2]):
         raise ValueError('Invalid inclusive reconstruction interval.')
@@ -108,8 +111,7 @@ def _fixed_cpml_reversible_reservation(project, options, device, interval, *,
     # model without mutating the caller's project or copying unrelated graphs.
     if device.type == 'cuda' and getattr(project.region, 'complex_fields', False) and getattr(project.region, 'cuda_kernel', 'torch') != 'fused':
         base_project = project.model_copy(update={'region': project.region.model_copy(update={'cuda_kernel': 'fused'})})
-    base = (_resident_reservation(base_project, internal, device) if spectral is None
-            else _resident_reservation(base_project, internal, device, spectral))
+    base = _resident_reservation(base_project, internal, device, spectral, decomposition=decomposition)
     cells = math.prod(shape)
     plane = shape[0]*shape[1]
     complex_fields = getattr(project.region, 'complex_fields', False)
@@ -152,6 +154,8 @@ def _fixed_cpml_reversible_reservation(project, options, device, interval, *,
             or getattr(options, 'block_size', None) == 'auto')) or multi_tuning):
         from .boundaries import BoundaryDescription
         descriptors = BoundaryDescription(project.region)
+        if decomposition is not None:
+            decomposition.localize(descriptors)
         psi_bytes = electric_psi_bytes = 0
         for (forward, axis, _), segments in descriptors.cpml.items():
             for segment in segments:

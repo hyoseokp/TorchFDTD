@@ -21,6 +21,9 @@ class FusedAdjointCUDA:
         self.direct_views=direct_views
         self.buffers=buffers
         self.system=system
+        decomposition=system.decomposition
+        if decomposition is not None and (material_gradient or any(face.kind=='pml' for face in system.region.boundaries.pair(decomposition.axis))):
+            raise ValueError('The fused slab transpose exchanges only field-adjoint halo rows: no material VJP and no CPML on the split axis.')
         self.device=system.device.index
         self.gradient=gradient
         self.signal_bar=signal_bar.contiguous()
@@ -33,7 +36,7 @@ class FusedAdjointCUDA:
         self.psi_bars=[tuple(allocate(f'bar:psi:{phase}:{i}',s['psi']) for i,s in enumerate(system.segments)) for phase in range(2)]
         self.phase=0
         self.launches={}
-        self.count=math.prod(system.region.shape)
+        self.count=math.prod(system.shape)
         with cupy.cuda.Device(self.device),self.stream():
             for phase in (0,1):
                 for forward in (True,False):
@@ -104,7 +107,7 @@ class FusedAdjointCUDA:
 
     def source(self,forward,phase):
         system=self.system;g=system.grid
-        shape=system.region.shape
+        shape=system.shape
         strides=(shape[1]*shape[2],shape[2],1)
         real='double' if g.E.dtype==torch.float64 else 'float'
         cn=f'(({real})({g.courant_number:.17g}))'
@@ -222,6 +225,9 @@ class FusedAdjointCUDA:
                 fn,arrays,_,count=self.observer
                 fn(((count+127)//128,),(128,),(*arrays,np.int32(index if observation_index is None else observation_index)))
             for forward in (True,False):
+                if self.system.decomposition is not None:
+                    # The gathered split-axis derivatives read the previous (E target) or next (H target) adjoint row.
+                    self.system.decomposition.fill_halo(self.h_bar if forward else self.electric_seed,not forward)
                 fn,arrays,_=self.launches[forward,self.phase]
                 block = getattr(self, 'tuned_blocks', {}).get((forward, self.phase), 256)
                 fn(((self.count+block-1)//block,),(block,),arrays)

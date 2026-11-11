@@ -237,13 +237,14 @@ class DispersiveSimulation(DifferentiableSimulation):
     """
     _explicit_dispersive_parameters = True
 
-    def __init__(self, project, options=None):
+    def __init__(self, project, options=None, *, decomposition=None):
         options = options or AdjointOptions()
         if not isinstance(options, AdjointOptions):
             raise ValueError('DispersiveSimulation requires resident AdjointOptions. Use StreamedDispersiveSimulation for spatial streaming.')
         # Keep the Torch fallback as auto until application-scale performance
         # comparisons establish when native ADE kernels are beneficial.
-        super().__init__(project, replace(options, backward_kernel='torch') if options.backward_kernel=='auto' else options)
+        super().__init__(project, replace(options, backward_kernel='torch') if options.backward_kernel=='auto' else options,
+                         decomposition=decomposition)
         from .endpoint_native import uses_endpoint
         if uses_endpoint(self.project.region) and (self.project.region.cuda_kernel == 'fused' or self.options.backward_kernel == 'fused'):
             raise ValueError('The fused CUDA ADE kernels do not implement stored PMC/symmetric faces. Use cuda_kernel="torch" and backward_kernel="torch".')

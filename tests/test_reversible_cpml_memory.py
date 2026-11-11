@@ -16,7 +16,7 @@ def mock_base(monkeypatch):
     import torchfdtd.memory_profile as host
     import torchfdtd.cuda_memory as cuda
     calls = []
-    def reserve(project, opts, device, spectral=None):
+    def reserve(project, opts, device, spectral=None, decomposition=None):
         assert opts.checkpoints == 1 and opts.storage == 'device'
         assert opts.host_budget_bytes is opts.gpu_budget_bytes is None
         assert opts.backward_kernel == ('fused' if device.type == 'cuda' else 'torch')
@@ -171,7 +171,7 @@ def test_complex_fused_project_copy_and_spectral_forwarding(monkeypatch):
         boundaries=faces, bloch_phase=(.2, 0, 0), cuda_kernel='torch'),
         monitors=[Monitor(component='Ex', center=(0, 0, 0))])
     sentinel = SimpleNamespace(block_size=3, components=('Ex',), reservation=lambda depth: {'spectral_reservation_bytes': 160})
-    def capture(copy, opts, device, spectral=None):
+    def capture(copy, opts, device, spectral=None, decomposition=None):
         assert copy is not project and copy.region is not project.region
         assert copy.region.cuda_kernel == 'fused'
         assert spectral is sentinel
@@ -193,7 +193,7 @@ def test_spectral_layout_total_admission_and_bounded_history(monkeypatch, comple
         spectral_workspace_bytes=depth*2*32, spectral_settings_bytes=16,
         spectral_reservation_bytes=64+depth*2*32+16,
         plane_workspace_reservation_bytes=256)
-    def spectral_base(project, opts, device, spectral=None):
+    def spectral_base(project, opts, device, spectral=None, decomposition=None):
         assert spectral is settings
         result = previous(project, opts, device, spectral)
         result.update(output_history_bytes=0, history_reservation_bytes=settings.reservation(3)['spectral_reservation_bytes'])

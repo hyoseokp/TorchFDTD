@@ -31,7 +31,7 @@ class _CUDARecorder:
             raise ValueError('Recorded observation count exceeds the CUDA launch index range.')
         # Encode E/H in the low bit of a field index. The CPU layout is built
         # from monitor metadata, avoiding a device-to-host index transfer.
-        shape = system.region.shape
+        shape = system.shape
         mapping = np.empty(self.count, dtype=np.int64)
         for i, (name, loc, component) in enumerate(system.monitors):
             index = 3*((loc[0]*shape[1]+loc[1])*shape[2]+loc[2])+component

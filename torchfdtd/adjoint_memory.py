@@ -23,11 +23,11 @@ def _resident_contract(region,options):
     if refusal:raise ValueError(refusal+'. Use memory_mode="streamed" with StreamedSimulation.')
 
 
-def _cuda_index_contract(region,monitor_count,observation_steps):
+def _cuda_index_contract(region,shape,monitor_count,observation_steps):
     # Fused Yee field offsets use signed int arithmetic. Complex forward uses
     # two real lanes. ADE pole and packed-parameter offsets already use int64.
     lanes=2 if region.complex_fields else 1
-    if 3*lanes*math.prod(region.shape)>=2**31:
+    if 3*lanes*math.prod(shape)>=2**31:
         raise ValueError('Resident CUDA field indexing exceeds the signed 32-bit range. Use spatial streaming.')
     # Retain the conservative observation bound for all CUDA paths.
     # Spectral observations seed bounded time blocks instead of full history.
@@ -129,8 +129,13 @@ def _workspace(project,options,device,boundary,segments,n,cpml,item,real_item,po
     return model,parts
 
 
-def _resident_reservation(project, options, device, spectral=None, *, pole_count=0, parameter_elements=0):
-    """Shared planner/execution calculation, including original tier semantics."""
+def _resident_reservation(project, options, device, spectral=None, *, pole_count=0, parameter_elements=0,
+                          decomposition=None):
+    """Shared planner/execution calculation, including original tier semantics.
+
+    With a SlabDecomposition the volume, CPML and halo terms are this rank's
+    slab; observation histories keep their full, replicated size.
+    """
     region=project.region
     _resident_contract(region,options)
     device=torch.device(device)
@@ -138,12 +143,14 @@ def _resident_reservation(project, options, device, spectral=None, *, pole_count
     if device.type!='cuda' and options.backward_kernel=='fused':raise ValueError('The fused backward requires a CUDA tensor.')
     if device.type!='cuda' and options.checkpoint_transfers=='async':raise ValueError('Asynchronous checkpoints require a CUDA tensor.')
     monitor_count=sum(m.enabled for m in project.monitors) if spectral is None else len(spectral.components)
+    shape=region.shape if decomposition is None else decomposition.shape
     if device.type=='cuda':
-        _cuda_index_contract(region,monitor_count,region.steps if spectral is None else spectral.block_size)
-    n=math.prod(region.shape)
+        _cuda_index_contract(region,shape,monitor_count,region.steps if spectral is None else spectral.block_size)
+    n=math.prod(shape)
     real_item=8 if region.precision=='float64' else 4
     item=real_item*(2 if region.complex_fields else 1)
     boundary=BoundaryDescription(region)
+    if decomposition is not None:decomposition.localize(boundary)
     segments=[s for group in boundary.cpml.values() for s in group]
     cpml=sum(math.prod(s['shape']) for s in segments)
     # Stored upper PMC faces/edges are exact element counts, not a padded volume.
@@ -152,7 +159,12 @@ def _resident_reservation(project, options, device, spectral=None, *, pole_count
     state=(6*n+cpml+faces+6*pole_count*n+2*pole_count*electric_faces)*item
     from .boundaries import material_shape
     workspace_model,workspace_parts=_workspace(project,options,device,boundary,segments,
-        math.prod(material_shape(region)),cpml,item,real_item,pole_count,state,monitor_count)
+        math.prod(material_shape(region) if decomposition is None else shape),cpml,item,real_item,pole_count,state,monitor_count)
+    if decomposition is not None:
+        # The halo-extended diagonal material and its staging copy, plus one
+        # send and one receive row for each of the field and derivative halos.
+        row=n//shape[decomposition.axis]
+        workspace_parts['slab_material_and_halo_rows']=6*n*real_item+12*row*item
     workspace=sum(workspace_parts.values())
     # Packing and its normalization graph precede field creation. Budget those
     # carriers before torch.cat, rather than testing only the packed output.
@@ -230,7 +242,7 @@ def _resident_reservation(project, options, device, spectral=None, *, pole_count
 
 
 def estimate_adjoint_memory(project, options=None, *, device='cpu', parameter_shapes=None,
-                            frequency_hz=None, window=None, block_size=32):
+                            frequency_hz=None, window=None, block_size=32, decomposition=None):
     """Admit resident Yee/CPML or ADE without creating fields or scratch files.
 
     Supply four original material shapes for ADE. Omit them for nondispersive
@@ -240,6 +252,7 @@ def estimate_adjoint_memory(project, options=None, *, device='cpu', parameter_sh
     host_budget_bytes limits the checkpoint tier, as in AdjointOptions.
     Current available RAM additionally bounds CPU solver workspace. Execution
     rechecks resources and validates actual tensors and supported physics.
+    A SlabDecomposition admits this rank's slab on this rank's device.
     """
     from .differentiable import AdjointOptions, DifferentiableSimulation
     options=options or AdjointOptions()
@@ -263,6 +276,7 @@ def estimate_adjoint_memory(project, options=None, *, device='cpu', parameter_sh
         scalar=torch.empty((),dtype=getattr(torch,project.region.precision),device='cpu')
         spectral=SpectralObservation(scalar,project.region,[m.component for m in project.monitors if m.enabled],
             frequency_hz,window,block_size)
-    report=_resident_reservation(project,options,device,spectral,pole_count=poles,parameter_elements=elements)
+    report=_resident_reservation(project,options,device,spectral,pole_count=poles,parameter_elements=elements,
+                                 decomposition=decomposition)
     if spectral is not None:report.update(spectral.reservation(spectral.block_size))
     return report

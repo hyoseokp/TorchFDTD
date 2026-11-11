@@ -19,13 +19,13 @@ class ReversibleCPMLPlaneSimulation(DifferentiablePlaneSimulation):
 
     _resident_model_type = ReversibleCPMLSimulation
 
-    def __init__(self, project, options=None, *, quadrature_counts=None, material=None):
+    def __init__(self, project, options=None, *, quadrature_counts=None, material=None, decomposition=None):
         if options is not None and not isinstance(options, ReversibleCPMLOptions):
             raise ValueError('Recorded CPML planes require ReversibleCPMLOptions.')
         if material is not None:
             self._resident_model_type = partial(ReversibleCPMLSimulation, material=material)
             self._resident_model_type._explicit_dispersive_parameters = True
-        super().__init__(project, options, quadrature_counts=quadrature_counts)
+        super().__init__(project, options, quadrature_counts=quadrature_counts, decomposition=decomposition)
         self._material_snapshot = None if self.model.material is None else self.model.material.model_dump(mode='json')
         if self._material_snapshot is not None:
             self.fingerprint = hashlib.sha256(json.dumps(dict(base=self.fingerprint,

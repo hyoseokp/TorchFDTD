@@ -172,15 +172,20 @@ def _interior_blocks(field, a, b, chunk=65536):
 
 
 def _interior_scale(system, a, b, chunk=65536):
+    """Peak and L2 of the interior E/H; x slabs reduce their owned rows over all ranks."""
     square = torch.zeros((), dtype=torch.float64, device=system.device)
     peak = torch.zeros((), dtype=torch.float32, device=system.device)
+    slab = system.decomposition
     for field in system.state()[:2]:
-        for block in _interior_blocks(field, a, b, chunk):
+        for block in _interior_blocks(field if slab is None else field[slab.owned], a, b, chunk):
             peak = torch.maximum(peak, block.abs().amax())
             lanes = torch.view_as_real(block) if block.is_complex() else block
             converted = lanes.to(torch.float64)
             square.add_(converted.square().sum())
             del converted
+    if slab is not None:
+        slab.all_reduce(peak, 'max')
+        slab.all_reduce(square, 'sum')
     maximum, norm = float(peak), math.sqrt(float(square))
     if not math.isfinite(maximum) or not math.isfinite(norm):
         raise RuntimeError('Reversible interior fields became nonfinite.')
@@ -229,10 +234,11 @@ def _require_fixed_exterior(value, fixed, interval, chunk):
         raise ValueError('With explicit interior_z, epsilon must equal fixed_epsilon outside the reconstruction interval.')
 
 
-def _recorded_system(epsilon, project, spectral, options=None, report=None):
+def _recorded_system(epsilon, project, spectral, options=None, report=None, decomposition=None):
     system = _System(project, epsilon.detach(), prepare_kernels=False,
                      observation_monitors=None if spectral is None else spectral.observers,
-                     observation_cache=getattr(spectral, 'observation_cache', None))
+                     observation_cache=getattr(spectral, 'observation_cache', None),
+                     decomposition=decomposition)
     if epsilon.is_cuda:
         from .cuda_kernels import FusedYeeCUDA
         from .cuda_complex import FusedComplexYeeCUDA
@@ -291,13 +297,11 @@ def _advance_recorded(system, step, frame, a, b):
         return
     e, h, *psis = system.state()
     if system.kernel is not None:
-        system.kernel.update_E()
-        system.inject(e, 'E', step)
+        system.update('E', step)
         if frame is not None:
             frame[0].copy_(e[:, :, b + 1, :2])
             frame[1].copy_(h[:, :, a - 1, :2])
-        system.kernel.update_H()
-        system.inject(h, 'H', step)
+        system.update('H', step)
     else:
         curl, psis = system.curl(h, psis, False)
         next_e = system.inject(e + system.grid.courant_number / system.eps4 * curl,
@@ -315,31 +319,31 @@ def _advance_recorded(system, step, frame, a, b):
 
 
 @torch.no_grad()
-def _forward_only(epsilon, project, interval, report, spectral, options=None):
+def _forward_only(system, interval, report, spectral):
     """The recorded forward's steps, observations and DFT blocks, with no tape.
 
     Signals and spectra equal the recorded path's bit for bit. No boundary
     trace, terminal copy or reconstruction scale is kept, so no adjoint exists.
     """
-    system = _recorded_system(epsilon, project, spectral, options, report)
     a, b = interval
-    block_size = project.region.steps if spectral is None else spectral.block_size
+    steps = system.region.steps
+    block_size = steps if spectral is None else spectral.block_size
     samples = system.grid.E.new_empty((block_size, len(system.monitors)))
     record = recorder(system, samples)
     signals = samples if spectral is None else spectral.zeros()
     started = time.perf_counter()
-    for step in range(project.region.steps):
+    for step in range(steps):
         _advance_recorded(system, step, None, a, b)
         row = step % block_size
         record(row)
-        if spectral is not None and (row + 1 == block_size or step + 1 == project.region.steps):
+        if spectral is not None and (row + 1 == block_size or step + 1 == steps):
             spectral.accumulate(signals, samples[:row + 1], step - row)
     chunk = report['diagnostic_chunk_elements']
     _require_finite(signals, 'Recorded CPML observations became nonfinite.', chunk)
     for field in system.state()[:2]:
         _require_finite(field, 'CPML fields became nonfinite.', chunk)
-    if epsilon.is_cuda:
-        torch.cuda.synchronize(epsilon.device)
+    if system.device.type == 'cuda':
+        torch.cuda.synchronize(system.device)
     report.update(forward_seconds=time.perf_counter() - started,
                   sampled_forward_peak=None, sampled_forward_l2=None,
                   diagnostic_cadence_steps=0, terminal_copies=0,
@@ -351,14 +355,14 @@ def _forward_only(epsilon, project, interval, report, spectral, options=None):
 
 class _RecordedCPML(torch.autograd.Function):
     @staticmethod
-    def forward(ctx, epsilon, project, options, interval, report, spectral):
-        system = _recorded_system(epsilon, project, spectral, options, report)
+    def forward(ctx, epsilon, system, options, interval, report, spectral):
         a, b = interval
+        steps = system.region.steps
         # Admission has resolved automatic placement before effective material
         # or fields are allocated. Use that exact decision for this graph's
         # lifetime; later solves may choose differently as live memory changes.
         trace_device = epsilon.device if report['trace_storage'] == 'device' else torch.device('cpu')
-        shape = (project.region.steps, 2, *epsilon.shape[:2], 2)
+        shape = (steps, 2, *epsilon.shape[:2], 2)
         transport = None
         if report['trace_transfers'] == 'async':
             from .reversible_trace import AsyncBoundaryTrace
@@ -367,23 +371,23 @@ class _RecordedCPML(torch.autograd.Function):
             archive = transport.archive
         else:
             archive = torch.empty(shape, dtype=system.field_dtype, device=trace_device)
-        block_size = project.region.steps if spectral is None else spectral.block_size
+        block_size = steps if spectral is None else spectral.block_size
         samples = system.grid.E.new_empty((block_size, len(system.monitors)))
         record = recorder(system, samples)
         signals = samples if spectral is None else spectral.zeros()
         maximum = norm = 0.
         started = time.perf_counter()
         try:
-            for step in range(project.region.steps):
+            for step in range(steps):
                 frame = transport.frame(step) if transport is not None else archive[step]
                 _advance_recorded(system, step, frame, a, b)
                 if transport is not None:
                     transport.commit(step)
                 row = step % block_size
                 record(row)
-                if spectral is not None and (row + 1 == block_size or step + 1 == project.region.steps):
+                if spectral is not None and (row + 1 == block_size or step + 1 == steps):
                     spectral.accumulate(signals, samples[:row + 1], step - row)
-                if (step + 1) % 64 == 0 or step + 1 == project.region.steps:
+                if (step + 1) % 64 == 0 or step + 1 == steps:
                     current_maximum, current_norm = _interior_scale(system, a, b, options.diagnostic_chunk_elements)
                     maximum = max(maximum, current_maximum)
                     norm = max(norm, current_norm)
@@ -499,14 +503,19 @@ class ReversibleCPMLSimulation(torch.nn.Module):
     With an isotropic oscillator ``material``, the input is FP32 density rho
     in [0,1]. The fixed background is scalar, per-z or laterally uniform.
     Packed pole states participate in terminal reconstruction and its VJP.
+    An x ``decomposition`` (SlabDecomposition) gives every rank its owned
+    rows of both maps; each slab records its own boundary trace and
+    reconstructs its own interior, and every rank receives all signals.
     """
 
     _explicit_dispersive_parameters = True
 
-    def __init__(self, project: Project, options: ReversibleCPMLOptions | None = None, *, material=None):
+    def __init__(self, project: Project, options: ReversibleCPMLOptions | None = None, *, material=None,
+                 decomposition=None):
         super().__init__()
         self.project = Project.model_validate(project.model_dump())
         self.options = options or ReversibleCPMLOptions()
+        self.decomposition = decomposition
         from .reversible_lorentz import resolve_material, proxy_project
         if not isinstance(self.options, ReversibleCPMLOptions):
             raise ValueError('ReversibleCPMLSimulation requires ReversibleCPMLOptions.')
@@ -516,6 +525,10 @@ class ReversibleCPMLSimulation(torch.nn.Module):
         self.material = resolve_material(self.project, material)
         if self.material is None and self.options.offload_terminal:
             raise ValueError('Terminal offload is currently available for reversible Lorentz density mixtures only.')
+        if decomposition is not None and (self.material is not None or decomposition.axis != 0
+                                          or self.options.forward_kernel != 'split' or self.options.adjoint_kernel != 'split'
+                                          or self.options.cells_per_thread != 1):
+            raise ValueError('Slab reconstruction splits x for dielectric maps with split, single-cell E/H and adjoint launches.')
         from .adjoint_memory import _resident_contract
         _resident_contract(self.project.region, self.options)
 
@@ -544,7 +557,8 @@ class ReversibleCPMLSimulation(torch.nn.Module):
                                material, density_shape=shape)[0]
         from .reversible_cpml_memory import _cpml_reversible_reservation
         return _cpml_reversible_reservation(project, self.options, torch.device(device), interval,
-                                           material_components=material_components)
+                                           material_components=material_components,
+                                           decomposition=self.decomposition)
 
     def forward(self, epsilon, *, fixed_epsilon):
         return self._run(epsilon, None, fixed_epsilon=fixed_epsilon)
@@ -555,27 +569,31 @@ class ReversibleCPMLSimulation(torch.nn.Module):
             from .reversible_lorentz import resolve_material, execute_density
             material = resolve_material(project, self.material)
             return execute_density(epsilon, fixed_epsilon, project, self.options, interval, material, spectral)
-        for name, value in (('epsilon', epsilon), ('fixed_epsilon', fixed_epsilon)):
-            if (not isinstance(value, torch.Tensor) or value.dtype != torch.float32
-                    or value.device.type not in ('cpu', 'cuda') or value.layout != torch.strided
-                    or not value.is_contiguous() or value.is_conj() or value.is_neg()
-                    or tuple(value.shape) not in (project.region.shape, (*project.region.shape, 3))):
-                raise ValueError(f'{name} must be a contiguous resolved scalar FP32 or diagonal FP32 CPU/CUDA tensor matching the region shape.')
-        if fixed_epsilon.requires_grad:
-            raise ValueError('fixed_epsilon must not require gradients. Only the explicit reconstruction interior is differentiable.')
-        if fixed_epsilon.device != epsilon.device:
-            raise ValueError('epsilon and fixed_epsilon must use the same device.')
-        if fixed_epsilon.shape != epsilon.shape:
-            raise ValueError('epsilon and fixed_epsilon must have the same scalar or diagonal shape.')
-        from .reversible_cpml_memory import _cpml_reversible_reservation
-        reservation = _cpml_reversible_reservation(project, self.options, epsilon.device, interval,
-                                                   material_components=3 if epsilon.ndim == 4 else 1,
-                                                   spectral=spectral)
-        chunk = reservation['diagnostic_chunk_elements']
-        for value in (epsilon, fixed_epsilon):
-            _require_material(value, chunk)
-        if self.options.interior_z is not None:
-            _require_fixed_exterior(epsilon, fixed_epsilon, interval, chunk)
+        d = self.decomposition
+        grid = project.region.shape if d is None else d.owned_shape
+        from .domain_decomposition import collective_errors
+        with collective_errors(d):
+            for name, value in (('epsilon', epsilon), ('fixed_epsilon', fixed_epsilon)):
+                if (not isinstance(value, torch.Tensor) or value.dtype != torch.float32
+                        or value.device.type not in ('cpu', 'cuda') or value.layout != torch.strided
+                        or not value.is_contiguous() or value.is_conj() or value.is_neg()
+                        or tuple(value.shape) not in (grid, (*grid, 3))):
+                    raise ValueError(f'{name} must be a contiguous resolved scalar FP32 or diagonal FP32 CPU/CUDA tensor matching the region shape (the owned slab rows with a decomposition).')
+            if fixed_epsilon.requires_grad:
+                raise ValueError('fixed_epsilon must not require gradients. Only the explicit reconstruction interior is differentiable.')
+            if fixed_epsilon.device != epsilon.device:
+                raise ValueError('epsilon and fixed_epsilon must use the same device.')
+            if fixed_epsilon.shape != epsilon.shape:
+                raise ValueError('epsilon and fixed_epsilon must have the same scalar or diagonal shape.')
+            from .reversible_cpml_memory import _cpml_reversible_reservation
+            reservation = _cpml_reversible_reservation(project, self.options, epsilon.device, interval,
+                                                       material_components=3 if epsilon.ndim == 4 else 1,
+                                                       spectral=spectral, decomposition=d)
+            chunk = reservation['diagnostic_chunk_elements']
+            for value in (epsilon, fixed_epsilon):
+                _require_material(value, chunk)
+            if self.options.interior_z is not None:
+                _require_fixed_exterior(epsilon, fixed_epsilon, interval, chunk)
         if epsilon.is_cuda:
             from .cuda_bootstrap import prepare_cuda_kernels
             prepare_cuda_kernels()
@@ -593,10 +611,19 @@ class ReversibleCPMLSimulation(torch.nn.Module):
                       cpml_primal_inverted=False,
                       backend='fused CUDA' if epsilon.is_cuda else 'torch CPU',
                       forward_only=forward_only, **reservation)
+        if d is not None:
+            report['decomposition'] = d.report()
+            # The halo rows are the neighbouring material and carry no gradient.
+            effective = d.extend(effective)
+        system = _recorded_system(effective, project, spectral, self.options, report, d)
+        observation = spectral if spectral is None or d is None else spectral.restricted(system.monitor_columns)
         if forward_only:
-            signals = _forward_only(effective, project, interval, report, spectral, self.options)
+            signals = _forward_only(system, interval, report, observation)
         else:
-            signals = _RecordedCPML.apply(effective, project, self.options, interval, report, spectral)
+            signals = _RecordedCPML.apply(effective, system, self.options, interval, report, observation)
+        if d is not None:
+            signals = d.gather(signals, system.monitor_columns,
+                               sum(m.enabled for m in project.monitors) if spectral is None else len(spectral.components))
         if spectral is not None:
             return spectral.result(signals, report)
         return DifferentiableResult(signals, project.region.time_step,

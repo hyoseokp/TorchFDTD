@@ -155,11 +155,13 @@ class DifferentiablePlaneSimulation(torch.nn.Module):
     """Fixed planes and common explicit frequencies. All six fields are returned.
 
     Geometry/epsilon differentiates. Monitor positions and mesh remain fixed.
-    Every enabled project monitor must be a field plane.
+    Every enabled project monitor must be a field plane. With a resident
+    ``decomposition`` each rank samples its own slab of every plane and all
+    ranks receive the complete planes.
     """
     _resident_model_type = DifferentiableSimulation
 
-    def __init__(self,project,options=None,*,quadrature_counts=None):
+    def __init__(self,project,options=None,*,quadrature_counts=None,decomposition=None):
         super().__init__()
         self.project=Project.model_validate(project.model_dump())
         from .boundaries import reject_pmc_faces, reject_pml_dispersion
@@ -214,7 +216,10 @@ class DifferentiablePlaneSimulation(torch.nn.Module):
         region=self.project.region
         internal=freeze_refinements(self.project) if region.mesh_type=='graded' and region.mesh_auto_refine else self.project.model_copy(deep=True)
         internal.monitors=[Monitor()]
-        self.model=getattr(self, '_streamed_model_type', StreamedSimulation)(internal,options) if isinstance(options,StreamedAdjointOptions) else self._resident_model_type(internal,options)
+        if isinstance(options,StreamedAdjointOptions):
+            if decomposition is not None:raise ValueError('Slab decomposition runs the resident solver; use AdjointOptions.')
+            self.model=getattr(self, '_streamed_model_type', StreamedSimulation)(internal,options)
+        else:self.model=self._resident_model_type(internal,options,decomposition=decomposition)
         inner=self.model.project.region
         for axis,(planned,solved) in enumerate(zip(region.mesh_nodes,inner.mesh_nodes)):
             if not np.array_equal(planned,solved):

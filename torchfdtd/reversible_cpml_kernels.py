@@ -16,14 +16,17 @@ from .cuda_complex_adjoint import FusedComplexAdjointCUDA, complex_definition
 
 
 def _local_curl(field, a, b, forward, wrap):
-    """Interior curl with positive/reciprocal Bloch factors at transverse seams."""
+    """Interior curl with positive/reciprocal Bloch factors at transverse seams.
+
+    A slab-split axis is absent from ``wrap``; its owned rows read the filled halo rows.
+    """
     value = field[:, :, a:b+1]
     differences = []
     for axis in (0, 1):
         if value.shape[axis] == 1:
             differences.append(torch.zeros_like(value))
             continue
-        phase = wrap[axis]
+        phase = wrap.get(axis, 1)
         shifted = torch.roll(value, -1 if forward else 1, axis)
         if phase != 1:
             seam = [slice(None)] * 4
@@ -59,7 +62,7 @@ def _interior_launch_contract(system, block_size):
     if type(block_size) is not int or block_size not in (64, 128, 256, 512, 1024):
         raise ValueError('Interior CUDA block size must be 64, 128, 256, 512 or 1024.')
     from .adjoint_memory import _cuda_index_contract
-    _cuda_index_contract(system.region, 0, 0)
+    _cuda_index_contract(system.region, system.shape, 0, 0)
 
 
 class _InteriorCUDA:
@@ -68,10 +71,10 @@ class _InteriorCUDA:
   self.s=s;self.cp=prepare_cuda_kernels();self.a=a;self.b=b
   self.block_size=block_size
   self.report=report;self.launch_blocks={};self.bar=eb;self.bar_views={}
-  nx,ny,nz=s.region.shape;cn=s.grid.courant_number
+  nx,ny,nz=s.shape;cn=s.grid.courant_number
   diagonal=s.epsilon.ndim==4
   # Each thread owns one interior cell. Only x/y wrap, no exterior target write.
-  common=_interior_indices(s.region.shape,a,b,legacy=legacy)
+  common=_interior_indices(s.shape,a,b,legacy=legacy)
   qualifier='' if legacy else ' __restrict__'
   bounds='' if legacy else f'__launch_bounds__({128 if block_size=="auto" else block_size}) '
   self.kernels={};self.programs={};self.count=nx*ny*(b-a+1)
@@ -128,10 +131,10 @@ class _ComplexInteriorCUDA:
         _interior_launch_contract(s,block_size)
         self.s=s;self.cp=prepare_cuda_kernels();self.launches={};self.programs={}
         self.block_size=block_size
-        nx,ny,nz=s.region.shape;depth=b-a+1;self.count=nx*ny*depth;cn=s.grid.courant_number
+        nx,ny,nz=s.shape;depth=b-a+1;self.count=nx*ny*depth;cn=s.grid.courant_number
         diagonal=s.epsilon.ndim==4
         def eps(c):return f'eps[3*i+{c}]' if diagonal else 'eps[i]'
-        common=_interior_indices(s.region.shape,a,b,legacy=legacy)
+        common=_interior_indices(s.shape,a,b,legacy=legacy)
         qualifier='' if legacy else ' __restrict__'
         bounds='' if legacy else f'__launch_bounds__({block_size}) '
         for name in ('h','e','g','eg'):
@@ -195,7 +198,7 @@ class InteriorReconstruction:
     """
 
     def __init__(self, system, a, b, gradient, signal_bar, *, options=None, report=None):
-        shape = tuple(system.region.shape)
+        shape = system.shape
         if (type(a) is not int or type(b) is not int
                 or not 0 < a <= b < shape[2]-1):
             raise ValueError('Reconstruction needs an interior inclusive z interval with halos.')
@@ -215,9 +218,12 @@ class InteriorReconstruction:
                 or signal_bar.dtype != field_dtype or signal_bar.device != system.device
                 or signal_bar.layout != torch.strided or signal_bar.is_conj() or signal_bar.is_neg()):
             raise ValueError('Seed buffer must match field dtype/device and have shape (B,M), 1 <= B <= steps.')
+        # A periodic slab axis wraps through its halo ring instead of the grid.
+        slab = system.decomposition
+        periodic = set(system.grid.wrap) | ({slab.axis} if slab is not None and slab.periodic else set())
         if (field_dtype not in (torch.float32, torch.complex64)
                 or system.grid.E.dtype != field_dtype or system.grid.H.dtype != field_dtype
-                or system.grid.metric or set(system.grid.wrap) != {0, 1}
+                or system.grid.metric or periodic != {0, 1}
                 or (field_dtype == torch.float32 and any(value != 1 for value in system.grid.wrap.values()))):
             raise ValueError('Reconstruction supports uniform real/complex64 periodic or Bloch x/y with z CPML only.')
         if any(face.kind != 'pml' for face in system.region.boundaries.pair(2)):
@@ -311,7 +317,7 @@ class InteriorReconstruction:
             if type(observation_index) is not int or not 0 <= observation_index < self.signal_bar.shape[0]:
                 raise ValueError('observation_index must select a valid seed buffer row.')
             row = observation_index
-        expected = (2, *self.system.region.shape[:2], 2)
+        expected = (2, *self.system.shape[:2], 2)
         if (not isinstance(trace, torch.Tensor) or trace.dtype != self.system.field_dtype
                 or trace.device != self.system.device or tuple(trace.shape) != expected
                 or trace.layout != torch.strided or trace.is_conj() or trace.is_neg()):
@@ -320,12 +326,17 @@ class InteriorReconstruction:
         e, h = s.grid.E, s.grid.H
         e[:, :, b+1, :2].copy_(trace[0])
         self._undo_sources('H', h, n)
+        # Neighbouring slabs exchange their already reconstructed rows.
+        if s.decomposition is not None:
+            s.decomposition.fill_halo(e, True)
         if self._inverse is not None:
             self._inverse.run('h')
         else:
             h[:, :, a:b+1].add_(s.grid.courant_number * _local_curl(e, a, b, True, s.grid.wrap))
         h[:, :, a-1, :2].copy_(trace[1])
         self._undo_sources('E', e, n)
+        if s.decomposition is not None:
+            s.decomposition.fill_halo(h, False)
         if self._inverse is not None:
             self._fused.step(n, observation_index=row)
             if isinstance(self._inverse, _InteriorCUDA):

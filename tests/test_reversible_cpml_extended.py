@@ -128,7 +128,7 @@ def test_complex_imaginary_diagnostic_and_bounded_chunks():
         blocks = list(_interior_blocks(e, a, b))
         assert all(block.numel()*2 <= 65536 for block in blocks)
         assert sum(block.numel() for block in blocks) == shape[0]*shape[1]*(b-a+1)*3
-        system = SimpleNamespace(device=torch.device('cpu'), state=lambda: (e, h))
+        system = SimpleNamespace(device=torch.device('cpu'), state=lambda: (e, h), decomposition=None)
         maximum, norm = _interior_scale(system, a, b)
         count = shape[0]*shape[1]*(b-a+1)*3
         assert maximum == 3.

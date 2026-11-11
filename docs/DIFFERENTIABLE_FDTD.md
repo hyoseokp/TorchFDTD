@@ -123,7 +123,7 @@ scale with timestep count. See [validation and timings](validation/ONLINE_SPECTR
 | Automatic tile policy | Two-duration replay-cost selection, full-duration optimality unproven |
 | Resident/DRAM/file execution selection | Experimental [measured search](EXECUTION_SELECTION.md) with CPU design tensors and input/output transfer accounting. Full-duration policy quality remains unverified |
 | GPUDirect Storage | Pending |
-| Single-domain multi-GPU backward | Pending |
+| Single-domain multi-GPU backward | Experimental [slab decomposition](DISTRIBUTED.md), bit-identical on CPU, Gloo and one-GPU thread ranks; NCCL multi-GPU unvalidated |
 
 Multiple calls can share a design tensor and their losses can accumulate, but
 each live result graph retains its own native state. This is not a global

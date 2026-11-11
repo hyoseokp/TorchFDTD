@@ -602,6 +602,17 @@ The adjoint remains full-domain: all E/H cotangents and all CPML auxiliary cotan
 
 The forward and initial-state scales are computed over the interior in chunks of at most `diagnostic_chunk_elements` real lanes, with a float64 sum. A larger value launches fewer, larger reductions: over a 1200-step forward of a 920 x 920 x 125 grid with 99 interior planes, the 65536-lane default makes 146,224 chunk reductions and 2**24 makes 570. Above the default the summation order changes, so the reported L2 scales and residuals are not bitwise equal to those of the default (the peaks are); signals, spectra and gradients are unaffected. Floating-point reconstruction is approximate. The report includes initial-state reconstruction residuals normalized by sampled forward interior field scales. Exceeding `reconstruction_tolerance` raises an error and asks for a checkpointed run. A small residual is a drift diagnostic, not a universal gradient-error guarantee. Tolerances must lie in `(0, 1e-3]`.
 
+## Slab decomposition
+
+With `decomposition=SlabDecomposition(region, axis=0)` every rank records the
+trace of its own x rows and reconstructs its own interior. The periodic x seam
+becomes a ring of halo rows. Before each reversed curl the neighbouring slabs
+exchange their already reconstructed boundary rows, and the full-domain
+adjoint exchanges its halo rows inside the transpose, so no halo history is
+recorded. Signals, traces and gradients equal the single-device run bit for
+bit. The drift diagnostics reduce the owned rows over all ranks. See
+[DISTRIBUTED.md](DISTRIBUTED.md) for the contract.
+
 ## Storage and admission
 
 With `N` grid cells, transverse area `A = Nx*Ny`, and `T` timesteps, storage is `O(N + T*A)` plus point/source histories. It is not constant in simulation duration. The real FP32 trace payload alone is `16*T*Nx*Ny` bytes, and complex64 doubles it to `32*T*Nx*Ny`. Terminal interior E/H copies require `24*Nx*Ny*(b-a+1)` bytes for real fields or twice that for complex fields. Full resident forward fields, CPML state, material maps, adjoint buffers, output gradients, and working temporaries also remain necessary.

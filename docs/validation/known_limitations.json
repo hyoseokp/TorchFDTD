@@ -33,10 +33,10 @@
     },
     {
       "id": "multi-gpu",
-      "statement": "Single-problem multi-GPU forward, adjoint and scaling (the HPC profile, stage H1) cannot be verified: no host with two or more NVIDIA GPUs is available to the program. The domain decomposition is verified with two and three Linux CPU Gloo ranks only, which do not count as CUDA verification.",
+      "statement": "Single-problem multi-GPU forward, adjoint and scaling (the HPC profile, stage H1) cannot be verified: no host with two or more NVIDIA GPUs is available to the program. The domain decomposition is verified with two and three Linux CPU Gloo ranks only, which do not count as CUDA verification. The slab decomposition of the differentiable and reversible solvers is verified bit for bit with two and four Gloo processes and with one, two and four thread ranks on one RTX 3060, not with NCCL across GPUs.",
       "status": "BLOCKED_EXTERNAL",
       "tasks": ["H1-02", "H1-03", "H1-04", "H1-05", "H1-06"],
-      "sources": ["docs/validation/completion_gates.json", "docs/RELEASE_SCOPE.md", "docs/DOMAIN_DECOMPOSITION.md"]
+      "sources": ["docs/validation/completion_gates.json", "docs/RELEASE_SCOPE.md", "docs/DOMAIN_DECOMPOSITION.md", "docs/DISTRIBUTED.md"]
     }
   ]
 }

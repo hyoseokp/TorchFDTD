@@ -44,10 +44,14 @@ class CudaStepGraphs:
         torch.cuda.synchronize()
         self.graphs = {}
         for count in sorted({1, self.width}):
+            # Capture on the side stream directly: torch.cuda.graph() would also run gc.collect() and
+            # empty_cache() before every capture, which cost up to 0.1 s per solve on some hosts.
             graph = torch.cuda.CUDAGraph()
-            with torch.cuda.graph(graph):
+            with torch.cuda.stream(stream):
+                graph.capture_begin()
                 for _ in range(count):
                     step()
+                graph.capture_end()
             self.graphs[count] = graph
             for value in states:
                 value.zero_()

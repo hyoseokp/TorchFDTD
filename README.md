@@ -213,7 +213,7 @@ For gradients and optimization, start with [differentiable FDTD](docs/DIFFERENTI
 
 ## Performance and validation
 
-The repository includes analytical tests, convergence and gradient checks, and comparisons with Meep, FDTDX and RCWA. Start with the [worked device comparisons](docs/MEEP_COMPARISON.md) or the [cross-solver benchmarks](docs/CROSS_SOLVER_COMPARISON.md). Hardware, precision and problem size are recorded alongside the results.
+The repository includes analytical tests, convergence and gradient checks, and comparisons with Meep, FDTDX, BeamZ and RCWA. Start with the [worked device comparisons](docs/MEEP_COMPARISON.md) or the [cross-solver benchmarks](docs/CROSS_SOLVER_COMPARISON.md). Hardware, precision and problem size are recorded alongside the results.
 
 <details>
 <summary>Detailed benchmarks, execution modes and solver comparisons</summary>
@@ -229,11 +229,12 @@ The repository includes analytical tests, convergence and gradient checks, and c
 | Meep 1.34 at its fastest rank count (4 MPI ranks on i7-12700) vs TorchFDTD on RTX 3060 | vacuum and sphere, 64³ and 96³, 800 steps, Meep in double precision, TorchFDTD in single | **30 to 36×** full solve, **36 to 41×** stepping |
 | Meep 1.34, 4 MPI ranks on i7-12700 vs TorchFDTD in double precision on an A100 80GB | the same scenes, both solvers in double precision; a data-center GPU against a desktop CPU | **49 to 59×** full solve |
 | FDTDX 0.6.2 on the same RTX 3060 vs TorchFDTD | vacuum and sphere, 64³ and 96³, 800 steps | **6.4 to 7.3×** full solve, **4.4 to 5.7×** stepping |
+| BeamZ 0.6.2 from PyPI (JAX backend) vs TorchFDTD on the same RTX 5090 | vacuum and sphere, 64³ and 96³, 800 steps | **1.6 to 2.1×** full solve, **2.6 to 3.6×** stepping |
 | FDTDX adjoint (checkpointed, reversible) vs TorchFDTD checkpointed adjoint | 64³, 128 steps, full permittivity gradient, 2 checkpoints, same RTX 3060 | **52×** and **2.0×** time to gradient, gradients within 1.1e-7 relative |
 | Larger than the GPU, capacity run | 2.42 billion cells, 58 GB (54 GiB) of E/H on a 48 GiB GPU, 10 steps plus full material gradient | 2.23 GB peak CUDA memory, 58 min, gradient within 9.1e-8 of the oracle |
 | Larger than the GPU, crash and resume | 2.26 billion cells, 54 GB (50.6 GiB) of E/H, same policy | killed after the first backward record, resumed process finishes with 3.03 GB peak CUDA memory and the gradient within 9.1e-8 |
 
-Every row has its conditions, hardware and raw records in [docs/MEASUREMENTS.md](docs/MEASUREMENTS.md). The Meep and FDTDX rows come from the same-hardware comparison in [docs/CROSS_SOLVER_COMPARISON.md](docs/CROSS_SOLVER_COMPARISON.md), which also lists the solver differences behind them; the Meep rows use the 4-rank member of its rank sweep (`docs/validation/cross_solver/meep_throughput_ranks4.json`), the fastest of 4, 8, 12 and 16 ranks, and the A100 row the double-precision record `docs/validation/paper_review/torchfdtd-precision-a100.json`. The two beyond-VRAM rows are ten-step capacity gates, not sustained optimizations.
+Every row has its conditions, hardware and raw records in [docs/MEASUREMENTS.md](docs/MEASUREMENTS.md). The Meep, FDTDX and BeamZ rows come from the same-hardware comparisons in [docs/CROSS_SOLVER_COMPARISON.md](docs/CROSS_SOLVER_COMPARISON.md) (BeamZ in section C2, on a rented RTX 5090), which also lists the solver differences behind them; the Meep rows use the 4-rank member of its rank sweep (`docs/validation/cross_solver/meep_throughput_ranks4.json`), the fastest of 4, 8, 12 and 16 ranks, and the A100 row the double-precision record `docs/validation/paper_review/torchfdtd-precision-a100.json`. The two beyond-VRAM rows are ten-step capacity gates, not sustained optimizations.
 
 <!-- meep-comparison:start -->
 ## Compared with Meep
@@ -277,7 +278,7 @@ Behind: single-problem multi-GPU (verified with CPU ranks only).
 - [Python and batch API](docs/PYTHON_BATCH.md), [tensor batches](docs/TENSOR_BATCH.md), [differentiable FDTD](docs/DIFFERENTIABLE_FDTD.md), [shape gradients](docs/SHAPE_GRADIENTS.md)
 - [Streamed execution](docs/STREAMED_FDTD.md), [planner](docs/STREAMED_WORK_PLANNING.md), [restart journal](docs/STREAMED_RESTART.md), [beyond-VRAM records](docs/BEYOND_VRAM_RESTART.md), [propagated case](docs/BEYOND_VRAM_PROPAGATED.md)
 - [Mode ports](docs/OPEN_MODE_PORTS.md), [far field](docs/FARFIELD_WORKFLOW.md), [GDS](docs/GDS.md), [materials](docs/MATERIALS.md), [boundaries](docs/BOUNDARIES.md)
-- [Measurements and feature record](docs/MEASUREMENTS.md), [cross-solver comparison with Meep and FDTDX](docs/CROSS_SOLVER_COMPARISON.md), [worked comparisons with Meep](docs/MEEP_COMPARISON.md)
+- [Measurements and feature record](docs/MEASUREMENTS.md), [cross-solver comparison with Meep, FDTDX and BeamZ](docs/CROSS_SOLVER_COMPARISON.md), [worked comparisons with Meep](docs/MEEP_COMPARISON.md)
 - [Security model](docs/SECURITY.md), [compatibility and support policy](docs/COMPATIBILITY.md), [changelog](docs/CHANGELOG.md), [third-party notices and SBOM](docs/THIRD_PARTY_NOTICES.md)
 
 ## Verification

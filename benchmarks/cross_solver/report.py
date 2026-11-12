@@ -12,7 +12,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 COMBINED = ROOT / 'docs' / 'validation' / 'cross_solver_3060.json'
 OUTPUT = ROOT / 'docs' / 'CROSS_SOLVER_COMPARISON.md'
-LABEL = {'torchfdtd': 'TorchFDTD', 'fdtdx': 'FDTDX', 'meep': 'Meep'}
+LABEL = {'torchfdtd': 'TorchFDTD', 'fdtdx': 'FDTDX', 'meep': 'Meep', 'beamz': 'BeamZ'}
 
 
 def fmt(value, digits=3):
@@ -57,7 +57,7 @@ def fixture_section(c):
     s, b, t, a = fx['slab'], fx['sphere'], fx['throughput'], fx['adjoint']
     lines = ['## Fixtures', '',
              'Each fixture is defined once in `benchmarks/cross_solver/fixtures/*.json` and instantiated by one driver per solver '
-             '(`torchfdtd_driver.py`, `fdtdx_driver.py`, `meep_driver.py`). The drivers assert the cell counts, the time step, the '
+             '(`torchfdtd_driver.py`, `fdtdx_driver.py`, `meep_driver.py`; `beamz_driver.py` for fixture C in section C2). The drivers assert the cell counts, the time step, the '
              'source and monitor cell indices and, where a solver accepts a sampled permittivity array, the shared staircase array itself.', '',
              f"**A. Analytic slab.** Index {s['slab']['index']} slab, {s['slab']['thickness_um']} um thick, in a periodic 2D TMz cell of "
              f"{s['size_um'][0]} x {s['size_um'][1]} um, {s['mesh_um']} um mesh ({s['shape'][0]} x {s['shape'][1]} cells), Courant number "
@@ -136,15 +136,10 @@ def sphere_section(c):
     return lines
 
 
-def throughput_section(c):
-    block = c['throughput']
-    lines = ['## C. Forward throughput', '',
-             'Full solve = setup + stepping + final field transfer (medians of three timed solves after one warm-up; setup excludes interpreter '
-             'start-up and compilation, which the warm-up absorbs). Stepping = the solver\'s own time-stepping loop. Peak device memory is '
-             'torch.cuda.max_memory_allocated for TorchFDTD and the XLA peak_bytes_in_use for FDTDX; Meep runs on the CPU.', '',
-             '| Case | Solver | Full solve (s) | Stepping (s) | Cell-steps/s, full | Cell-steps/s, stepping | Peak device MiB |', '|---|---|---:|---:|---:|---:|---:|']
+def throughput_rows(block, solvers):
+    lines = ['| Case | Solver | Full solve (s) | Stepping (s) | Cell-steps/s, full | Cell-steps/s, stepping | Peak device MiB |', '|---|---|---:|---:|---:|---:|---:|']
     for case_name, case in block['cases'].items():
-        for name in ('torchfdtd', 'fdtdx', 'meep'):
+        for name in solvers:
             r = case['solvers'].get(name)
             if not r:
                 continue
@@ -152,6 +147,28 @@ def throughput_section(c):
             extra = f" ({r['mpi_processes']} MPI ranks)" if name == 'meep' else ''
             lines.append(f"| {case_name} | {LABEL[name]}{extra} | {r['median_wall_seconds']:.3f} | {r['median_loop_seconds']:.3f} | "
                          f"{r['cell_steps_per_second_full']:.2e} | {r['cell_steps_per_second_stepping']:.2e} | {mb(peak) if name != 'meep' else 'CPU'} |")
+    return lines
+
+
+def trace_rows(traces):
+    lines = ['| Case | Pair | Raw relative L2 | Fitted relative L2 | Best shift (steps) | Amplitude ratio at best shift | Shifted, fitted relative L2 | pi dt/T |',
+             '|---|---|---:|---:|---:|---:|---:|---:|']
+    for case_name, t in traces.items():
+        for pair, v in t['pairwise'].items():
+            a, b = pair.split('_vs_')
+            bs = v['best_shift']
+            lines.append(f"| {case_name} | {LABEL[a]} vs {LABEL[b]} | {fmt(v['raw_relative_l2'])} | {fmt(v['fitted_relative_l2'])} | "
+                         f"{bs['shift_samples']} | {bs['amplitude_ratio']:.4e} | {fmt(bs['fitted_relative_l2'])} | {fmt(t.get('half_step_carrier_phase'))} |")
+    return lines
+
+
+def throughput_section(c):
+    block = c['throughput']
+    lines = ['## C. Forward throughput', '',
+             'Full solve = setup + stepping + final field transfer (medians of three timed solves after one warm-up; setup excludes interpreter '
+             'start-up and compilation, which the warm-up absorbs). Stepping = the solver\'s own time-stepping loop. Peak device memory is '
+             'torch.cuda.max_memory_allocated for TorchFDTD and the XLA peak_bytes_in_use for FDTDX; Meep runs on the CPU.', '']
+    lines += throughput_rows(block, ('torchfdtd', 'fdtdx', 'meep'))
     src = block.get('source_records', {})
     if src.get('meep') == 'meep_throughput_ranks12.json':
         lines += ['', 'The Meep rows come from the 12-rank member of the rank sweep (`meep_throughput_ranks12.json`, one warm-up and three timed '
@@ -173,15 +190,8 @@ def throughput_section(c):
         lines += ['', 'Point-monitor traces of the timed solves: relative L2 over the common samples, then after a least-squares amplitude fit, '
                   'then after additionally shifting the second trace by the integer number of steps that minimises the residual (Meep normalises '
                   'its current source differently, flips its sign, records one extra sample and offsets its source timing, so only the shifted, '
-                  'fitted column compares waveform shapes):', '',
-                  '| Case | Pair | Raw relative L2 | Fitted relative L2 | Best shift (steps) | Amplitude ratio at best shift | Shifted, fitted relative L2 | pi dt/T |',
-                  '|---|---|---:|---:|---:|---:|---:|---:|']
-        for case_name, t in traces.items():
-            for pair, v in t['pairwise'].items():
-                a, b = pair.split('_vs_')
-                bs = v['best_shift']
-                lines.append(f"| {case_name} | {LABEL[a]} vs {LABEL[b]} | {fmt(v['raw_relative_l2'])} | {fmt(v['fitted_relative_l2'])} | "
-                             f"{bs['shift_samples']} | {bs['amplitude_ratio']:.4e} | {fmt(bs['fitted_relative_l2'])} | {fmt(t.get('half_step_carrier_phase'))} |")
+                  'fitted column compares waveform shapes):', '']
+        lines += trace_rows(traces)
         lines += ['', 'The last column is the residual that a remaining half-step timing offset of the 1.55 um carrier alone would leave '
                   '(pi dt / T), for comparison with the Meep rows.']
     fd = block['cases'][next(iter(block['cases']))]['solvers'].get('fdtdx')
@@ -194,6 +204,38 @@ def throughput_section(c):
         for row in c['meep_rank_sweep']:
             lines.append(f"| {row['ranks']} | " + ' | '.join(f"{v['median_loop_seconds']:.3f}" for v in row['cases'].values()) + ' |')
     lines.append('')
+    return lines
+
+
+def other_gpu_sections(c):
+    lines = []
+    for tag, g in (c.get('other_gpus') or {}).items():
+        env = g['environments']
+        t, z = env.get('torchfdtd', {}), env.get('beamz', {})
+        tp, zp, gpu = t.get('packages', {}), z.get('packages', {}), t.get('gpu') or {}
+        dates = ', '.join(sorted(set(g['record_dates'].values())))
+        lines += [f"## C2. Forward throughput against BeamZ on an {gpu.get('name', tag).replace('NVIDIA GeForce ', '')}", '',
+                  f"Fixture C, retaken for TorchFDTD and run for BeamZ on one rented {gpu.get('name')} ({gpu.get('memory.total')} MiB, driver "
+                  f"{gpu.get('driver_version')}, {t.get('cpu')}) on {dates}: the two drivers ran back to back in one container, each in its own venv, "
+                  f"with the same definitions as section C. TorchFDTD: the repository source of the commit that adds these records (package version {tp.get('torchfdtd')}), torch {tp.get('torch')} (CUDA {t.get('torch_cuda')}), "
+                  f"cupy-cuda12x {tp.get('cupy-cuda12x')}. BeamZ: beamz {zp.get('beamz')} installed from PyPI, backend='{z.get('backend')}', which runs its "
+                  f"JAX backend (jax {zp.get('jax')}, jax-cuda12-plugin {zp.get('jax-cuda12-plugin')}); its optional native CUDA component is built from "
+                  'source and was not used. For BeamZ, stepping is SimulationPerformance.runtime_s, its own timing of the compiled executable from dispatch '
+                  'to completion, and peak device memory is the XLA peak_bytes_in_use. Records: '
+                  f"`docs/validation/cross_solver/{tag}/`.", '']
+        lines += throughput_rows(g['throughput'], ('torchfdtd', 'beamz'))
+        warmups = {n: case['solvers']['beamz']['warmup_seconds'] for n, case in g['throughput']['cases'].items()
+                   if 'warmup_seconds' in case['solvers'].get('beamz', {})}
+        if warmups:
+            lines += ['', 'BeamZ first solve per case, including its JAX compilation (excluded from the timed solves): ' +
+                      ', '.join(f'{n} {v:.2f} s' for n, v in warmups.items()) + '.']
+        if g.get('throughput_traces'):
+            lines += ['', 'Point-monitor traces, defined as in section C. The BeamZ trace comes from one additional untimed solve with a per-step '
+                      'FieldRecorder at the monitor node; its timed solves record one frequency there with a point FieldMonitor.', '']
+            lines += trace_rows(g['throughput_traces'])
+        lines += ['', 'Rerun on a CUDA host with the two GPU venvs of `setup_env.sh`: `run_gpu.sh torchfdtd_driver.py --fixture throughput` and '
+                  '`run_gpu.sh beamz_driver.py --fixture throughput` from a fresh copy of the repository, then move the two records into '
+                  f"`docs/validation/cross_solver/{tag}/` and the trace artifacts into `$TORCHFDTD_BENCH_ROOT/artifacts_{tag}` before `combine.py`.", '']
     return lines
 
 
@@ -273,6 +315,9 @@ def differences_section(c):
             'place_objects/apply_params of about 0.5 s included in the full solve); Meep runs 12 MPI ranks on the CPU with a per-step field probe; the '
             'rank-sweep table gives its stepping time for 4 to 16 ranks. The Meep driver can gate its timing blocks on the Windows host CPU load '
             'because other processes on the workstation share the cores; the Meep rows reported here come from the ungated sweep run described in section C.',
+            "- **BeamZ (section C2 only).** BeamZ receives the shared staircase permittivity as a MaterialGrid with Yee-support arrays (its own "
+            "rasteriser smooths interfaces by default), the same additive Ez kick through CustomSource(timing='e') and a CPML of the same 8-cell "
+            'thickness with its own profile. Its timed solves record one frequency at the monitor node instead of the per-step trace of the other solvers.',
             '- **Adjoint semantics.** TorchFDTD differentiates its discrete Yee/CPML step with a checkpointed transpose; FDTDX differentiates the same forward '
             'model through JAX with either equinox checkpointing or time reversal. Meep\'s adjoint solver is frequency-domain and was not run.',
             '- **Shared GPU.** The RTX 3060 also drives the Windows desktop (about 2.6 GiB resident); every timing block waited '
@@ -281,8 +326,10 @@ def differences_section(c):
 
 def main():
     c = json.loads(COMBINED.read_text(encoding='utf-8'))
+    dates = sorted(set((c.get('record_dates') or {}).values())) or [c['date']]
     lines = ['# Cross-solver comparison on one RTX 3060 workstation', '',
-             f"Same-hardware accuracy and speed comparison of TorchFDTD against Meep (CPU) and FDTDX (GPU) on {c['date']}, from the machine-readable "
+             f"Same-hardware accuracy and speed comparison of TorchFDTD against Meep (CPU) and FDTDX (GPU) on {', '.join(dates)}"
+             + (', and of forward throughput against BeamZ (GPU) on a second GPU in section C2' if c.get('other_gpus') else '') + ', from the machine-readable '
              '[combined record](validation/cross_solver_3060.json) and the per-solver records in `docs/validation/cross_solver/`. '
              'The drivers, fixtures and environment scripts live in `benchmarks/cross_solver/`. The document reports numbers and their conditions only.', '']
     lines += environment_section(c)
@@ -290,6 +337,7 @@ def main():
     lines += slab_section(c)
     lines += sphere_section(c)
     lines += throughput_section(c)
+    lines += other_gpu_sections(c)
     lines += adjoint_section(c)
     lines += rerun_section(c)
     lines += differences_section(c)

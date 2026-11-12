@@ -1,6 +1,11 @@
 {
   "schema": "torchfdtd-cross-solver-combined-v1",
-  "date": "2026-09-22",
+  "date": "2026-11-12",
+  "record_dates": {
+    "torchfdtd": "2026-09-21",
+    "fdtdx": "2026-09-21",
+    "meep": "2026-09-21"
+  },
   "worktree_head_at_run": "fa57986a3c11886033a416c809db125b281a032a",
   "hardware": {
     "gpu": "NVIDIA GeForce RTX 3060 12 GB (WSL2, driver from Windows)",
@@ -542,11 +547,12 @@
   },
   "driver_sha256": {
     "common.py": "25dfbc48970f46f6fba4d19439a2d925ef381c982ab543452e719188cc9ab716",
-    "torchfdtd_driver.py": "78d12115209a5d9422b4362d27c3b3da2324dcd454921361229d68f4c82f5fb6",
-    "fdtdx_driver.py": "0151c5df68905651fedad6c37c7fd38fd8537fafbdb00ae02e066e9395b7196c",
-    "meep_driver.py": "860264cb7ec94fedcda05c02ff8dfa1cdac688af275f6329c2926fc41a6d0d42",
-    "combine.py": "0b428ff8f089eab32da334acd09b0c4702e41748894ee1c1870a41a8619c1e01",
-    "report.py": "b5a0f77d4c860049bba2c68fabc5f95cd044b525db1d3cebe40bf41e66f330e4"
+    "torchfdtd_driver.py": "d6789ad845bb80bf5f2d67caae1e05b503d9a773ee2e1c5ac634dd93dbbd7ad3",
+    "fdtdx_driver.py": "b261799ffd73790dc0dde9fd5006a63da5009ea283c0413370bcf9193f9c23d7",
+    "meep_driver.py": "3093374e890cba1e0702e30e55de4b7d93e554bf563b59a810958e4a349e648a",
+    "beamz_driver.py": "46b659f79b8acbf91c497fcda75f54c1f55f6e31da865f7bceda96dca06ea1cd",
+    "combine.py": "b94a3ace80f3954abf873196775e2740c1d3bfe69583f351ce10ac59c24016e7",
+    "report.py": "a988529ad7f732db20146ff3c028330ad8e8fe7f76dba6cfa063e4092c5d8268"
   },
   "records": {
     "fdtdx_adjoint_checkpointed.json": "662c18ecd0265c3fbf298730f26458e5493eb3ec1d91fb1773fa089bf1477279",
@@ -558,9 +564,13 @@
     "meep_slab.json": "b2ec98be2a31b65650040991b0955f6614ae6d080025585196cf3c3f9be1e1a7",
     "meep_sphere.json": "8b06f58cec21db3c643edba1474d2dcf68e1046f8af7160f9e8eecf09ec76fc6",
     "meep_throughput_ranks12.json": "3a7423bc816ec0381f5b3455784ab396d52a9851d655afa228424fd60a771dfd",
+    "meep_throughput_ranks12_quiet.json": "3f3e88da9a11367af77f734f4c463722431fb4bf26e54945219cfee1c6ded64b",
     "meep_throughput_ranks16.json": "39e80e0e1af9aae428788da68b6e809f2f928127d4e0b668b2491b58e65603b0",
     "meep_throughput_ranks4.json": "503872b5121618590548b0c4648a943c4f37a022460660c7b444b2af26986d5b",
+    "meep_throughput_ranks4_quiet.json": "2fb6b81f20156ae5c3d1e8da83a1cc71758d05293487c4b58f7d2754e95e6faa",
     "meep_throughput_ranks8.json": "33773d5723c848c20764b49830fdc2b49048b47f4201f9636d6b57572e378af7",
+    "rtx5090/beamz_throughput.json": "ab5ff77efc2c22ff864bb3a3c439bf2c45e9b6ba1e86847182f78ce11760ba68",
+    "rtx5090/torchfdtd_throughput.json": "7194dd57e60b3a7eaf9712f9da7298ccb8fafecd54308712f4f89b34b9ebfd2d",
     "torchfdtd_adjoint.json": "93fb52c4ff63c5ba017d6cf2b74f2382daba19c64c1bc6ed8bcde405275b3098",
     "torchfdtd_slab.json": "bb4a7ddb308ff9895ff112683e92677186f8ed4c01263782eb549b2a8f94caff",
     "torchfdtd_sphere.json": "4aa0f5da3bada9b9254db0061bb182032e4bdda74557e39c63b3dc23d05662ae",
@@ -2570,5 +2580,613 @@
       }
     },
     "meep": "excluded: Meep implements a frequency-domain adjoint with different semantics"
+  },
+  "other_gpus": {
+    "rtx5090": {
+      "record_dates": {
+        "torchfdtd": "2026-11-12",
+        "beamz": "2026-11-12"
+      },
+      "environments": {
+        "torchfdtd": {
+          "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+          "python": "3.12.3",
+          "cpu": "AMD EPYC 7543 32-Core Processor",
+          "logical_cpus": 120,
+          "wsl_distribution": null,
+          "gpu": {
+            "name": "NVIDIA GeForce RTX 5090",
+            "driver_version": "595.91.07",
+            "memory.total": "32607",
+            "memory.used": "622",
+            "utilization.gpu": "0"
+          },
+          "packages": {
+            "torchfdtd": "1.1.7",
+            "torch": "2.8.0+cu128",
+            "cupy-cuda12x": "14.2.0",
+            "fdtd": "0.2.2",
+            "numpy": "2.1.2",
+            "scipy": "1.18.1"
+          },
+          "torch_hardware": {
+            "cuda": true,
+            "gpu": "NVIDIA GeForce RTX 5090",
+            "gpu_memory_gb": 31.4,
+            "torch": "2.8.0+cu128",
+            "engine": "TorchFDTD Yee/CPML on fdtd grid",
+            "cpu_threads": 120
+          },
+          "torch_cuda": "12.8"
+        },
+        "beamz": {
+          "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+          "python": "3.12.3",
+          "cpu": "AMD EPYC 7543 32-Core Processor",
+          "logical_cpus": 120,
+          "wsl_distribution": null,
+          "gpu": {
+            "name": "NVIDIA GeForce RTX 5090",
+            "driver_version": "595.91.07",
+            "memory.total": "32607",
+            "memory.used": "540",
+            "utilization.gpu": "0"
+          },
+          "packages": {
+            "beamz": "0.6.2",
+            "jax": "0.12.0.1",
+            "jaxlib": "0.12.0.1",
+            "jax-cuda12-plugin": "0.12.0.1",
+            "jax-cuda12-pjrt": "0.12.0.1",
+            "numpy": "2.5.4",
+            "scipy": "1.18.1"
+          },
+          "jax_devices": [
+            "cuda:0"
+          ],
+          "jax_x64": false,
+          "backend": "auto",
+          "xla_preallocate": "false"
+        }
+      },
+      "throughput": {
+        "cases": {
+          "vacuum-64": {
+            "shape": [
+              64,
+              64,
+              64
+            ],
+            "cells": 262144,
+            "steps": 800,
+            "solvers": {
+              "torchfdtd": {
+                "median_wall_seconds": 0.04950061801355332,
+                "median_loop_seconds": 0.011613509966991842,
+                "median_setup_seconds": 0.02408818795811385,
+                "cell_steps_per_second_full": 4236617812.379226,
+                "cell_steps_per_second_stepping": 18057865416.747982,
+                "wall_samples": [
+                  0.04879939300008118,
+                  0.05131896096281707,
+                  0.04950061801355332
+                ],
+                "loop_samples": [
+                  0.011624820996075869,
+                  0.011613509966991842,
+                  0.011597839999012649
+                ],
+                "peak_allocated_bytes": 18714624,
+                "gpu_idle": {
+                  "checked": true,
+                  "limit_mb": 2118.0,
+                  "memory_used_mb": 622.0,
+                  "utilization": 0.0,
+                  "waited_seconds": 10.113383769989014,
+                  "samples": [
+                    {
+                      "memory_used_mb": 622.0,
+                      "utilization": 0.0,
+                      "t": 0.042838096618652344
+                    },
+                    {
+                      "memory_used_mb": 622.0,
+                      "utilization": 0.0,
+                      "t": 5.077919244766235
+                    },
+                    {
+                      "memory_used_mb": 622.0,
+                      "utilization": 0.0,
+                      "t": 10.113377094268799
+                    }
+                  ]
+                },
+                "spread": 1.0516311332547046,
+                "accepted_attempt": 0
+              },
+              "beamz": {
+                "median_wall_seconds": 0.07880805595777929,
+                "median_loop_seconds": 0.039721820037811995,
+                "median_setup_seconds": 0.03911815502215177,
+                "cell_steps_per_second_full": 2661088355.134062,
+                "cell_steps_per_second_stepping": 5279596952.011965,
+                "wall_samples": [
+                  0.0810597250238061,
+                  0.07880805595777929,
+                  0.07756564696319401
+                ],
+                "loop_samples": [
+                  0.039783971034921706,
+                  0.03968990093562752,
+                  0.039721820037811995
+                ],
+                "peak_bytes_in_use": 31209216,
+                "warmup_seconds": 1.4524836820783094,
+                "gpu_idle": {
+                  "checked": true,
+                  "limit_mb": 2039.0,
+                  "memory_used_mb": 574.0,
+                  "utilization": 0.0,
+                  "waited_seconds": 10.131631851196289,
+                  "samples": [
+                    {
+                      "memory_used_mb": 574.0,
+                      "utilization": 0.0,
+                      "t": 0.05076265335083008
+                    },
+                    {
+                      "memory_used_mb": 574.0,
+                      "utilization": 0.0,
+                      "t": 5.092690944671631
+                    },
+                    {
+                      "memory_used_mb": 574.0,
+                      "utilization": 0.0,
+                      "t": 10.131629228591919
+                    }
+                  ]
+                },
+                "spread": 1.0450467210345074,
+                "accepted_attempt": 0
+              }
+            }
+          },
+          "sphere-64": {
+            "shape": [
+              64,
+              64,
+              64
+            ],
+            "cells": 262144,
+            "steps": 800,
+            "solvers": {
+              "torchfdtd": {
+                "median_wall_seconds": 0.04841868893709034,
+                "median_loop_seconds": 0.011588301975280046,
+                "median_setup_seconds": 0.02330152306240052,
+                "cell_steps_per_second_full": 4331286216.206304,
+                "cell_steps_per_second_stepping": 18097146626.60333,
+                "wall_samples": [
+                  0.047315070987679064,
+                  0.04841868893709034,
+                  0.051809725002385676
+                ],
+                "loop_samples": [
+                  0.011588301975280046,
+                  0.011582469916902483,
+                  0.0116095399716869
+                ],
+                "peak_allocated_bytes": 18714624,
+                "gpu_idle": {
+                  "checked": true,
+                  "limit_mb": 2118.0,
+                  "memory_used_mb": 716.0,
+                  "utilization": 0.0,
+                  "waited_seconds": 15.163132905960083,
+                  "samples": [
+                    {
+                      "memory_used_mb": 716.0,
+                      "utilization": 0.0,
+                      "t": 5.078166484832764
+                    },
+                    {
+                      "memory_used_mb": 716.0,
+                      "utilization": 0.0,
+                      "t": 10.116530656814575
+                    },
+                    {
+                      "memory_used_mb": 716.0,
+                      "utilization": 0.0,
+                      "t": 15.163104772567749
+                    }
+                  ]
+                },
+                "spread": 1.0949941302186152,
+                "accepted_attempt": 0
+              },
+              "beamz": {
+                "median_wall_seconds": 0.09955921897199005,
+                "median_loop_seconds": 0.041569566004909575,
+                "median_setup_seconds": 0.058044863981194794,
+                "cell_steps_per_second_full": 2106436773.6653419,
+                "cell_steps_per_second_stepping": 5044921565.340172,
+                "wall_samples": [
+                  0.09955921897199005,
+                  0.09892986505292356,
+                  0.09973322099540383
+                ],
+                "loop_samples": [
+                  0.041514354990795255,
+                  0.04160429607145488,
+                  0.041569566004909575
+                ],
+                "peak_bytes_in_use": 45139968,
+                "warmup_seconds": 1.005370591999963,
+                "gpu_idle": {
+                  "checked": true,
+                  "limit_mb": 2039.0,
+                  "memory_used_mb": 606.0,
+                  "utilization": 0.0,
+                  "waited_seconds": 10.111305713653564,
+                  "samples": [
+                    {
+                      "memory_used_mb": 606.0,
+                      "utilization": 4.0,
+                      "t": 0.034012556076049805
+                    },
+                    {
+                      "memory_used_mb": 606.0,
+                      "utilization": 0.0,
+                      "t": 5.072084426879883
+                    },
+                    {
+                      "memory_used_mb": 606.0,
+                      "utilization": 0.0,
+                      "t": 10.111302614212036
+                    }
+                  ]
+                },
+                "spread": 1.0081204592976094,
+                "accepted_attempt": 0
+              }
+            }
+          },
+          "vacuum-96": {
+            "shape": [
+              96,
+              96,
+              96
+            ],
+            "cells": 884736,
+            "steps": 800,
+            "solvers": {
+              "torchfdtd": {
+                "median_wall_seconds": 0.08223018504213542,
+                "median_loop_seconds": 0.019829264958389103,
+                "median_setup_seconds": 0.039338527945801616,
+                "cell_steps_per_second_full": 8607408576.757103,
+                "cell_steps_per_second_stepping": 35694152127.43718,
+                "wall_samples": [
+                  0.07616506691556424,
+                  0.0837538749910891,
+                  0.08223018504213542
+                ],
+                "loop_samples": [
+                  0.019818645087070763,
+                  0.019849825999699533,
+                  0.019829264958389103
+                ],
+                "peak_allocated_bytes": 59756544,
+                "gpu_idle": {
+                  "checked": true,
+                  "limit_mb": 2118.0,
+                  "memory_used_mb": 716.0,
+                  "utilization": 0.0,
+                  "waited_seconds": 15.156574964523315,
+                  "samples": [
+                    {
+                      "memory_used_mb": 716.0,
+                      "utilization": 0.0,
+                      "t": 5.078070640563965
+                    },
+                    {
+                      "memory_used_mb": 716.0,
+                      "utilization": 0.0,
+                      "t": 10.112459421157837
+                    },
+                    {
+                      "memory_used_mb": 716.0,
+                      "utilization": 0.0,
+                      "t": 15.156572341918945
+                    }
+                  ]
+                },
+                "spread": 1.0996363343832907,
+                "accepted_attempt": 0
+              },
+              "beamz": {
+                "median_wall_seconds": 0.1537582240998745,
+                "median_loop_seconds": 0.05142440309282392,
+                "median_setup_seconds": 0.10198696912266314,
+                "cell_steps_per_second_full": 4603258161.594348,
+                "cell_steps_per_second_stepping": 13763675559.294323,
+                "wall_samples": [
+                  0.1543431389145553,
+                  0.15204769105184823,
+                  0.1537582240998745
+                ],
+                "loop_samples": [
+                  0.051321911974810064,
+                  0.05142440309282392,
+                  0.051771254977211356
+                ],
+                "peak_bytes_in_use": 131699968,
+                "warmup_seconds": 1.2045399110065773,
+                "gpu_idle": {
+                  "checked": true,
+                  "limit_mb": 2039.0,
+                  "memory_used_mb": 672.0,
+                  "utilization": 0.0,
+                  "waited_seconds": 10.107082843780518,
+                  "samples": [
+                    {
+                      "memory_used_mb": 672.0,
+                      "utilization": 0.0,
+                      "t": 0.035639047622680664
+                    },
+                    {
+                      "memory_used_mb": 672.0,
+                      "utilization": 0.0,
+                      "t": 5.0691564083099365
+                    },
+                    {
+                      "memory_used_mb": 672.0,
+                      "utilization": 0.0,
+                      "t": 10.107081890106201
+                    }
+                  ]
+                },
+                "spread": 1.0150968939207654,
+                "accepted_attempt": 0
+              }
+            }
+          },
+          "sphere-96": {
+            "shape": [
+              96,
+              96,
+              96
+            ],
+            "cells": 884736,
+            "steps": 800,
+            "solvers": {
+              "torchfdtd": {
+                "median_wall_seconds": 0.08380240597762167,
+                "median_loop_seconds": 0.019837024970911443,
+                "median_setup_seconds": 0.039765030960552394,
+                "cell_steps_per_second_full": 8445924573.919819,
+                "cell_steps_per_second_stepping": 35680188991.94235,
+                "wall_samples": [
+                  0.08380240597762167,
+                  0.08566445100586861,
+                  0.081054104026407
+                ],
+                "loop_samples": [
+                  0.019837024970911443,
+                  0.019913196098059416,
+                  0.019817745895124972
+                ],
+                "peak_allocated_bytes": 59756544,
+                "gpu_idle": {
+                  "checked": true,
+                  "limit_mb": 2118.0,
+                  "memory_used_mb": 760.0,
+                  "utilization": 0.0,
+                  "waited_seconds": 15.145200490951538,
+                  "samples": [
+                    {
+                      "memory_used_mb": 760.0,
+                      "utilization": 0.0,
+                      "t": 5.074594736099243
+                    },
+                    {
+                      "memory_used_mb": 760.0,
+                      "utilization": 0.0,
+                      "t": 10.108134031295776
+                    },
+                    {
+                      "memory_used_mb": 760.0,
+                      "utilization": 0.0,
+                      "t": 15.145198106765747
+                    }
+                  ]
+                },
+                "spread": 1.0568798709804945,
+                "accepted_attempt": 0
+              },
+              "beamz": {
+                "median_wall_seconds": 0.1319327240344137,
+                "median_loop_seconds": 0.05934313405305147,
+                "median_setup_seconds": 0.07256701902952045,
+                "cell_steps_per_second_full": 5364770606.990412,
+                "cell_steps_per_second_stepping": 11927054600.238205,
+                "wall_samples": [
+                  0.13447697297669947,
+                  0.1319327240344137,
+                  0.1306731830118224
+                ],
+                "loop_samples": [
+                  0.05934313405305147,
+                  0.05936570500489324,
+                  0.059317433973774314
+                ],
+                "peak_bytes_in_use": 169636352,
+                "warmup_seconds": 0.9996240669861436,
+                "gpu_idle": {
+                  "checked": true,
+                  "limit_mb": 2039.0,
+                  "memory_used_mb": 800.0,
+                  "utilization": 0.0,
+                  "waited_seconds": 10.108172178268433,
+                  "samples": [
+                    {
+                      "memory_used_mb": 800.0,
+                      "utilization": 0.0,
+                      "t": 0.038321733474731445
+                    },
+                    {
+                      "memory_used_mb": 800.0,
+                      "utilization": 0.0,
+                      "t": 5.074833393096924
+                    },
+                    {
+                      "memory_used_mb": 800.0,
+                      "utilization": 0.0,
+                      "t": 10.1081702709198
+                    }
+                  ]
+                },
+                "spread": 1.0291091858115442,
+                "accepted_attempt": 0
+              }
+            }
+          }
+        },
+        "methods": {
+          "torchfdtd": "benchmarks.open_source.scene projects, fused CUDA kernels, CUDA graph capture, float32. Full solve = Simulation(project).run() wall time including voxelization, grid and graph construction and the final host copy of E, H and the point trace. Stepping = summary[\"seconds\"] (captured loop only). One warm-up solve per case, then the listed repetitions.",
+          "beamz": "Simulation.run(backend='auto') on the PyPI release, float32, GPU. Full solve = Simulation.run (plan, runtime setup, stepping, result decoding) + host copy of the point DFT value, after one warm-up that includes JAX compilation (recorded separately). Stepping = SimulationPerformance.runtime_s, BeamZ's own timing of the compiled executable. The timed solves use a one-frequency point FieldMonitor; the point trace comes from one additional untimed solve with a per-step FieldRecorder at the same Ez node."
+        }
+      },
+      "throughput_traces": {
+        "vacuum-64": {
+          "lengths": {
+            "torchfdtd": 800,
+            "beamz": 800
+          },
+          "pairwise": {
+            "torchfdtd_vs_beamz": {
+              "samples": 800,
+              "raw_relative_l2": 0.00010758475037500774,
+              "amplitude_ratio": 0.9999992778889069,
+              "fitted_relative_l2": 0.00010758240462178699,
+              "best_shift": {
+                "shift_samples": 0,
+                "amplitude_ratio": 0.9999992778889069,
+                "fitted_relative_l2": 0.00010758240462178699
+              }
+            }
+          },
+          "artifacts": {
+            "torchfdtd": {
+              "artifact": "torchfdtd_throughput_vacuum-64_trace.npy",
+              "sha256": "04a47f590c9ecb1ee2cf5b60cf500ffa2b97e8ea260be2c7006e42c80d7e8cbf",
+              "matches_record": true
+            },
+            "beamz": {
+              "artifact": "beamz_throughput_vacuum-64_trace.npy",
+              "sha256": "cf64c19cd2809f4f6c7e7dd108edceab87be1920ae2c4ebb462dc39cc18c4149",
+              "matches_record": true
+            }
+          },
+          "half_step_carrier_phase": 0.08688684051251011
+        },
+        "sphere-64": {
+          "lengths": {
+            "torchfdtd": 800,
+            "beamz": 800
+          },
+          "pairwise": {
+            "torchfdtd_vs_beamz": {
+              "samples": 800,
+              "raw_relative_l2": 0.0001229535122633845,
+              "amplitude_ratio": 1.000010702239169,
+              "fitted_relative_l2": 0.0001224855384436664,
+              "best_shift": {
+                "shift_samples": 0,
+                "amplitude_ratio": 1.000010702239169,
+                "fitted_relative_l2": 0.0001224855384436664
+              }
+            }
+          },
+          "artifacts": {
+            "torchfdtd": {
+              "artifact": "torchfdtd_throughput_sphere-64_trace.npy",
+              "sha256": "6f719862c389ece8fdc3e3d2658389ca16df9fb9aa27b515a264d8a69f3788b7",
+              "matches_record": true
+            },
+            "beamz": {
+              "artifact": "beamz_throughput_sphere-64_trace.npy",
+              "sha256": "f16e2c44540ea078a1d64e4815b4826b66c471f2d8b5c8257fed5ad6e1acf5cd",
+              "matches_record": true
+            }
+          },
+          "half_step_carrier_phase": 0.08688684051251011
+        },
+        "vacuum-96": {
+          "lengths": {
+            "torchfdtd": 800,
+            "beamz": 800
+          },
+          "pairwise": {
+            "torchfdtd_vs_beamz": {
+              "samples": 800,
+              "raw_relative_l2": 6.978669245513677e-05,
+              "amplitude_ratio": 1.0000497705293603,
+              "fitted_relative_l2": 4.891665012471031e-05,
+              "best_shift": {
+                "shift_samples": 0,
+                "amplitude_ratio": 1.0000497705293603,
+                "fitted_relative_l2": 4.891665012471031e-05
+              }
+            }
+          },
+          "artifacts": {
+            "torchfdtd": {
+              "artifact": "torchfdtd_throughput_vacuum-96_trace.npy",
+              "sha256": "24f21e3393e8bb96ef5777802bbd10cd1a4a8c6f8342dea829a360d06ee3147c",
+              "matches_record": true
+            },
+            "beamz": {
+              "artifact": "beamz_throughput_vacuum-96_trace.npy",
+              "sha256": "538fd1bb6ada7c0541082a3bccce40e933740ce7e8a8849fb398d442fe68cffa",
+              "matches_record": true
+            }
+          },
+          "half_step_carrier_phase": 0.057924560341673405
+        },
+        "sphere-96": {
+          "lengths": {
+            "torchfdtd": 800,
+            "beamz": 800
+          },
+          "pairwise": {
+            "torchfdtd_vs_beamz": {
+              "samples": 800,
+              "raw_relative_l2": 0.00011113022183006961,
+              "amplitude_ratio": 1.0000957427161492,
+              "fitted_relative_l2": 5.6414971845209944e-05,
+              "best_shift": {
+                "shift_samples": 0,
+                "amplitude_ratio": 1.0000957427161492,
+                "fitted_relative_l2": 5.6414971845209944e-05
+              }
+            }
+          },
+          "artifacts": {
+            "torchfdtd": {
+              "artifact": "torchfdtd_throughput_sphere-96_trace.npy",
+              "sha256": "fe6460ef52f25f684f72e674fa3b1fff049b09aa64cc04357056a60103cf89ea",
+              "matches_record": true
+            },
+            "beamz": {
+              "artifact": "beamz_throughput_sphere-96_trace.npy",
+              "sha256": "2e8fd4c3990179de6ee5e4618ec1edba9cbf2547c9551b3a6356bc17e991f002",
+              "matches_record": true
+            }
+          },
+          "half_step_carrier_phase": 0.057924560341673405
+        }
+      }
+    }
   }
 }

@@ -33,7 +33,7 @@ def load(name):
 
 
 def record_hashes():
-    return {p.name: common.sha256_file(p) for p in sorted(RECORDS.glob('*.json'))}
+    return {p.relative_to(RECORDS).as_posix(): common.sha256_file(p) for p in sorted(RECORDS.rglob('*.json'))}
 
 
 def git_commit():
@@ -132,7 +132,8 @@ def trace_comparison(solvers, artifacts):
             if path and path.exists():
                 array = np.load(path)
                 traces.setdefault(case['name'], {})[name] = array.astype(np.float64)
-                recorded = {r.get('trace_sha256') for r in case['runs']}
+                # BeamZ records its trace once per case, from an untimed solve.
+                recorded = {r.get('trace_sha256') for r in case['runs']} | {case.get('trace_sha256')}
                 # The GPU drivers hash their float32 device trace; the saved artifact is float64.
                 hashes = {common.sha256_array(array), common.sha256_array(array.astype(np.float32))}
                 provenance.setdefault(case['name'], {})[name] = dict(artifact=path.name, sha256=common.sha256_array(array),
@@ -172,7 +173,7 @@ def throughput_block(solvers):
                          median_setup_seconds=case['median_setup_seconds'], cell_steps_per_second_full=case['cell_steps_per_second_full'],
                          cell_steps_per_second_stepping=case['cell_steps_per_second_stepping'],
                          wall_samples=[r['wall_seconds'] for r in case['runs']], loop_samples=[r['loop_seconds'] for r in case['runs']])
-            for key in ('peak_allocated_bytes', 'peak_bytes_in_use', 'compile_seconds', 'steps_run', 'load_average_before', 'load_average_after', 'gpu_idle',
+            for key in ('peak_allocated_bytes', 'peak_bytes_in_use', 'compile_seconds', 'warmup_seconds', 'steps_run', 'load_average_before', 'load_average_after', 'gpu_idle',
                         'cpu_idle', 'host_cpu_percent_before', 'host_cpu_percent_after', 'spread', 'accepted_attempt'):
                 if key in case:
                     entry[key] = case[key]
@@ -182,9 +183,20 @@ def throughput_block(solvers):
     return dict(cases=cases, methods={name: rec['method'] for name, rec in solvers.items() if rec is not None})
 
 
+def other_gpus(artifacts):
+    """Fixture C retaken on another GPU host: records in docs/validation/cross_solver/<gpu>/, trace artifacts in <artifacts>_<gpu>."""
+    out = {}
+    for folder in sorted(p for p in RECORDS.iterdir() if p.is_dir()):
+        names = sorted((p.name[:-len('_throughput.json')] for p in folder.glob('*_throughput.json')), key=lambda n: n != 'torchfdtd')
+        solvers = {name: load(f'{folder.name}/{name}_throughput') for name in names}
+        out[folder.name] = dict(record_dates={n: r['date'] for n, r in solvers.items()}, environments={n: r['environment'] for n, r in solvers.items()},
+                                throughput=throughput_block(solvers), throughput_traces=trace_comparison(solvers, Path(f'{artifacts}_{folder.name}')))
+    return out
+
+
 def meep_rank_sweep():
     rows = []
-    for path in sorted(RECORDS.glob('meep_throughput_ranks*.json')):
+    for path in sorted(p for p in RECORDS.glob('meep_throughput_ranks*.json') if p.stem.removeprefix('meep_throughput_ranks').isdigit()):  # not the *_quiet retakes
         rec = json.loads(path.read_text(encoding='utf-8'))
         rows.append(dict(ranks=rec['environment']['mpi_processes'], record=path.name,
                          cases={c['name']: dict(median_loop_seconds=c['median_loop_seconds'], cell_steps_per_second_stepping=c['cell_steps_per_second_stepping'],
@@ -255,22 +267,28 @@ def main():
     adjoint = adjoint_block(load('torchfdtd_adjoint'), load('fdtdx_adjoint_checkpointed'), load('fdtdx_adjoint_reversible'),
                             load('fdtdx_adjoint_checkpointed16'), Path(args.artifacts))
     environments = {}
+    record_dates = {}
     for name, rec in (('torchfdtd', throughput['torchfdtd'] or slab['torchfdtd']), ('fdtdx', throughput['fdtdx'] or slab['fdtdx']), ('meep', throughput['meep'] or slab['meep'])):
         if rec is not None:
             environments[name] = rec['environment']
+            record_dates[name] = rec['date']
+    # The drivers do not record the git HEAD; keep the HEAD of the original workstation runs when records are added later.
+    previous = json.loads(OUTPUT.read_text(encoding='utf-8')) if OUTPUT.exists() else {}
     combined = dict(
-        schema='torchfdtd-cross-solver-combined-v1', date=time.strftime('%Y-%m-%d'), worktree_head_at_run=git_commit(),
+        schema='torchfdtd-cross-solver-combined-v1', date=time.strftime('%Y-%m-%d'), record_dates=record_dates,
+        worktree_head_at_run=previous.get('worktree_head_at_run') or git_commit(),
         hardware=dict(gpu='NVIDIA GeForce RTX 3060 12 GB (WSL2, driver from Windows)', cpu=common.cpu_model(),
                       note='Linux side: a WSL2 Ubuntu 22.04 distribution. '
                            'GPU shared with the Windows desktop compositor; every timing block waited for the idle criterion recorded in gpu_idle.'),
         environments=environments,
         fixtures={name: {k: v for k, v in spec.items()} for name, spec in fixtures.items()},
         fixture_sha256={name: spec['_sha256'] for name, spec in fixtures.items()},
-        driver_sha256=common.driver_hashes('common.py', 'torchfdtd_driver.py', 'fdtdx_driver.py', 'meep_driver.py', 'combine.py', 'report.py'),
+        driver_sha256=common.driver_hashes('common.py', 'torchfdtd_driver.py', 'fdtdx_driver.py', 'meep_driver.py', 'beamz_driver.py', 'combine.py',
+                                           'report.py'),
         records=record_hashes(),
         slab=spectra_block('slab', slab), sphere=sphere_block(sphere), throughput=dict(source_records=throughput_sources, **throughput_block(throughput)),
         throughput_traces=trace_comparison(throughput, Path(args.artifacts)),
-        meep_rank_sweep=meep_rank_sweep(), adjoint=adjoint)
+        meep_rank_sweep=meep_rank_sweep(), adjoint=adjoint, other_gpus=other_gpus(args.artifacts))
     for spec in combined['fixtures'].values():
         spec.pop('_sha256', None)
     OUTPUT.write_bytes((json.dumps(combined, indent=2, allow_nan=False) + '\n').encode('utf-8'))

@@ -9,6 +9,10 @@ Commits that only record validation evidence or documentation ("Record ...",
 
 ## Unreleased
 
+### Performance
+
+- CUDA step graphs are captured on their side stream without the full garbage collection and cache release that `torch.cuda.graph()` runs before every capture. Results are bit-identical; the 64^3 throughput solve on an RTX 5090 host took 0.050 s instead of 0.118 s ([CROSS_SOLVER_COMPARISON.md](CROSS_SOLVER_COMPARISON.md#c2-forward-throughput-against-beamz-on-an-rtx-5090), ac7bed8).
+
 ## 1.1.7 (2026-10-07)
 
 ### Added

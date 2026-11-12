@@ -14,6 +14,12 @@ print('torch.cuda.is_available', torch.cuda.is_available(), torch.cuda.get_devic
 print('jax.devices', jax.devices())
 print('cupy runtime', cupy.cuda.runtime.runtimeGetVersion())
 PY
+"$ROOT/venv-beamz/bin/python" - <<'PY'
+import importlib.metadata as m, jax, beamz
+for k in ('beamz', 'jax', 'jaxlib', 'jax-cuda12-plugin', 'jax-cuda12-pjrt', 'numpy', 'scipy'):
+    print(k, m.version(k))
+print('beamz jax.devices', jax.devices())
+PY
 "$ROOT/bin/micromamba" run -n meep python - <<'PY'
 import meep as mp, numpy, scipy, sys
 print('meep python', sys.version.split()[0], 'meep', mp.__version__, 'numpy', numpy.__version__, 'scipy', scipy.__version__)

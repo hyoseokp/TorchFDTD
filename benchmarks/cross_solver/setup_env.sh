@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Build the isolated comparison environments under $TORCHFDTD_BENCH_ROOT (default ~/torchfdtd-bench).
 # GPU venv: Python 3.12 (from micromamba), torch cu128, cupy, jax[cuda12], fdtdx, torchfdtd.
+# BeamZ venv: the PyPI release of BeamZ with its own jax[cuda12] (it needs a newer jax than fdtdx).
 # CPU env: micromamba environment "meep" with conda-forge pymeep (MPI build preferred).
 set -euo pipefail
 ROOT=${TORCHFDTD_BENCH_ROOT:-$HOME/torchfdtd-bench}
@@ -30,6 +31,12 @@ VPY="$ROOT/venv/bin/python"
 "$VPY" -m pip install "cupy-cuda12x" "jax[cuda12]" fdtdx equinox optax numpy scipy psutil
 "$VPY" -m pip install --no-build-isolation "$WORKTREE"
 "$VPY" -m pip freeze > "$ROOT/venv-freeze.txt"
+if [ ! -x "$ROOT/venv-beamz/bin/python" ]; then
+  "$PY312" -m venv "$ROOT/venv-beamz"
+fi
+"$ROOT/venv-beamz/bin/python" -m pip install --upgrade pip
+"$ROOT/venv-beamz/bin/python" -m pip install "beamz==0.6.2" "jax[cuda12]" numpy scipy
+"$ROOT/venv-beamz/bin/python" -m pip freeze > "$ROOT/venv-beamz-freeze.txt"
 if [ ! -x "$MAMBA_ROOT_PREFIX/envs/meep/bin/python" ]; then
   "$MM" create -y -n meep -c conda-forge 'pymeep=*=mpi_mpich_*' numpy scipy \
     || "$MM" create -y -n meep -c conda-forge pymeep numpy scipy

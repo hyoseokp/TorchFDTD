@@ -1,6 +1,6 @@
 # Cross-solver comparison on one RTX 3060 workstation
 
-Same-hardware accuracy and speed comparison of TorchFDTD against Meep (CPU) and FDTDX (GPU) on 2026-09-22, from the machine-readable [combined record](validation/cross_solver_3060.json) and the per-solver records in `docs/validation/cross_solver/`. The drivers, fixtures and environment scripts live in `benchmarks/cross_solver/`. The document reports numbers and their conditions only.
+Same-hardware accuracy and speed comparison of TorchFDTD against Meep (CPU) and FDTDX (GPU) on 2026-09-21, and of forward throughput against BeamZ (GPU) on a second GPU in section C2, from the machine-readable [combined record](validation/cross_solver_3060.json) and the per-solver records in `docs/validation/cross_solver/`. The drivers, fixtures and environment scripts live in `benchmarks/cross_solver/`. The document reports numbers and their conditions only.
 
 ## Environment
 
@@ -21,7 +21,7 @@ Environment build: `benchmarks/cross_solver/setup_env.sh`; verification: `benchm
 
 ## Fixtures
 
-Each fixture is defined once in `benchmarks/cross_solver/fixtures/*.json` and instantiated by one driver per solver (`torchfdtd_driver.py`, `fdtdx_driver.py`, `meep_driver.py`). The drivers assert the cell counts, the time step, the source and monitor cell indices and, where a solver accepts a sampled permittivity array, the shared staircase array itself.
+Each fixture is defined once in `benchmarks/cross_solver/fixtures/*.json` and instantiated by one driver per solver (`torchfdtd_driver.py`, `fdtdx_driver.py`, `meep_driver.py`; `beamz_driver.py` for fixture C in section C2). The drivers assert the cell counts, the time step, the source and monitor cell indices and, where a solver accepts a sampled permittivity array, the shared staircase array itself.
 
 **A. Analytic slab.** Index 1.5 slab, 0.2 um thick, in a periodic 2D TMz cell of 8.0 x 0.5 um, 0.025 um mesh (320 x 20 cells), Courant number 0.700036 (dt = 5.837669e-17 s), 1600 steps, 16 absorbing cells on each x end, periodic in y. Soft Ez sheet at x = -1.5 um with a 1.0-cycle Gaussian pulse at 1.55 um; reflection and transmission planes at x = -0.8 and 0.8 um; 31 frequencies equally spaced between c/1.8 and c/1.3 um; air reference run for normalisation and incident subtraction. The slab covers Ez cells 157..164 in every solver. FDTDX has no 2D mode and uses a 3D grid with one periodic z cell and courant_factor scaled so that dt is identical. Reference: T = [1 + ((n^2-1)/2n)^2 sin^2(2 pi n d / lambda)]^-1, R = 1 - T.
 
@@ -145,6 +145,34 @@ Meep stepping time versus MPI rank count on the same CPU (supplementary; the tab
 | 12 | 4.323 | 4.298 | 13.005 | 13.356 |
 | 16 | 5.070 | 4.895 | 14.256 | 14.114 |
 
+## C2. Forward throughput against BeamZ on an RTX 5090
+
+Fixture C, retaken for TorchFDTD and run for BeamZ on one rented NVIDIA GeForce RTX 5090 (32607 MiB, driver 595.91.07, AMD EPYC 7543 32-Core Processor) on 2026-11-12: the two drivers ran back to back in one container, each in its own venv, with the same definitions as section C. TorchFDTD: the repository source of the commit that adds these records (package version 1.1.7), torch 2.8.0+cu128 (CUDA 12.8), cupy-cuda12x 14.2.0. BeamZ: beamz 0.6.2 installed from PyPI, backend='auto', which runs its JAX backend (jax 0.12.0.1, jax-cuda12-plugin 0.12.0.1); its optional native CUDA component is built from source and was not used. For BeamZ, stepping is SimulationPerformance.runtime_s, its own timing of the compiled executable from dispatch to completion, and peak device memory is the XLA peak_bytes_in_use. Records: `docs/validation/cross_solver/rtx5090/`.
+
+| Case | Solver | Full solve (s) | Stepping (s) | Cell-steps/s, full | Cell-steps/s, stepping | Peak device MiB |
+|---|---|---:|---:|---:|---:|---:|
+| vacuum-64 | TorchFDTD | 0.050 | 0.012 | 4.24e+09 | 1.81e+10 | 18 |
+| vacuum-64 | BeamZ | 0.079 | 0.040 | 2.66e+09 | 5.28e+09 | 30 |
+| sphere-64 | TorchFDTD | 0.048 | 0.012 | 4.33e+09 | 1.81e+10 | 18 |
+| sphere-64 | BeamZ | 0.100 | 0.042 | 2.11e+09 | 5.04e+09 | 43 |
+| vacuum-96 | TorchFDTD | 0.082 | 0.020 | 8.61e+09 | 3.57e+10 | 57 |
+| vacuum-96 | BeamZ | 0.154 | 0.051 | 4.60e+09 | 1.38e+10 | 126 |
+| sphere-96 | TorchFDTD | 0.084 | 0.020 | 8.45e+09 | 3.57e+10 | 57 |
+| sphere-96 | BeamZ | 0.132 | 0.059 | 5.36e+09 | 1.19e+10 | 162 |
+
+BeamZ first solve per case, including its JAX compilation (excluded from the timed solves): vacuum-64 1.45 s, sphere-64 1.01 s, vacuum-96 1.20 s, sphere-96 1.00 s.
+
+Point-monitor traces, defined as in section C. The BeamZ trace comes from one additional untimed solve with a per-step FieldRecorder at the monitor node; its timed solves record one frequency there with a point FieldMonitor.
+
+| Case | Pair | Raw relative L2 | Fitted relative L2 | Best shift (steps) | Amplitude ratio at best shift | Shifted, fitted relative L2 | pi dt/T |
+|---|---|---:|---:|---:|---:|---:|---:|
+| vacuum-64 | TorchFDTD vs BeamZ | 1.076e-04 | 1.076e-04 | 0 | 1.0000e+00 | 1.076e-04 | 0.087 |
+| sphere-64 | TorchFDTD vs BeamZ | 1.230e-04 | 1.225e-04 | 0 | 1.0000e+00 | 1.225e-04 | 0.087 |
+| vacuum-96 | TorchFDTD vs BeamZ | 6.979e-05 | 4.892e-05 | 0 | 1.0000e+00 | 4.892e-05 | 0.058 |
+| sphere-96 | TorchFDTD vs BeamZ | 1.111e-04 | 5.641e-05 | 0 | 1.0001e+00 | 5.641e-05 | 0.058 |
+
+Rerun on a CUDA host with the two GPU venvs of `setup_env.sh`: `run_gpu.sh torchfdtd_driver.py --fixture throughput` and `run_gpu.sh beamz_driver.py --fixture throughput` from a fresh copy of the repository, then move the two records into `docs/validation/cross_solver/rtx5090/` and the trace artifacts into `$TORCHFDTD_BENCH_ROOT/artifacts_rtx5090` before `combine.py`.
+
 ## D. Adjoint
 
 Time to gradient is the median wall time of three warmed repetitions of upload + forward + backward + synchronise. Peak device memory is torch.cuda.max_memory_allocated (TorchFDTD) and the XLA peak_bytes_in_use of the process (FDTDX, one process per method). Meep is excluded: its adjoint is a frequency-domain method with different semantics.
@@ -191,5 +219,6 @@ The script runs `run_meep.sh 12 --fixture throughput` (the primary 12-rank block
 - **Grid and time step.** All solvers use dx = 0.025 um (A) and the fixture values above; dt is identical to 1e-12 relative (FDTDX derives dt from courant_factor/sqrt(3), so the 2D slab passes courant_factor = 0.99 sqrt(3/2)). Meep's run(until=...) stepped 801 times instead of 800 for the 64^3 throughput cases; its rates use the steps it ran.
 - **Material sampling.** TorchFDTD and FDTDX receive the same per-component staircase permittivity arrays (SHA-256 recorded). Meep rasterises the geometry itself at its Yee positions with eps_averaging=False; its epsilon array is not identical cell by cell.
 - **Execution model.** TorchFDTD runs fused CUDA kernels (NVRTC-compiled once, cached on disk) captured in a CUDA graph with a Python setup of about 15 ms; FDTDX runs one jitted XLA executable per case (compilation excluded and reported with JAX persistent compilation cache enabled, place_objects/apply_params of about 0.5 s included in the full solve); Meep runs 12 MPI ranks on the CPU with a per-step field probe; the rank-sweep table gives its stepping time for 4 to 16 ranks. The Meep driver can gate its timing blocks on the Windows host CPU load because other processes on the workstation share the cores; the Meep rows reported here come from the ungated sweep run described in section C.
+- **BeamZ (section C2 only).** BeamZ receives the shared staircase permittivity as a MaterialGrid with Yee-support arrays (its own rasteriser smooths interfaces by default), the same additive Ez kick through CustomSource(timing='e') and a CPML of the same 8-cell thickness with its own profile. Its timed solves record one frequency at the monitor node instead of the per-step trace of the other solvers.
 - **Adjoint semantics.** TorchFDTD differentiates its discrete Yee/CPML step with a checkpointed transpose; FDTDX differentiates the same forward model through JAX with either equinox checkpointing or time reversal. Meep's adjoint solver is frequency-domain and was not run.
 - **Shared GPU.** The RTX 3060 also drives the Windows desktop (about 2.6 GiB resident); every timing block waited until the reported memory and utilisation stayed below the idle criterion recorded in the records.

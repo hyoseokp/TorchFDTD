@@ -15,6 +15,7 @@ Check before promising:
 
 - Supported feature combinations are listed in the workbench (Supported combinations) and in `torchfdtd/capabilities.json`. Experimental items are labelled as such in [docs](docs/). Single-problem multi-GPU slab decomposition is experimental ([DISTRIBUTED.md](docs/DISTRIBUTED.md)).
 - Tiling is approximate and its error depends on the overlap ([TILED_STITCHING.md](docs/TILED_STITCHING.md)).
+- Project sources are point, plane (soft or one-way sheet) and TFSF; the project schema has no eigenmode source. For waveguides, launch a plane sheet across the guide and measure total flux, or project the monitor fields on guided modes. Fixed-eigenmode launches and mode power for 3D guides are in `solve_waveguide_modes` and `normalized_mode_power` ([mode_ports.md](docs/mode_ports.md)), `ModeInjectedPlaneSimulation` ([MODE_INJECTION.md](docs/MODE_INJECTION.md)), `ModeNetwork` for two opposing ports ([MODE_NETWORK.md](docs/MODE_NETWORK.md)) and port diagnostics ([PORTS.md](docs/PORTS.md)).
 - Results are only as good as the mesh: run a mesh convergence check ([examples/mesh_convergence.py](examples/mesh_convergence.py)) before quoting numbers.
 
 ## Install
@@ -69,13 +70,13 @@ The same `Project` JSON opens in the browser workbench, and the workbench export
 
 1. Start from the closest example and keep its boundary, source and monitor conventions. Boundaries are described in [BOUNDARIES.md](docs/BOUNDARIES.md).
 2. Check before running: `torchfdtd.solver.estimate(project)`, the MCP tool `validate_project` or the workbench report cells, memory, time step and warnings. Read the warnings; they name the fix.
-3. For transmission and reflection, normalise by a reference run without the device, as the slab and Meep-comparison examples do.
+3. For transmission and reflection, normalise by a reference run without the device, as the slab and Meep-comparison examples do: `torchfdtd.normalize_flux` for identical planes (with incident subtraction for reflection), or the MCP tool `flux_ratio` when the planes differ, such as a bend against a straight guide.
 4. Check mesh convergence before reporting a number.
 5. Hand the user the project JSON or the exported Python script so the run can be repeated.
 
 ## Tools for agents (MCP)
 
-`torchfdtd mcp` serves six tools over stdio: `environment`, `example_project`, `project_schema`, `validate_project`, `run_project` and `python_script`. `run_project` returns the run summary, point-monitor and flux spectra, and the path of the saved NPZ (under `$TORCHFDTD_RESULTS/mcp`, default `./results/mcp`). It runs through the same admission and execution path as a workbench job.
+`torchfdtd mcp` serves seven tools over stdio: `environment`, `example_project`, `project_schema`, `validate_project`, `run_project`, `flux_ratio` and `python_script`. `run_project` returns the run summary, point-monitor and flux spectra, and the path of the saved NPZ (under `$TORCHFDTD_RESULTS/mcp`, default `./results/mcp`). It runs through the same admission and execution path as a workbench job.
 
 Register it in any MCP client as the command `torchfdtd` with the argument `mcp`. In Claude Code, the repository is also a plugin marketplace; the plugin adds a simulation skill and the MCP server:
 

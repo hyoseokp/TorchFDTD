@@ -42,7 +42,7 @@ from packaging.utils import canonicalize_name
 ROOT = Path(__file__).resolve().parents[1]
 NOTICES = ROOT / 'docs' / 'THIRD_PARTY_NOTICES.md'
 SBOM = ROOT / 'docs' / 'validation' / 'sbom.json'
-GROUPS = ['runtime', 'gds', 'hdf5', 'cuda-kernels', 'dev', 'benchmark']
+GROUPS = ['runtime', 'gds', 'hdf5', 'cuda-kernels', 'dev', 'benchmark', 'mcp']
 
 # Non-pip material in the tracked tree and in the wheel. status is 'cleared'
 # when the licence and the right to redistribute are documented, 'own' for the

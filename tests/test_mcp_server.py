@@ -58,3 +58,36 @@ def test_tools_register_with_the_mcp_server():
     pytest.importorskip('mcp')
     names = {tool.name for tool in asyncio.run(tools.build_server().list_tools())}
     assert names == {tool.__name__ for tool in tools.TOOLS}
+
+
+def slab_projects():
+    from torchfdtd import Project, Region, Structure, Source, FieldMonitor, SpectrumSettings, Boundaries, BoundaryFace
+    sample = Project(name='slab', region=Region(size=(8, .5, 1), mesh=.05, steps=800, pml_cells=12, backend='cpu',
+                     material_sampling='yee', boundaries=Boundaries(y_min=BoundaryFace(kind='periodic'), y_max=BoundaryFace(kind='periodic'))),
+                     structures=[Structure(center=(0, 0, 0), size=(.2, .5, 1), material='SiO2 (constant n)')],
+                     sources=[Source(id='source', kind='plane', center=(-1.5, 0, 0), size=(0, .5, 0), pulse_cycles=1)],
+                     monitors=[FieldMonitor(id='t', name='transmission', center=(.8, 0, 0), size=(0, .5, 1),
+                                            spectrum=SpectrumSettings(sampling='frequency', frequency_points=11, apodization='none'))])
+    air = sample.model_copy(deep=True)
+    air.structures = []
+    return sample.model_dump(mode='json'), air.model_dump(mode='json')
+
+
+def test_flux_ratio_normalises_a_slab_by_its_air_reference():
+    sample, air = slab_projects()
+    s, a = tools.run_project(sample, name='slab'), tools.run_project(air, name='air')
+    same = tools.flux_ratio(a['output'], 'transmission', a['output'], 'transmission')
+    assert all(v for v in same['valid']) and np.allclose(same['ratio'], 1.0)
+    out = tools.flux_ratio(s['output'], 'transmission', a['output'], 'transmission')
+    ratio = np.array([r for r, v in zip(out['ratio'], out['valid']) if v])
+    assert ratio.size and ((ratio > 0.85) & (ratio < 1.01)).all()
+
+
+def test_flux_ratio_refuses_runs_with_different_sources(results):
+    sample, air = slab_projects()
+    air['sources'][0]['pulse_cycles'] = 2
+    s, a = tools.run_project(sample, name='slab'), tools.run_project(air, name='air2')
+    with pytest.raises(ValueError, match='sources'):
+        tools.flux_ratio(s['output'], 'transmission', a['output'], 'transmission')
+    with pytest.raises(ValueError, match='saved TorchFDTD result'):
+        tools.flux_ratio(str(results / 'missing.npz'), 'transmission', a['output'], 'transmission')

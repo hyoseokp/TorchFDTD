@@ -10,7 +10,7 @@ TorchFDTD solves Maxwell's equations in the time domain on 2D or 3D Yee grids. L
 ## Setup
 
 1. Check the installation with `torchfdtd doctor`. If the command is missing, install `pip install "torchfdtd[mcp]"` (add `[cuda-kernels]` for the fused CUDA kernels; install a CUDA build of PyTorch first for GPU runs).
-2. The plugin starts the `torchfdtd` MCP server. Its tools are `environment`, `example_project`, `project_schema`, `validate_project`, `run_project` and `python_script`. Without the server, use the Python API (`from torchfdtd import Project, Simulation`) or the CLI (`torchfdtd example`, `torchfdtd run`).
+2. The plugin starts the `torchfdtd` MCP server. Its tools are `environment`, `example_project`, `project_schema`, `validate_project`, `run_project`, `flux_ratio` and `python_script`. Without the server, use the Python API (`from torchfdtd import Project, Simulation`) or the CLI (`torchfdtd example`, `torchfdtd run`).
 
 ## Steps
 
@@ -18,7 +18,7 @@ TorchFDTD solves Maxwell's equations in the time domain on 2D or 3D Yee grids. L
 2. Start from the closest example: `example_project` (waveguide, scatterer, 3d, pmc) or the task table in AGENTS.md. Read `project_schema` when a field is unclear.
 3. Edit structures, materials, sources, monitors and the region to match the user's device. Keep the example's boundary and monitor conventions.
 4. Call `validate_project` and read every warning before running. Reduce the mesh or the region if the memory estimate is too large.
-5. Call `run_project`. For transmission or reflection, also run a reference without the device and normalise by it.
+5. Call `run_project`. For transmission, also run a reference without the device with the same sources, mesh and step count, and divide with `flux_ratio`. The project schema has no eigenmode source; launch a plane sheet across a waveguide.
 6. Before quoting numbers, repeat the run on a finer mesh and report how much the result changed.
 7. Give the user the project JSON or `python_script` output so the run can be repeated, and the saved NPZ path.
 

@@ -85,12 +85,48 @@ def run_project(project: dict, name: str = 'run') -> dict:
                       flux_monitors=result.flux_data(max_values=MAX_TRACE_VALUES), citation=CITATION))
 
 
+def flux_ratio(sample_result: str, sample_monitor: str, reference_result: str, reference_monitor: str) -> dict:
+    """Signed flux through a field monitor of one run divided by the flux through a field monitor of a reference run.
+
+    Use it for transmission normalised by a reference without the device, for example a bend's output arm against
+    a straight guide: run both with the same sources, mesh, time step and step count, then pass the NPZ paths that
+    run_project returned and the field-monitor names. The two planes may differ. A negative ratio means power crossed
+    the plane against its normal. Frequencies where the reference flux is below 1% of its peak are marked invalid.
+    For reflection with incident-field subtraction on identical planes, use torchfdtd.normalize_flux in Python.
+    """
+    import numpy as np
+    from .solver import Result
+    runs = []
+    for path in (sample_result, reference_result):
+        path = Path(path)
+        if path.suffix.lower() not in ('.npz', '.h5', '.hdf5') or not path.is_file():
+            raise ValueError(f'{path} is not a saved TorchFDTD result (.npz, .h5 or .hdf5).')
+        runs.append(Result.load(path))
+    sample, reference = runs
+    a, b = sample.field_monitor(sample_monitor), reference.field_monitor(reference_monitor)
+    if a['flux'] is None or b['flux'] is None:
+        raise ValueError('Both field monitors need recorded flux.')
+    if np.shape(a['frequency_hz']) != np.shape(b['frequency_hz']) or not np.allclose(a['frequency_hz'], b['frequency_hz'], rtol=1e-10, atol=0):
+        raise ValueError('The two monitors must sample the same frequencies.')
+    for label, first, second in (('sources', [s.model_dump() for s in sample.project.sources], [s.model_dump() for s in reference.project.sources]),
+                                 ('mesh', sample.project.region.mesh, reference.project.region.mesh),
+                                 ('step count', sample.summary['steps'], reference.summary['steps']),
+                                 ('time step', sample.summary['dt_fs'], reference.summary['dt_fs'])):
+        if first != second:
+            raise ValueError(f'The sample and reference runs differ in their {label}; normalise only runs with the same {label}.')
+    flux, ref = np.asarray(a['flux'], dtype=float), np.asarray(b['flux'], dtype=float)
+    valid = np.abs(ref) >= 0.01 * np.abs(ref).max()
+    ratio = np.where(valid, flux / np.where(valid, ref, 1.0), np.nan)
+    return _json(dict(wavelength_um=(299792458.0 / np.asarray(a['frequency_hz']) * 1e6).tolist(), ratio=ratio.tolist(),
+                      valid=valid.tolist(), sample_normal=a['normal_axis'], reference_normal=b['normal_axis']))
+
+
 def python_script(project: dict) -> str:
     """The equivalent standalone Python script of a Project, using the torchfdtd API."""
     return Project.model_validate(project).python_script()
 
 
-TOOLS = (environment, example_project, project_schema, validate_project, run_project, python_script)
+TOOLS = (environment, example_project, project_schema, validate_project, run_project, flux_ratio, python_script)
 
 
 def build_server():
@@ -101,7 +137,9 @@ def build_server():
     server = Server('torchfdtd', instructions=(
         'TorchFDTD is a GPU FDTD electromagnetic simulator for photonics (lengths in micrometres). Start from '
         'example_project, edit the structures, sources and monitors, call validate_project, then run_project. '
-        'Use python_script to hand the user a reproducible script. ' + CITATION))
+        'For transmission, also run a reference without the device and call flux_ratio. Check the result on a finer '
+        'mesh before quoting numbers. Project sources are point, plane (sheet) and TFSF; there is no eigenmode '
+        'source in the project schema. Use python_script to hand the user a reproducible script. ' + CITATION))
     for tool in TOOLS:
         server.tool()(tool)
     return server

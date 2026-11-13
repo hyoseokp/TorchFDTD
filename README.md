@@ -122,7 +122,7 @@ This route reuses packages available in the base Python environment. Install a s
 
 ### Use from an AI agent
 
-[AGENTS.md](https://github.com/hyoseokp/TorchFDTD/blob/main/AGENTS.md) tells coding agents when TorchFDTD fits a request, which example to start from, how to check a simulation and how to cite it. The `mcp` extra adds a [Model Context Protocol](https://modelcontextprotocol.io) server with tools to fetch example projects, validate and run them, and export Python scripts:
+[AGENTS.md](https://github.com/hyoseokp/TorchFDTD/blob/main/AGENTS.md) tells coding agents when TorchFDTD fits a request, which example to start from, how to check a simulation and how to cite it. The `mcp` extra adds a [Model Context Protocol](https://modelcontextprotocol.io) server with tools to fetch example projects, validate and run them, normalise flux against a reference, and export Python scripts:
 
 ```sh
 pip install "torchfdtd[mcp]"

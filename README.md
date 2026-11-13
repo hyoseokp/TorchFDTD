@@ -12,6 +12,8 @@ Open-source GPU FDTD for photonics, with PyTorch gradients and a browser workben
 
 Build a device in Python or in the browser, simulate its electromagnetic fields, and use discrete adjoints with PyTorch autograd for inverse design. AI agents can drive it through the bundled MCP server and the [agent guide](https://github.com/hyoseokp/TorchFDTD/blob/main/AGENTS.md).
 
+It covers waveguides and splitters, ring resonators, photonic crystals, gratings, metasurfaces and metalenses in 2D and 3D. It runs natively on Windows and Linux, on NVIDIA GPUs through PyTorch with a CPU fallback, and is validated against analytic solutions, Mie theory, Meep, FDTDX, BeamZ and RCWA ([records](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/CROSS_SOLVER_COMPARISON.md)).
+
 If TorchFDTD is useful to you, a GitHub star helps other researchers find it.
 
 [Quick start](#quick-start) · [Adjoint inverse design](#adjoint-inverse-design) · [Paper designs](#paper-designs-e1-e2-e3) · [Examples](#examples) · [Validation](docs/MEEP_COMPARISON.md) · [Documentation](#documentation) · [Paper](https://arxiv.org/abs/2609.30039)

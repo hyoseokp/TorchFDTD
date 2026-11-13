@@ -269,7 +269,7 @@ The workbench's FDTD panel has a **GPU** switch and a **Memory** selector; `/api
 
 Ahead: browser CAD, same-GPU structure batches, beyond-VRAM streaming with restart, GDS export and browser import, shape derivatives on top of density parameterization.
 Equal: nonuniform meshes, dispersive materials, anisotropic materials, boundaries, mode sources and ports, far-field projection, differentiable physics with fixed eigenmodes.
-Behind: single-problem multi-GPU (verified with CPU ranks only).
+Behind: single-problem multi-GPU (experimental slab decomposition, verified bit for bit with CPU, Gloo and single-GPU thread ranks; not yet timed on several GPUs).
 
 </details>
 

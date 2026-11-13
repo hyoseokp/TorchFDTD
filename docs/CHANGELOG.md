@@ -9,6 +9,8 @@ Commits that only record validation evidence or documentation ("Record ...",
 
 ## Unreleased
 
+## 1.2.0 (2026-11-13)
+
 ### Added
 
 - Experimental slab decomposition (`SlabDecomposition`, `decomposition=`) for `DifferentiableSimulation`, `DifferentiablePlaneSimulation` and the recorded CPML point/plane adjoints: halo rows inside the existing Yee/CPML, fused CUDA and adjoint code, per-rank admission, torchrun and local launchers, bit-identical to one device on CPU, Gloo and single-GPU thread ranks ([DISTRIBUTED.md](DISTRIBUTED.md)) (71ff83f).
@@ -16,6 +18,10 @@ Commits that only record validation evidence or documentation ("Record ...",
 ### Performance
 
 - CUDA step graphs are captured on their side stream without the full garbage collection and cache release that `torch.cuda.graph()` runs before every capture. Results are bit-identical; the 64^3 throughput solve on an RTX 5090 host took 0.050 s instead of 0.118 s ([CROSS_SOLVER_COMPARISON.md](CROSS_SOLVER_COMPARISON.md#c2-forward-throughput-against-beamz-on-an-rtx-5090), ac7bed8).
+
+### Validation scope
+
+- Changed-code tests on an RTX 3060 (WSL, torch 2.11, CuPy 14.2): 760 passed, covering slab decomposition, the differentiable and recorded CPML adjoints, adjoint memory, planes and spectra, and CUDA graph steps. Slab decomposition is bit-identical to one device on CPU, Gloo and single-GPU thread ranks. The CUDA graph tests also passed on an RTX 5090. Several physical GPUs and the full release suite remain outside this release's validation scope.
 
 ## 1.1.7 (2026-10-07)
 

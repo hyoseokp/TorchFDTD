@@ -1,6 +1,6 @@
 # Compatibility and support policy
 
-Version of record: **1.1.7** (`pyproject.toml`, `torchfdtd.server` and `/api/health`
+Version of record: **1.2.0** (`pyproject.toml`, `torchfdtd.server` and `/api/health`
 carry the same string). This document fixes what the public API is, how it may change,
 which persisted formats exist and which reader accepts which version, how a numerical
 bug is graded, and how a fix that changes results is announced. The rules are checked by

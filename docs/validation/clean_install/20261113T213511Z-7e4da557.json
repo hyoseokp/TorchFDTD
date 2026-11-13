@@ -1,0 +1,851 @@
+{
+  "kind": "clean_install_record",
+  "schema_version": 1,
+  "recorded_at": "2026-11-13T21:35:11+00:00",
+  "source_commit": "7e4da5573553d0232daa3915704c0ea0b9cc4bdb",
+  "dirty_paths": [],
+  "packaging_inputs_sha256": "06d3fddbc1a1c37dc1621d8809d21c00566c8e6bd4ced31787df5224cacea910",
+  "host": {
+    "os": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "base_python": "3.10.2"
+  },
+  "checkout": "D:\\torchfdtd-rc-wt",
+  "local_root": "D:\\torchfdtd-clean",
+  "find_links": [
+    "D:/TorchFDTD/.local/wheels"
+  ],
+  "cpu_torch": {
+    "spec": "torch",
+    "index_url": "https://download.pytorch.org/whl/cpu"
+  },
+  "cuda_torch": {
+    "spec": "torch==2.10.0+cu126",
+    "index_url": "https://download.pytorch.org/whl/cu126"
+  },
+  "readme": {
+    "sha256": "0ec338dd6af13e60ca3d68cc0a5ba58d5ad086edfd201f4b8abff3b349df739a",
+    "runnable_blocks_sha256": "3035b65f555deadbcd8a1b20329fa049f48cfe176f63b699e96c0558349aeda1",
+    "blocks": [
+      {
+        "index": 1,
+        "line": 35,
+        "language": "sh",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "383fd89b860a39e6da607b5aab1df11bfb63ae32f2c6a62bce534db174c6e5e3"
+      },
+      {
+        "index": 2,
+        "line": 47,
+        "language": "powershell",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "fc54843e2b6cbc318fb82a42f30c791f4c36693d80b3e4396840f7061cbfac53"
+      },
+      {
+        "index": 3,
+        "line": 68,
+        "language": "python",
+        "mode": "cuda",
+        "reason": null,
+        "sha256": "a92e7e3144bc693ced45dcc0794f1711945f8f35e1c2e0d264b34d88570e5d28"
+      },
+      {
+        "index": 4,
+        "line": 91,
+        "language": "python",
+        "mode": "cpu",
+        "reason": null,
+        "sha256": "c23f3530a9466abd3c478038f36664b8322f9c3a4c1619912f0c90c162e39543"
+      },
+      {
+        "index": 5,
+        "line": 109,
+        "language": "powershell",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "1ae17fb51d1f0a1844238ff8857b2e0ad0dea907f1299726ad409eed8f5ea4a3"
+      },
+      {
+        "index": 6,
+        "line": 127,
+        "language": "sh",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "c8f139d3a25da306d025e137b62d817e1509b0c2f3fcfe013cb60f9fafe0108a"
+      },
+      {
+        "index": 7,
+        "line": 134,
+        "language": "text",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "71e40c033b13364c352bcc1b8864af0f056f4a838f40cdebf95ed7dff4bd088c"
+      },
+      {
+        "index": 8,
+        "line": 148,
+        "language": "sh",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "bd1318d6ee5c2354dd2392f78e741073d877ba61fb75d6f19ed0443397437966"
+      },
+      {
+        "index": 9,
+        "line": 156,
+        "language": "python",
+        "mode": "skip",
+        "reason": "core update excerpt; the complete standalone script is linked above",
+        "sha256": "0f6898e9b338408e6a1c5c3d0ae0b874a011b25ce4178b678278ce966b70614b"
+      },
+      {
+        "index": 10,
+        "line": 305,
+        "language": "powershell",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "0890ae38f33c79232c501db6fa79564e2d51556953b16a0f76c84ab7149767bc"
+      },
+      {
+        "index": 11,
+        "line": 318,
+        "language": "bibtex",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "66a4decec9f38a61acfe2518e614489888dd5de5aaa32f4f178d1831631ee577"
+      }
+    ]
+  },
+  "wheel": {
+    "path": "D:\\torchfdtd-clean\\dist\\7e4da5573553\\torchfdtd-1.3.0-py3-none-any.whl",
+    "name": "torchfdtd-1.3.0-py3-none-any.whl",
+    "sha256": "640ef278c424ac948f5fa575919724aeb9f566b1d5a1234792e2348ac7018b2e",
+    "bytes": 1002411,
+    "entries": 165,
+    "package_files": 158,
+    "requires_dist": [
+      "fdtd==0.2.2",
+      "numpy>=1.24",
+      "scipy>=1.10",
+      "torch>=2.4",
+      "fastapi>=0.115",
+      "uvicorn>=0.30",
+      "pydantic>=2.7",
+      "gdstk<1.1,>=0.9.62; extra == \"gds\"",
+      "h5py>=3.8; extra == \"hdf5\"",
+      "pytest>=8; extra == \"dev\"",
+      "httpx>=0.27; extra == \"dev\"",
+      "build>=1; extra == \"dev\"",
+      "psutil>=5.9; extra == \"dev\"",
+      "cupy-cuda12x<14,>=13.6; extra == \"cuda-kernels\"",
+      "psutil>=5.9; extra == \"benchmark\"",
+      "mcp>=1.2; extra == \"mcp\""
+    ],
+    "web_assets": {
+      "torchfdtd/web/assets/index-DErGp_7h.css": {
+        "sha256": "aaefe25d640c4dc92a69ab20f49335885e1dc69c8325da46f6ed2c1507ac7ebc",
+        "bytes": 32307,
+        "committed_sha256": "aaefe25d640c4dc92a69ab20f49335885e1dc69c8325da46f6ed2c1507ac7ebc"
+      },
+      "torchfdtd/web/assets/index-h3na3siz.js": {
+        "sha256": "34d50b9c4552fedc950cd7c6d56e1d7f3ca874c800217c18bd83b71752df721c",
+        "bytes": 786568,
+        "committed_sha256": "34d50b9c4552fedc950cd7c6d56e1d7f3ca874c800217c18bd83b71752df721c"
+      },
+      "torchfdtd/web/index.html": {
+        "sha256": "0c31c4113ced673fcbeeed60d75980a89170e937424d8ffcb782c11f0b12f942",
+        "bytes": 371,
+        "committed_sha256": "0c31c4113ced673fcbeeed60d75980a89170e937424d8ffcb782c11f0b12f942"
+      }
+    },
+    "web_assets_match_committed": true,
+    "web_assets_last_commit": "3197b36420524f0b744fb244bf8c69f4f3b7147d",
+    "frontend_commits_after_web_assets": [],
+    "frontend_assets_current": true
+  },
+  "environments": {
+    "g8-cpu": {
+      "path": "D:\\torchfdtd-clean\\venvs\\g8-cpu",
+      "python": "D:\\torchfdtd-clean\\venvs\\g8-cpu\\Scripts\\python.exe",
+      "base_python": "3.10.2",
+      "packages": [
+        "Jinja2==3.1.6",
+        "MarkupSafe==3.0.3",
+        "annotated-doc==0.0.6",
+        "annotated-types==0.8.0",
+        "anyio==4.16.0",
+        "click==8.5.1",
+        "colorama==0.4.6",
+        "contourpy==1.3.2",
+        "cycler==0.12.1",
+        "exceptiongroup==1.3.1",
+        "fastapi==0.162.5",
+        "fdtd==0.2.2",
+        "filelock==4.1.0",
+        "fonttools==4.65.0",
+        "fsspec==2026.9.0",
+        "h11==0.16.0",
+        "idna==3.20",
+        "kiwisolver==1.5.1",
+        "matplotlib==3.10.9",
+        "mpmath==1.3.0",
+        "networkx==3.4.2",
+        "numpy==2.2.6",
+        "opentelemetry-api==1.45.2",
+        "packaging==26.3",
+        "pillow==12.3.0",
+        "pip==21.2.4",
+        "pydantic==2.14.3",
+        "pydantic_core==2.50.4",
+        "pyparsing==3.3.3",
+        "python-dateutil==3.0.0",
+        "scipy==1.15.3",
+        "setuptools==78.1.0",
+        "six==1.17.0",
+        "starlette==1.7.0",
+        "sympy==1.14.0",
+        "torch==2.14.1+cpu",
+        "torchfdtd==1.3.0",
+        "tqdm==4.70.1",
+        "typing-inspection==0.4.5",
+        "typing_extensions==4.16.0",
+        "tzdata==2026.6",
+        "uvicorn==0.54.0"
+      ]
+    },
+    "g8-cuda": {
+      "path": "D:\\torchfdtd-clean\\venvs\\g8-cuda",
+      "python": "D:\\torchfdtd-clean\\venvs\\g8-cuda\\Scripts\\python.exe",
+      "base_python": "3.10.2",
+      "packages": [
+        "Jinja2==3.1.6",
+        "MarkupSafe==3.0.3",
+        "annotated-doc==0.0.6",
+        "annotated-types==0.8.0",
+        "anyio==4.16.0",
+        "click==8.5.1",
+        "colorama==0.4.6",
+        "contourpy==1.3.2",
+        "cupy-cuda12x==13.6.0",
+        "cycler==0.12.1",
+        "exceptiongroup==1.3.1",
+        "fastapi==0.162.5",
+        "fastrlock==0.8.4",
+        "fdtd==0.2.2",
+        "filelock==4.1.0",
+        "fonttools==4.65.0",
+        "fsspec==2026.9.0",
+        "h11==0.16.0",
+        "idna==3.20",
+        "kiwisolver==1.5.1",
+        "matplotlib==3.10.9",
+        "mpmath==1.3.0",
+        "networkx==3.4.2",
+        "numpy==2.2.6",
+        "opentelemetry-api==1.45.2",
+        "packaging==26.3",
+        "pillow==12.3.0",
+        "pip==21.2.4",
+        "pydantic==2.14.3",
+        "pydantic_core==2.50.4",
+        "pyparsing==3.3.3",
+        "python-dateutil==3.0.0",
+        "scipy==1.15.3",
+        "setuptools==58.1.0",
+        "six==1.17.0",
+        "starlette==1.7.0",
+        "sympy==1.14.0",
+        "torch==2.10.0+cu126",
+        "torchfdtd==1.3.0",
+        "tqdm==4.70.1",
+        "typing-inspection==0.4.5",
+        "typing_extensions==4.16.0",
+        "tzdata==2026.6",
+        "uvicorn==0.54.0"
+      ]
+    }
+  },
+  "doctor": {
+    "cpu": {
+      "exit_code": 0,
+      "report": {
+        "torchfdtd": "1.3.0",
+        "python": "3.10.2",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "machine": "AMD64",
+        "torch": {
+          "version": "2.14.1+cpu",
+          "cuda_runtime": null,
+          "cuda_available": false
+        },
+        "driver": {
+          "version": null,
+          "cuda_version": null
+        },
+        "cupy": {
+          "version": null,
+          "distributions": {},
+          "importable": false,
+          "error": "CUDA kernel dependency initialization failed. Install torchfdtd[cuda-kernels] with a CuPy build compatible with your CUDA environment, then retry. Import reported ModuleNotFoundError: No module named 'cupy'"
+        },
+        "device": null,
+        "fused_kernels": {
+          "status": "not_applicable",
+          "detail": "skipped: no CUDA device",
+          "seconds": null
+        },
+        "backend": {
+          "backend": "cpu",
+          "cuda_kernel": "torch",
+          "reason": "no CUDA device"
+        },
+        "checks": [
+          {
+            "name": "cuda",
+            "status": "notice",
+            "message": "This torch build (2.14.1+cpu) has no CUDA support, so every simulation runs on the CPU. For GPU execution install a CUDA-enabled torch wheel from https://pytorch.org/get-started/locally/ and an NVIDIA driver for that CUDA version."
+          },
+          {
+            "name": "cupy",
+            "status": "notice",
+            "message": "CuPy is not installed, so the fused CUDA kernels and streamed GPU tiles are unavailable and CUDA projects run the torch kernels. Install the extra: pip install \"torchfdtd[cuda-kernels]\"."
+          },
+          {
+            "name": "backend",
+            "status": "ok",
+            "message": "A project with backend=\"auto\" runs on cpu with the torch kernels (no CUDA device)."
+          }
+        ],
+        "ok": true
+      }
+    },
+    "cuda": {
+      "exit_code": 0,
+      "report": {
+        "torchfdtd": "1.3.0",
+        "python": "3.10.2",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "machine": "AMD64",
+        "torch": {
+          "version": "2.10.0+cu126",
+          "cuda_runtime": "12.6",
+          "cuda_available": true
+        },
+        "driver": {
+          "version": null,
+          "cuda_version": null
+        },
+        "cupy": {
+          "version": "13.6.0",
+          "distributions": {
+            "cupy-cuda12x": "13.6.0"
+          },
+          "importable": true,
+          "error": null
+        },
+        "device": {
+          "name": "NVIDIA GeForce RTX 3060",
+          "capability": "8.6",
+          "memory_total_bytes": 12884377600,
+          "memory_free_bytes": 11801722880,
+          "count": 1
+        },
+        "fused_kernels": {
+          "status": "ok",
+          "detail": {
+            "cells": 400,
+            "steps": 20
+          },
+          "seconds": 0.253
+        },
+        "backend": {
+          "backend": "cuda",
+          "cuda_kernel": "fused",
+          "reason": "CUDA device and CuPy available"
+        },
+        "checks": [
+          {
+            "name": "cuda",
+            "status": "ok",
+            "message": "CUDA device NVIDIA GeForce RTX 3060 (compute capability 8.6) with torch 2.10.0+cu126 on CUDA runtime 12.6."
+          },
+          {
+            "name": "cupy",
+            "status": "ok",
+            "message": "CuPy 13.6.0 imports; the fused CUDA kernels and streamed GPU tiles are available."
+          },
+          {
+            "name": "fused_kernels",
+            "status": "ok",
+            "message": "The fused Yee/CPML kernels compiled and ran 20 steps on 400 cells in 0.253 s."
+          },
+          {
+            "name": "backend",
+            "status": "ok",
+            "message": "A project with backend=\"auto\" runs on cuda with the fused kernels (CUDA device and CuPy available)."
+          }
+        ],
+        "ok": true
+      }
+    }
+  },
+  "readme_examples": {
+    "interpreters": {
+      "cpu": {
+        "prefix": "D:\\torchfdtd-clean\\venvs\\g8-cpu",
+        "file": "D:\\torchfdtd-clean\\venvs\\g8-cpu\\lib\\site-packages\\torchfdtd\\__init__.py",
+        "python": "3.10.2",
+        "executable": "D:\\torchfdtd-clean\\venvs\\g8-cpu\\Scripts\\python.exe"
+      },
+      "cuda": {
+        "prefix": "D:\\torchfdtd-clean\\venvs\\g8-cuda",
+        "file": "D:\\torchfdtd-clean\\venvs\\g8-cuda\\lib\\site-packages\\torchfdtd\\__init__.py",
+        "python": "3.10.2",
+        "executable": "D:\\torchfdtd-clean\\venvs\\g8-cuda\\Scripts\\python.exe"
+      }
+    },
+    "blocks": [
+      {
+        "index": 1,
+        "line": 35,
+        "language": "sh",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "383fd89b860a39e6da607b5aab1df11bfb63ae32f2c6a62bce534db174c6e5e3",
+        "status": "not_executed",
+        "detail": "sh block; only python blocks run"
+      },
+      {
+        "index": 2,
+        "line": 47,
+        "language": "powershell",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "fc54843e2b6cbc318fb82a42f30c791f4c36693d80b3e4396840f7061cbfac53",
+        "status": "not_executed",
+        "detail": "powershell block; only python blocks run"
+      },
+      {
+        "index": 3,
+        "line": 68,
+        "language": "python",
+        "mode": "cuda",
+        "reason": null,
+        "sha256": "a92e7e3144bc693ced45dcc0794f1711945f8f35e1c2e0d264b34d88570e5d28",
+        "status": "passed",
+        "interpreter": "D:\\torchfdtd-clean\\venvs\\g8-cuda\\Scripts\\python.exe",
+        "exit_code": 0,
+        "seconds": 5.23,
+        "stdout_tail": "",
+        "stderr_tail": ""
+      },
+      {
+        "index": 4,
+        "line": 91,
+        "language": "python",
+        "mode": "cpu",
+        "reason": null,
+        "sha256": "c23f3530a9466abd3c478038f36664b8322f9c3a4c1619912f0c90c162e39543",
+        "status": "passed",
+        "interpreter": "D:\\torchfdtd-clean\\venvs\\g8-cpu\\Scripts\\python.exe",
+        "exit_code": 0,
+        "seconds": 3.91,
+        "stdout_tail": "cpu\n",
+        "stderr_tail": ""
+      },
+      {
+        "index": 5,
+        "line": 109,
+        "language": "powershell",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "1ae17fb51d1f0a1844238ff8857b2e0ad0dea907f1299726ad409eed8f5ea4a3",
+        "status": "not_executed",
+        "detail": "powershell block; only python blocks run"
+      },
+      {
+        "index": 6,
+        "line": 127,
+        "language": "sh",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "c8f139d3a25da306d025e137b62d817e1509b0c2f3fcfe013cb60f9fafe0108a",
+        "status": "not_executed",
+        "detail": "sh block; only python blocks run"
+      },
+      {
+        "index": 7,
+        "line": 134,
+        "language": "text",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "71e40c033b13364c352bcc1b8864af0f056f4a838f40cdebf95ed7dff4bd088c",
+        "status": "not_executed",
+        "detail": "text block; only python blocks run"
+      },
+      {
+        "index": 8,
+        "line": 148,
+        "language": "sh",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "bd1318d6ee5c2354dd2392f78e741073d877ba61fb75d6f19ed0443397437966",
+        "status": "not_executed",
+        "detail": "sh block; only python blocks run"
+      },
+      {
+        "index": 9,
+        "line": 156,
+        "language": "python",
+        "mode": "skip",
+        "reason": "core update excerpt; the complete standalone script is linked above",
+        "sha256": "0f6898e9b338408e6a1c5c3d0ae0b874a011b25ce4178b678278ce966b70614b",
+        "status": "skipped",
+        "detail": "core update excerpt; the complete standalone script is linked above"
+      },
+      {
+        "index": 10,
+        "line": 305,
+        "language": "powershell",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "0890ae38f33c79232c501db6fa79564e2d51556953b16a0f76c84ab7149767bc",
+        "status": "not_executed",
+        "detail": "powershell block; only python blocks run"
+      },
+      {
+        "index": 11,
+        "line": 318,
+        "language": "bibtex",
+        "mode": "not_python",
+        "reason": null,
+        "sha256": "66a4decec9f38a61acfe2518e614489888dd5de5aaa32f4f178d1831631ee577",
+        "status": "not_executed",
+        "detail": "bibtex block; only python blocks run"
+      }
+    ],
+    "runnable_blocks": 2,
+    "all_runnable_passed": true
+  },
+  "steps": [
+    {
+      "name": "build_wheel",
+      "status": "passed",
+      "seconds": 9.55,
+      "detail": {
+        "name": "torchfdtd-1.3.0-py3-none-any.whl",
+        "sha256": "640ef278c424ac948f5fa575919724aeb9f566b1d5a1234792e2348ac7018b2e",
+        "bytes": 1002411,
+        "entries": 165,
+        "web_assets": [
+          "torchfdtd/web/assets/index-DErGp_7h.css",
+          "torchfdtd/web/assets/index-h3na3siz.js",
+          "torchfdtd/web/index.html"
+        ],
+        "web_assets_match_committed": true,
+        "frontend_assets_current": true
+      }
+    },
+    {
+      "name": "cpu_venv_create",
+      "status": "passed",
+      "seconds": 10.73,
+      "detail": "D:\\torchfdtd-clean\\venvs\\g8-cpu\\Scripts\\python.exe"
+    },
+    {
+      "name": "cpu_pip_install_torch",
+      "status": "passed",
+      "seconds": 100.73,
+      "detail": ":/TorchFDTD/.local/wheels\nCollecting torch\n  Using cached https://download-r2.pytorch.org/whl/cpu/torch-2.14.1%2Bcpu-cp310-cp310-win_amd64.whl (124.0 MB)\nCollecting setuptools>=77.0.3\n  Using cached https://download.pytorch.org/whl/setuptools-78.1.0-py3-none-any.whl (1.3 MB)\nCollecting fsspec>=0.8.5\n  Using cached fsspec-2026.9.0-py3-none-any.whl (221 kB)\nCollecting networkx>=2.5.1\n  Using cached networkx-3.4.2-py3-none-any.whl (1.7 MB)\nCollecting filelock\n  Using cached filelock-4.1.0-py3-none-any.whl (133 kB)\nCollecting typing-extensions>=4.10.0\n  Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)\nCollecting sympy>=1.13.3\n  Using cached sympy-1.14.0-py3-none-any.whl (6.3 MB)\nCollecting jinja2\n  Using cached https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl (134 kB)\nCollecting mpmath<1.4,>=1.1.0\n  Using cached mpmath-1.3.0-py3-none-any.whl (536 kB)\nCollecting MarkupSafe>=2.0\n  Using cached https://download.pytorch.org/whl/markupsafe-3.0.3-cp310-cp310-win_amd64.whl (15 kB)\nInstalling collected packages: mpmath, MarkupSafe, typing-extensions, sympy, setuptools, networkx, jinja2, fsspec, filelock, torch\n  Attempting uninstall: setuptools\n    Found existing installation: setuptools 58.1.0\n    Uninstalling setuptools-58.1.0:\n      Successfully uninstalled setuptools-58.1.0\nSuccessfully installed MarkupSafe-3.0.3 filelock-4.1.0 fsspec-2026.9.0 jinja2-3.1.6 mpmath-1.3.0 networkx-3.4.2 setuptools-78.1.0 sympy-1.14.0 torch-2.14.1+cpu typing-extensions-4.16.0\n"
+    },
+    {
+      "name": "cpu_pip_install_wheel",
+      "status": "passed",
+      "seconds": 56.94,
+      "detail": "y3-none-any.whl (129 kB)\nCollecting python-dateutil>=2.7\n  Using cached python_dateutil-3.0.0-py2.py3-none-any.whl (94 kB)\nCollecting kiwisolver>=1.3.1\n  Using cached kiwisolver-1.5.1-cp310-cp310-win_amd64.whl (70 kB)\nCollecting fonttools>=4.22.0\n  Using cached fonttools-4.65.0-cp310-cp310-win_amd64.whl (1.6 MB)\nCollecting pyparsing>=3\n  Using cached pyparsing-3.3.3-py3-none-any.whl (126 kB)\nCollecting six>=1.6\n  Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)\nCollecting tzdata\n  Using cached tzdata-2026.6-py2.py3-none-any.whl (348 kB)\nCollecting colorama\n  Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)\nInstalling collected packages: tzdata, six, numpy, idna, exceptiongroup, typing-inspection, python-dateutil, pyparsing, pydantic-core, pillow, packaging, kiwisolver, fonttools, cycler, contourpy, colorama, anyio, annotated-types, tqdm, starlette, scipy, pydantic, opentelemetry-api, matplotlib, h11, click, annotated-doc, uvicorn, fdtd, fastapi, torchfdtd\nSuccessfully installed annotated-doc-0.0.6 annotated-types-0.8.0 anyio-4.16.0 click-8.5.1 colorama-0.4.6 contourpy-1.3.2 cycler-0.12.1 exceptiongroup-1.3.1 fastapi-0.162.5 fdtd-0.2.2 fonttools-4.65.0 h11-0.16.0 idna-3.20 kiwisolver-1.5.1 matplotlib-3.10.9 numpy-2.2.6 opentelemetry-api-1.45.2 packaging-26.3 pillow-12.3.0 pydantic-2.14.3 pydantic-core-2.50.4 pyparsing-3.3.3 python-dateutil-3.0.0 scipy-1.15.3 six-1.17.0 starlette-1.7.0 torchfdtd-1.3.0 tqdm-4.70.1 typing-inspection-0.4.5 tzdata-2026.6 uvicorn-0.54.0\n"
+    },
+    {
+      "name": "cpu_package_list",
+      "status": "passed",
+      "seconds": 1.12,
+      "detail": {
+        "torch": "2.14.1+cpu",
+        "numpy": "2.2.6",
+        "scipy": "1.15.3",
+        "fastapi": "0.162.5",
+        "uvicorn": "0.54.0",
+        "pydantic": "2.14.3",
+        "fdtd": "0.2.2",
+        "cupy-cuda12x": null,
+        "torchfdtd": "1.3.0",
+        "pip": "21.2.4"
+      }
+    },
+    {
+      "name": "cpu_import_run_save_load",
+      "status": "passed",
+      "seconds": 10.24,
+      "detail": {
+        "package": "D:\\torchfdtd-clean\\venvs\\g8-cpu\\Lib\\site-packages\\torchfdtd\\__init__.py",
+        "backend": "cpu",
+        "steps": 80,
+        "field_peak": 0.11100377142429352,
+        "seconds": 9.04
+      }
+    },
+    {
+      "name": "cpu_server_index_assets_api",
+      "status": "passed",
+      "seconds": 3.84,
+      "detail": {
+        "port": 61367,
+        "routes": {
+          "/": 200,
+          "/assets/index-h3na3siz.js": 200,
+          "/assets/index-DErGp_7h.css": 200,
+          "/api/capabilities": 200,
+          "/api/health": 200
+        },
+        "health": {
+          "version": "1.3.0",
+          "cuda": false,
+          "torch": "2.14.1+cpu",
+          "cupy": false
+        },
+        "capabilities_keys": 1
+      }
+    },
+    {
+      "name": "cpu_doctor",
+      "status": "passed",
+      "seconds": 3.37,
+      "detail": {
+        "exit_code": 0,
+        "backend": {
+          "backend": "cpu",
+          "cuda_kernel": "torch",
+          "reason": "no CUDA device"
+        },
+        "checks": {
+          "cuda": "notice",
+          "cupy": "notice",
+          "backend": "ok"
+        }
+      }
+    },
+    {
+      "name": "cuda_venv_create",
+      "status": "passed",
+      "seconds": 14.73,
+      "detail": "D:\\torchfdtd-clean\\venvs\\g8-cuda\\Scripts\\python.exe"
+    },
+    {
+      "name": "cuda_pip_install_torch",
+      "status": "passed",
+      "seconds": 193.55,
+      "detail": "Looking in indexes: https://download.pytorch.org/whl/cu126\nLooking in links: d:/TorchFDTD/.local/wheels\nCollecting torch==2.10.0+cu126\n  Using cached https://download-r2.pytorch.org/whl/cu126/torch-2.10.0%2Bcu126-cp310-cp310-win_amd64.whl (2589.8 MB)\nCollecting networkx>=2.5.1\n  Using cached networkx-3.4.2-py3-none-any.whl (1.7 MB)\nCollecting sympy>=1.13.3\n  Using cached sympy-1.14.0-py3-none-any.whl (6.3 MB)\nCollecting filelock\n  Using cached filelock-4.1.0-py3-none-any.whl (133 kB)\nCollecting typing-extensions>=4.10.0\n  Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)\nCollecting jinja2\n  Using cached https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl (134 kB)\nCollecting fsspec>=0.8.5\n  Using cached fsspec-2026.9.0-py3-none-any.whl (221 kB)\nCollecting mpmath<1.4,>=1.1.0\n  Using cached mpmath-1.3.0-py3-none-any.whl (536 kB)\nCollecting MarkupSafe>=2.0\n  Using cached https://download.pytorch.org/whl/markupsafe-3.0.3-cp310-cp310-win_amd64.whl (15 kB)\nInstalling collected packages: mpmath, MarkupSafe, typing-extensions, sympy, networkx, jinja2, fsspec, filelock, torch\nSuccessfully installed MarkupSafe-3.0.3 filelock-4.1.0 fsspec-2026.9.0 jinja2-3.1.6 mpmath-1.3.0 networkx-3.4.2 sympy-1.14.0 torch-2.10.0+cu126 typing-extensions-4.16.0\n"
+    },
+    {
+      "name": "cuda_pip_install_wheel_extras",
+      "status": "passed",
+      "seconds": 59.68,
+      "detail": "0.10\n  Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)\nCollecting pillow>=8\n  Using cached pillow-12.3.0-cp310-cp310-win_amd64.whl (7.2 MB)\nCollecting kiwisolver>=1.3.1\n  Using cached kiwisolver-1.5.1-cp310-cp310-win_amd64.whl (70 kB)\nCollecting contourpy>=1.0.1\n  Using cached contourpy-1.3.2-cp310-cp310-win_amd64.whl (221 kB)\nCollecting tzdata\n  Using cached tzdata-2026.6-py2.py3-none-any.whl (348 kB)\nCollecting six>=1.6\n  Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)\nCollecting colorama\n  Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)\nInstalling collected packages: tzdata, six, numpy, idna, exceptiongroup, typing-inspection, python-dateutil, pyparsing, pydantic-core, pillow, packaging, kiwisolver, fonttools, cycler, contourpy, colorama, anyio, annotated-types, tqdm, starlette, scipy, pydantic, opentelemetry-api, matplotlib, h11, click, annotated-doc, uvicorn, fdtd, fastrlock, fastapi, torchfdtd, cupy-cuda12x\nSuccessfully installed annotated-doc-0.0.6 annotated-types-0.8.0 anyio-4.16.0 click-8.5.1 colorama-0.4.6 contourpy-1.3.2 cupy-cuda12x-13.6.0 cycler-0.12.1 exceptiongroup-1.3.1 fastapi-0.162.5 fastrlock-0.8.4 fdtd-0.2.2 fonttools-4.65.0 h11-0.16.0 idna-3.20 kiwisolver-1.5.1 matplotlib-3.10.9 numpy-2.2.6 opentelemetry-api-1.45.2 packaging-26.3 pillow-12.3.0 pydantic-2.14.3 pydantic-core-2.50.4 pyparsing-3.3.3 python-dateutil-3.0.0 scipy-1.15.3 six-1.17.0 starlette-1.7.0 torchfdtd-1.3.0 tqdm-4.70.1 typing-inspection-0.4.5 tzdata-2026.6 uvicorn-0.54.0\n"
+    },
+    {
+      "name": "cuda_package_list",
+      "status": "passed",
+      "seconds": 1.07,
+      "detail": {
+        "torch": "2.10.0+cu126",
+        "numpy": "2.2.6",
+        "scipy": "1.15.3",
+        "fastapi": "0.162.5",
+        "uvicorn": "0.54.0",
+        "pydantic": "2.14.3",
+        "fdtd": "0.2.2",
+        "cupy-cuda12x": "13.6.0",
+        "torchfdtd": "1.3.0",
+        "pip": "21.2.4"
+      }
+    },
+    {
+      "name": "cuda_fused_forward_run",
+      "status": "passed",
+      "seconds": 16.86,
+      "detail": {
+        "package": "D:\\torchfdtd-clean\\venvs\\g8-cuda\\Lib\\site-packages\\torchfdtd\\__init__.py",
+        "backend": "cuda",
+        "cuda_kernel": "fused",
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "steps": 20,
+        "cupy": "13.6.0",
+        "torch": "2.10.0+cu126",
+        "seconds": 8.9
+      }
+    },
+    {
+      "name": "cuda_doctor",
+      "status": "passed",
+      "seconds": 4.23,
+      "detail": {
+        "exit_code": 0,
+        "backend": {
+          "backend": "cuda",
+          "cuda_kernel": "fused",
+          "reason": "CUDA device and CuPy available"
+        },
+        "checks": {
+          "cuda": "ok",
+          "cupy": "ok",
+          "fused_kernels": "ok",
+          "backend": "ok"
+        }
+      }
+    },
+    {
+      "name": "readme_examples",
+      "status": "passed",
+      "seconds": 15.81,
+      "detail": {
+        "interpreters": {
+          "cpu": {
+            "prefix": "D:\\torchfdtd-clean\\venvs\\g8-cpu",
+            "file": "D:\\torchfdtd-clean\\venvs\\g8-cpu\\lib\\site-packages\\torchfdtd\\__init__.py",
+            "python": "3.10.2",
+            "executable": "D:\\torchfdtd-clean\\venvs\\g8-cpu\\Scripts\\python.exe"
+          },
+          "cuda": {
+            "prefix": "D:\\torchfdtd-clean\\venvs\\g8-cuda",
+            "file": "D:\\torchfdtd-clean\\venvs\\g8-cuda\\lib\\site-packages\\torchfdtd\\__init__.py",
+            "python": "3.10.2",
+            "executable": "D:\\torchfdtd-clean\\venvs\\g8-cuda\\Scripts\\python.exe"
+          }
+        },
+        "blocks": [
+          {
+            "index": 1,
+            "line": 35,
+            "language": "sh",
+            "mode": "not_python",
+            "reason": null,
+            "sha256": "383fd89b860a39e6da607b5aab1df11bfb63ae32f2c6a62bce534db174c6e5e3",
+            "status": "not_executed",
+            "detail": "sh block; only python blocks run"
+          },
+          {
+            "index": 2,
+            "line": 47,
+            "language": "powershell",
+            "mode": "not_python",
+            "reason": null,
+            "sha256": "fc54843e2b6cbc318fb82a42f30c791f4c36693d80b3e4396840f7061cbfac53",
+            "status": "not_executed",
+            "detail": "powershell block; only python blocks run"
+          },
+          {
+            "index": 3,
+            "line": 68,
+            "language": "python",
+            "mode": "cuda",
+            "reason": null,
+            "sha256": "a92e7e3144bc693ced45dcc0794f1711945f8f35e1c2e0d264b34d88570e5d28",
+            "status": "passed",
+            "interpreter": "D:\\torchfdtd-clean\\venvs\\g8-cuda\\Scripts\\python.exe",
+            "exit_code": 0,
+            "seconds": 5.23,
+            "stdout_tail": "",
+            "stderr_tail": ""
+          },
+          {
+            "index": 4,
+            "line": 91,
+            "language": "python",
+            "mode": "cpu",
+            "reason": null,
+            "sha256": "c23f3530a9466abd3c478038f36664b8322f9c3a4c1619912f0c90c162e39543",
+            "status": "passed",
+            "interpreter": "D:\\torchfdtd-clean\\venvs\\g8-cpu\\Scripts\\python.exe",
+            "exit_code": 0,
+            "seconds": 3.91,
+            "stdout_tail": "cpu\n",
+            "stderr_tail": ""
+          },
+          {
+            "index": 5,
+            "line": 109,
+            "language": "powershell",
+            "mode": "not_python",
+            "reason": null,
+            "sha256": "1ae17fb51d1f0a1844238ff8857b2e0ad0dea907f1299726ad409eed8f5ea4a3",
+            "status": "not_executed",
+            "detail": "powershell block; only python blocks run"
+          },
+          {
+            "index": 6,
+            "line": 127,
+            "language": "sh",
+            "mode": "not_python",
+            "reason": null,
+            "sha256": "c8f139d3a25da306d025e137b62d817e1509b0c2f3fcfe013cb60f9fafe0108a",
+            "status": "not_executed",
+            "detail": "sh block; only python blocks run"
+          },
+          {
+            "index": 7,
+            "line": 134,
+            "language": "text",
+            "mode": "not_python",
+            "reason": null,
+            "sha256": "71e40c033b13364c352bcc1b8864af0f056f4a838f40cdebf95ed7dff4bd088c",
+            "status": "not_executed",
+            "detail": "text block; only python blocks run"
+          },
+          {
+            "index": 8,
+            "line": 148,
+            "language": "sh",
+            "mode": "not_python",
+            "reason": null,
+            "sha256": "bd1318d6ee5c2354dd2392f78e741073d877ba61fb75d6f19ed0443397437966",
+            "status": "not_executed",
+            "detail": "sh block; only python blocks run"
+          },
+          {
+            "index": 9,
+            "line": 156,
+            "language": "python",
+            "mode": "skip",
+            "reason": "core update excerpt; the complete standalone script is linked above",
+            "sha256": "0f6898e9b338408e6a1c5c3d0ae0b874a011b25ce4178b678278ce966b70614b",
+            "status": "skipped",
+            "detail": "core update excerpt; the complete standalone script is linked above"
+          },
+          {
+            "index": 10,
+            "line": 305,
+            "language": "powershell",
+            "mode": "not_python",
+            "reason": null,
+            "sha256": "0890ae38f33c79232c501db6fa79564e2d51556953b16a0f76c84ab7149767bc",
+            "status": "not_executed",
+            "detail": "powershell block; only python blocks run"
+          },
+          {
+            "index": 11,
+            "line": 318,
+            "language": "bibtex",
+            "mode": "not_python",
+            "reason": null,
+            "sha256": "66a4decec9f38a61acfe2518e614489888dd5de5aaa32f4f178d1831631ee577",
+            "status": "not_executed",
+            "detail": "bibtex block; only python blocks run"
+          }
+        ],
+        "runnable_blocks": 2,
+        "all_runnable_passed": true
+      }
+    }
+  ],
+  "all_passed": true
+}

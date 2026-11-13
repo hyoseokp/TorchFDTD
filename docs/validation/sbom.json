@@ -55,8 +55,8 @@
     ]
   },
   "summary": {
-    "components": 52,
-    "installed": 52,
+    "components": 70,
+    "installed": 70,
     "open_items": 1,
     "scan_findings": 0
   },
@@ -107,14 +107,21 @@
       "name": "anyio",
       "groups": [
         "runtime",
-        "dev"
+        "dev",
+        "mcp"
       ],
       "required_by": [
         "httpx",
+        "httpx2",
+        "mcp",
+        "sse-starlette",
         "starlette"
       ],
       "specifiers": [
-        "<5,>=3.6.2"
+        "<5,>=3.6.2",
+        ">=4.9",
+        ">=4.10",
+        ">=4.7.0"
       ],
       "version": "4.12.1",
       "installed": true,
@@ -124,6 +131,27 @@
         "LICENSE"
       ],
       "source_url": "https://github.com/agronholm/anyio"
+    },
+    {
+      "name": "attrs",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "jsonschema",
+        "referencing"
+      ],
+      "specifiers": [
+        ">=22.2.0"
+      ],
+      "version": "26.1.0",
+      "installed": true,
+      "license": "MIT",
+      "license_classifiers": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "source_url": "https://www.attrs.org/"
     },
     {
       "name": "build",
@@ -163,6 +191,26 @@
         "LICENSE"
       ],
       "source_url": "https://github.com/certifi/python-certifi"
+    },
+    {
+      "name": "cffi",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "cryptography"
+      ],
+      "specifiers": [
+        ">=2.0.0"
+      ],
+      "version": "2.1.1",
+      "installed": true,
+      "license": "MIT-0",
+      "license_classifiers": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "source_url": "https://github.com/python-cffi/cffi"
     },
     {
       "name": "click",
@@ -231,6 +279,28 @@
         "LICENSE"
       ],
       "source_url": "https://github.com/contourpy/contourpy"
+    },
+    {
+      "name": "cryptography",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "pyjwt"
+      ],
+      "specifiers": [
+        ">=3.4.0"
+      ],
+      "version": "50.0.1",
+      "installed": true,
+      "license": "Apache-2.0 OR BSD-3-Clause",
+      "license_classifiers": [],
+      "license_files": [
+        "LICENSE",
+        "LICENSE.APACHE",
+        "LICENSE.BSD"
+      ],
+      "source_url": "https://github.com/pyca/cryptography/"
     },
     {
       "name": "cupy-cuda12x",
@@ -444,10 +514,12 @@
       "name": "h11",
       "groups": [
         "runtime",
-        "dev"
+        "dev",
+        "mcp"
       ],
       "required_by": [
         "httpcore",
+        "httpcore2",
         "uvicorn"
       ],
       "specifiers": [
@@ -512,6 +584,28 @@
       "source_url": "https://github.com/encode/httpcore"
     },
     {
+      "name": "httpcore2",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "httpx2"
+      ],
+      "specifiers": [
+        "==2.14.0"
+      ],
+      "version": "2.14.0",
+      "installed": true,
+      "license": "BSD-3-Clause",
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source_url": "https://github.com/pydantic/httpx2/blob/main/src/httpcore2"
+    },
+    {
       "name": "httpx",
       "groups": [
         "dev"
@@ -532,17 +626,42 @@
       "source_url": "https://github.com/encode/httpx"
     },
     {
+      "name": "httpx2",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "mcp"
+      ],
+      "specifiers": [
+        ">=2.10.0"
+      ],
+      "version": "2.14.0",
+      "installed": true,
+      "license": "BSD-3-Clause",
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "source_url": "https://github.com/pydantic/httpx2"
+    },
+    {
       "name": "idna",
       "groups": [
         "runtime",
-        "dev"
+        "dev",
+        "mcp"
       ],
       "required_by": [
         "anyio",
-        "httpx"
+        "httpx",
+        "httpx2"
       ],
       "specifiers": [
-        ">=2.8"
+        ">=2.8",
+        ">=3.18"
       ],
       "version": "3.20",
       "installed": true,
@@ -592,6 +711,46 @@
         "LICENSE.txt"
       ],
       "source_url": "https://github.com/pallets/jinja/"
+    },
+    {
+      "name": "jsonschema",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "mcp"
+      ],
+      "specifiers": [
+        ">=4.20.0"
+      ],
+      "version": "4.26.0",
+      "installed": true,
+      "license": "MIT",
+      "license_classifiers": [],
+      "license_files": [
+        "COPYING"
+      ],
+      "source_url": "https://github.com/python-jsonschema/jsonschema"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "jsonschema"
+      ],
+      "specifiers": [
+        ">=2023.03.6"
+      ],
+      "version": "2025.9.1",
+      "installed": true,
+      "license": "MIT",
+      "license_classifiers": [],
+      "license_files": [
+        "COPYING"
+      ],
+      "source_url": "https://github.com/python-jsonschema/jsonschema-specifications"
     },
     {
       "name": "kiwisolver",
@@ -654,6 +813,48 @@
         "LICENSE"
       ],
       "source_url": "https://github.com/matplotlib/matplotlib"
+    },
+    {
+      "name": "mcp",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [],
+      "specifiers": [
+        ">=1.2"
+      ],
+      "version": "2.3.0",
+      "installed": true,
+      "license": "MIT License",
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "license_files": [
+        "LICENSE"
+      ],
+      "source_url": "https://github.com/modelcontextprotocol/python-sdk"
+    },
+    {
+      "name": "mcp-types",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "mcp"
+      ],
+      "specifiers": [
+        "==2.3.0"
+      ],
+      "version": "2.3.0",
+      "installed": true,
+      "license": "MIT License",
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "license_files": [
+        "LICENSE"
+      ],
+      "source_url": "https://github.com/modelcontextprotocol/python-sdk"
     },
     {
       "name": "mpmath",
@@ -733,6 +934,26 @@
         "LICENSE.txt"
       ],
       "source_url": "https://github.com/numpy/numpy"
+    },
+    {
+      "name": "opentelemetry-api",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "mcp"
+      ],
+      "specifiers": [
+        ">=1.28.0"
+      ],
+      "version": "1.45.2",
+      "installed": true,
+      "license": "Apache-2.0",
+      "license_classifiers": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "source_url": "https://github.com/open-telemetry/opentelemetry-python"
     },
     {
       "name": "packaging",
@@ -823,16 +1044,38 @@
       "source_url": "https://github.com/giampaolo/psutil"
     },
     {
-      "name": "pydantic",
+      "name": "pycparser",
       "groups": [
-        "runtime"
+        "mcp"
       ],
       "required_by": [
-        "fastapi"
+        "cffi"
+      ],
+      "specifiers": [],
+      "version": "3.0",
+      "installed": true,
+      "license": "BSD-3-Clause",
+      "license_classifiers": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "source_url": "https://github.com/eliben/pycparser"
+    },
+    {
+      "name": "pydantic",
+      "groups": [
+        "runtime",
+        "mcp"
+      ],
+      "required_by": [
+        "fastapi",
+        "mcp",
+        "mcp-types"
       ],
       "specifiers": [
         ">=2.7.0",
-        ">=2.7"
+        ">=2.7",
+        ">=2.12.0"
       ],
       "version": "2.12.5",
       "installed": true,
@@ -883,6 +1126,27 @@
         "LICENSE"
       ],
       "source_url": "https://github.com/pygments/pygments"
+    },
+    {
+      "name": "pyjwt",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "mcp"
+      ],
+      "specifiers": [
+        ">=2.10.1"
+      ],
+      "version": "2.13.0",
+      "installed": true,
+      "license": "MIT",
+      "license_classifiers": [],
+      "license_files": [
+        "AUTHORS.rst",
+        "LICENSE"
+      ],
+      "source_url": "https://github.com/jpadilla/pyjwt"
     },
     {
       "name": "pyparsing",
@@ -966,6 +1230,98 @@
       "source_url": "https://github.com/dateutil/dateutil"
     },
     {
+      "name": "python-multipart",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "mcp"
+      ],
+      "specifiers": [
+        ">=0.0.9"
+      ],
+      "version": "0.0.32",
+      "installed": true,
+      "license": "Apache-2.0",
+      "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "source_url": "https://github.com/Kludex/python-multipart"
+    },
+    {
+      "name": "pywin32",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "mcp"
+      ],
+      "specifiers": [
+        ">=311"
+      ],
+      "version": "312",
+      "installed": true,
+      "license": "Python Software Foundation License",
+      "license_classifiers": [
+        "License :: OSI Approved :: Python Software Foundation License"
+      ],
+      "license_files": [
+        "LICENSE",
+        "LICENSE.txt",
+        "License.txt",
+        "README.txt",
+        "license.txt"
+      ],
+      "source_url": "https://github.com/mhammond/pywin32"
+    },
+    {
+      "name": "referencing",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "jsonschema",
+        "jsonschema-specifications"
+      ],
+      "specifiers": [
+        ">=0.31.0",
+        ">=0.28.4"
+      ],
+      "version": "0.37.0",
+      "installed": true,
+      "license": "MIT",
+      "license_classifiers": [],
+      "license_files": [
+        "COPYING"
+      ],
+      "source_url": "https://github.com/python-jsonschema/referencing"
+    },
+    {
+      "name": "rpds-py",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "jsonschema",
+        "referencing"
+      ],
+      "specifiers": [
+        ">=0.7.0",
+        ">=0.25.0"
+      ],
+      "version": "0.30.0",
+      "installed": true,
+      "license": "MIT",
+      "license_classifiers": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "source_url": "https://github.com/crate-py/rpds"
+    },
+    {
       "name": "scipy",
       "groups": [
         "runtime"
@@ -1010,15 +1366,41 @@
       "source_url": "https://github.com/benjaminp/six"
     },
     {
-      "name": "starlette",
+      "name": "sse-starlette",
       "groups": [
-        "runtime"
+        "mcp"
       ],
       "required_by": [
-        "fastapi"
+        "mcp"
       ],
       "specifiers": [
-        "<1.0.0,>=0.40.0"
+        ">=3.0.0"
+      ],
+      "version": "3.5.1",
+      "installed": true,
+      "license": "BSD-3-Clause",
+      "license_classifiers": [],
+      "license_files": [
+        "AUTHORS",
+        "LICENSE"
+      ],
+      "source_url": "https://github.com/sysid/sse-starlette"
+    },
+    {
+      "name": "starlette",
+      "groups": [
+        "runtime",
+        "mcp"
+      ],
+      "required_by": [
+        "fastapi",
+        "mcp",
+        "sse-starlette"
+      ],
+      "specifiers": [
+        "<1.0.0,>=0.40.0",
+        ">=0.49.1",
+        ">=0.27"
       ],
       "version": "0.52.1",
       "installed": true,
@@ -1114,18 +1496,47 @@
       "source_url": "https://github.com/tqdm/tqdm"
     },
     {
+      "name": "truststore",
+      "groups": [
+        "mcp"
+      ],
+      "required_by": [
+        "httpcore2",
+        "httpx2"
+      ],
+      "specifiers": [
+        ">=0.10"
+      ],
+      "version": "0.10.5",
+      "installed": true,
+      "license": "MIT",
+      "license_classifiers": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "source_url": "https://github.com/sethmlarson/truststore"
+    },
+    {
       "name": "typing-extensions",
       "groups": [
         "runtime",
-        "gds"
+        "gds",
+        "mcp"
       ],
       "required_by": [
         "anyio",
+        "cryptography",
         "exceptiongroup",
         "fastapi",
         "gdstk",
+        "httpx2",
+        "mcp",
+        "mcp-types",
+        "opentelemetry-api",
         "pydantic",
         "pydantic-core",
+        "pyjwt",
+        "referencing",
         "starlette",
         "torch",
         "typing-inspection",
@@ -1138,7 +1549,11 @@
         ">=4.14.1",
         ">=4.12.0",
         ">=4.8.0",
-        ">=4.0"
+        ">=4.0",
+        ">=4.5.0",
+        ">=4.4.0",
+        ">=4.13.0",
+        ">=4.13.2"
       ],
       "version": "4.15.0",
       "installed": true,
@@ -1152,14 +1567,17 @@
     {
       "name": "typing-inspection",
       "groups": [
-        "runtime"
+        "runtime",
+        "mcp"
       ],
       "required_by": [
         "fastapi",
+        "mcp",
         "pydantic"
       ],
       "specifiers": [
-        ">=0.4.2"
+        ">=0.4.2",
+        ">=0.4.1"
       ],
       "version": "0.4.2",
       "installed": true,
@@ -1173,11 +1591,15 @@
     {
       "name": "uvicorn",
       "groups": [
-        "runtime"
+        "runtime",
+        "mcp"
       ],
-      "required_by": [],
+      "required_by": [
+        "mcp"
+      ],
       "specifiers": [
-        ">=0.30"
+        ">=0.30",
+        ">=0.31.1"
       ],
       "version": "0.40.0",
       "installed": true,
@@ -1363,8 +1785,8 @@
       "docs/validation/sbom.json",
       "tests/test_provenance_inventory.py"
     ],
-    "files_scanned": 1562,
-    "tracked_files": 1624,
+    "files_scanned": 1563,
+    "tracked_files": 1625,
     "findings": []
   },
   "dependency_check": {

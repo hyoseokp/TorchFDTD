@@ -9,6 +9,21 @@ Commits that only record validation evidence or documentation ("Record ...",
 
 ## Unreleased
 
+## 1.3.0 (2026-11-14)
+
+### Added
+
+- `torchfdtd mcp`, a Model Context Protocol server for AI agents (optional `mcp` extra): example projects, the project schema, validation, runs through the workbench job path and Python export as six tools ([AGENTS.md](../AGENTS.md#tools-for-agents-mcp), 8155af6).
+- [AGENTS.md](../AGENTS.md), a guide for coding agents with a starting example per task, a checking workflow, citation and contribution rules; a Claude Code plugin marketplace with a simulation skill (`/plugin install torchfdtd --marketplace hyoseokp/TorchFDTD`); `llms.txt` and `llms-full.txt` on the project site (8155af6).
+
+### Changed
+
+- Package metadata: a description that names the solver, keywords, classifiers and project links on PyPI (8155af6).
+
+### Validation scope
+
+- CPU tests of the MCP tools, an end-to-end stdio session (list, validate and run on an RTX 3060), the server, API, security and README tests, and `claude plugin validate`. The solver and kernels are unchanged from 1.2.0.
+
 ## 1.2.0 (2026-11-13)
 
 ### Added

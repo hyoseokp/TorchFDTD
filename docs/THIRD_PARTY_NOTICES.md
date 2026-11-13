@@ -8,7 +8,7 @@ Licence texts of the bundled frontend libraries and of the grid dependency are i
 This inventory records what is known; it is not a legal opinion, and every item whose
 right to distribute is unsettled is listed under open items rather than left out.
 
-Project: torchfdtd 1.2.0, licence MIT; inventoried with Python 3.10.2 on win32 (Windows-10-10.0.26200-SP0).
+Project: torchfdtd 1.3.0, licence MIT; inventoried with Python 3.10.2 on win32 (Windows-10-10.0.26200-SP0).
 
 ## Python dependencies
 
@@ -39,7 +39,7 @@ development interpreter. Group `runtime` is the base install; the other groups a
 | h5py | 3.16.0 | BSD-3-Clause | hdf5 | pyproject.toml | https://github.com/h5py/h5py |
 | httpcore | 1.0.9 | BSD-3-Clause | dev | httpx | https://github.com/encode/httpcore |
 | httpx | 0.28.1 | BSD License | dev | pyproject.toml | https://github.com/encode/httpx |
-| idna | 3.11 | BSD-3-Clause | runtime, dev | anyio, httpx | https://github.com/kjd/idna |
+| idna | 3.20 | BSD-3-Clause | runtime, dev | anyio, httpx | https://github.com/kjd/idna |
 | iniconfig | 2.3.0 | MIT | dev | pytest | https://github.com/pytest-dev/iniconfig |
 | jinja2 | 3.1.6 | BSD License | runtime | torch | https://github.com/pallets/jinja/ |
 | kiwisolver | 1.3.2 | BSD License | runtime | matplotlib | https://github.com/nucleic/kiwi |
@@ -94,7 +94,7 @@ These items have no settled distribution decision yet and stay listed until one 
 
 ## Credential and private-path scan
 
-1552 text files of 1614 tracked paths were scanned for: `credential_token`, `password_literal`, `private_driveless_user_path`, `private_key_block`, `private_linux_home_path`, `private_macos_user_path`, `private_unc_user_path`, `private_windows_user_path`, `ssh_public_key`.
+1562 text files of 1624 tracked paths were scanned for: `credential_token`, `password_literal`, `private_driveless_user_path`, `private_key_block`, `private_linux_home_path`, `private_macos_user_path`, `private_unc_user_path`, `private_windows_user_path`, `ssh_public_key`.
 Excluded because they name the patterns themselves: `scripts/provenance_inventory.py`, `docs/THIRD_PARTY_NOTICES.md`, `docs/validation/sbom.json`, `tests/test_provenance_inventory.py`.
 
 No finding in the tracked tree.

@@ -4,7 +4,7 @@
   "generator": "scripts/provenance_inventory.py",
   "project": {
     "name": "torchfdtd",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "license": "MIT",
     "license_files": [
       "LICENSE",
@@ -49,6 +49,9 @@
     ],
     "benchmark": [
       "psutil>=5.9"
+    ],
+    "mcp": [
+      "mcp>=1.2"
     ]
   },
   "summary": {
@@ -541,7 +544,7 @@
       "specifiers": [
         ">=2.8"
       ],
-      "version": "3.11",
+      "version": "3.20",
       "installed": true,
       "license": "BSD-3-Clause",
       "license_classifiers": [],
@@ -1360,8 +1363,8 @@
       "docs/validation/sbom.json",
       "tests/test_provenance_inventory.py"
     ],
-    "files_scanned": 1552,
-    "tracked_files": 1614,
+    "files_scanned": 1562,
+    "tracked_files": 1624,
     "findings": []
   },
   "dependency_check": {

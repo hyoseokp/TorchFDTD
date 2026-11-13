@@ -3,7 +3,7 @@ name: Pages
 on:
   push:
     branches: [main]
-    paths: ["site/**", "docs/assets/**", ".github/workflows/pages.yml"]
+    paths: ["site/**", "docs/assets/**", "AGENTS.md", "README.md", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
 permissions:
@@ -26,7 +26,11 @@ jobs:
       - name: Assemble the site
         run: |
           mkdir -p _site/assets
-          cp site/index.html _site/
+          cp site/index.html site/llms.txt _site/
+          # One plain-text file for language models: the agent guide, the README and the core documentation.
+          for f in AGENTS.md README.md docs/PYTHON_BATCH.md docs/DIFFERENTIABLE_FDTD.md docs/EXECUTION_MODES.md docs/INSTALL.md; do
+            printf '\n\n# File: %s\n\n' "$f"; cat "$f"
+          done > _site/llms-full.txt
           cp site/assets/* _site/assets/
           cp docs/assets/metalens-volume.gif docs/assets/adjoint-inverse-design.png \
              docs/assets/paper-e1-lens.png docs/assets/paper-e2-e3-holograms.png \

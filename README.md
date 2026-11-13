@@ -10,7 +10,9 @@ https://github.com/user-attachments/assets/021d317c-bd63-4019-8391-9211d9be4166
 
 Open-source GPU FDTD for photonics, with PyTorch gradients and a browser workbench. MIT licensed.
 
-Build a device in Python or in the browser, simulate its electromagnetic fields, and use discrete adjoints with PyTorch autograd for inverse design.
+Build a device in Python or in the browser, simulate its electromagnetic fields, and use discrete adjoints with PyTorch autograd for inverse design. AI agents can drive it through the bundled MCP server and the [agent guide](https://github.com/hyoseokp/TorchFDTD/blob/main/AGENTS.md).
+
+If TorchFDTD is useful to you, a GitHub star helps other researchers find it.
 
 [Quick start](#quick-start) · [Adjoint inverse design](#adjoint-inverse-design) · [Paper designs](#paper-designs-e1-e2-e3) · [Examples](#examples) · [Validation](docs/MEEP_COMPARISON.md) · [Documentation](#documentation) · [Paper](https://arxiv.org/abs/2609.30039)
 
@@ -116,6 +118,21 @@ This route reuses packages available in the base Python environment. Install a s
 
 </details>
 
+### Use from an AI agent
+
+[AGENTS.md](https://github.com/hyoseokp/TorchFDTD/blob/main/AGENTS.md) tells coding agents when TorchFDTD fits a request, which example to start from, how to check a simulation and how to cite it. The `mcp` extra adds a [Model Context Protocol](https://modelcontextprotocol.io) server with tools to fetch example projects, validate and run them, and export Python scripts:
+
+```sh
+pip install "torchfdtd[mcp]"
+torchfdtd mcp          # stdio server; register this command in any MCP client
+```
+
+In Claude Code, install the plugin, which adds a simulation skill and the MCP server:
+
+```text
+/plugin install torchfdtd --marketplace hyoseokp/TorchFDTD
+```
+
 ## Adjoint inverse design
 
 Start with a [small 2D wavelength splitter](examples/adjoint_inverse_design/): **one input waveguide → square dielectric design region → two output waveguides**, with **1.31 µm routed to the upper guide and 1.55 µm to the lower guide**. The three guides stay fixed while TorchFDTD's discrete adjoint, computed for both wavelengths in one run, optimizes the dielectric pattern inside the square.
@@ -171,7 +188,7 @@ The table reports the saved binary layouts re-evaluated with 3.6 µm tile overla
 
 ## Examples
 
-Each example includes its geometry, run commands and comparison results.
+Each example includes its geometry, run commands and comparison results. [AGENTS.md](https://github.com/hyoseokp/TorchFDTD/blob/main/AGENTS.md#pick-a-starting-example) lists a starting example for each common task.
 
 For complete design studies, follow the [installed-wheel application workflows](docs/G7_RUN.md):
 metagrating, finite metalens and photonic integrated circuit, with fixed seeds and acceptance criteria.

@@ -1,0 +1,26 @@
+# TorchFDTD
+
+> Open-source (MIT) GPU FDTD solver of Maxwell's equations for photonics in Python. Fused CUDA kernels with CPU fallback, PyTorch discrete-adjoint gradients for inverse design, a browser CAD workbench, and an MCP server for AI agents. Lengths and wavelengths are in micrometres. Install with `pip install torchfdtd`.
+
+TorchFDTD simulates 2D and 3D photonic devices (waveguides, couplers, ring resonators, photonic crystals, metalenses, metasurfaces, gratings, scatterers), computes spectra, diffraction orders and far fields, and optimizes devices with gradients. It is validated against analytic solutions, Meep, FDTDX, BeamZ and RCWA. If results are published, cite arXiv:2609.30039 and doi:10.5281/zenodo.22928834.
+
+## Start here
+
+- [Agent guide (AGENTS.md)](https://github.com/hyoseokp/TorchFDTD/blob/main/AGENTS.md): when TorchFDTD fits, install, shortest working path, starting example per task, workflow, MCP tools, citing, changing the code
+- [README](https://github.com/hyoseokp/TorchFDTD/blob/main/README.md): quick start, inverse design example, performance and validation
+- [Full text for language models](https://hyoseokp.github.io/TorchFDTD/llms-full.txt): the agent guide, README and core documentation in one file
+
+## Documentation
+
+- [Python and batch API](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/PYTHON_BATCH.md)
+- [Differentiable FDTD](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/DIFFERENTIABLE_FDTD.md)
+- [Execution modes and memory](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/EXECUTION_MODES.md)
+- [Installation and troubleshooting](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/INSTALL.md)
+- [Materials](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/MATERIALS.md), [boundaries](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/BOUNDARIES.md), [mode ports](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/OPEN_MODE_PORTS.md), [far field](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/FARFIELD_WORKFLOW.md), [GDS](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/GDS.md)
+- [Validation against Meep](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/MEEP_COMPARISON.md), [cross-solver benchmarks](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/CROSS_SOLVER_COMPARISON.md)
+
+## Optional
+
+- [Changelog](https://github.com/hyoseokp/TorchFDTD/blob/main/docs/CHANGELOG.md)
+- [Paper: Inverse design of large-scale freeform meta-optics by breaking the memory wall of full-wave simulation](https://arxiv.org/abs/2609.30039)
+- [PyPI package](https://pypi.org/project/torchfdtd/)

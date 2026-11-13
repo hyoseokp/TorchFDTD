@@ -1,0 +1,14 @@
+{
+  "name": "torchfdtd",
+  "description": "TorchFDTD plugins for Claude Code: GPU FDTD electromagnetic simulation of photonic devices.",
+  "owner": {
+    "name": "Hyoseok Park"
+  },
+  "plugins": [
+    {
+      "name": "torchfdtd",
+      "source": "./plugins/torchfdtd",
+      "description": "Simulate photonic devices with TorchFDTD, a GPU FDTD solver: set up, validate and run projects through MCP tools."
+    }
+  ]
+}

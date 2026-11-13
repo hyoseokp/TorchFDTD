@@ -1,4 +1,10 @@
-"""TorchFDTD: micrometre geometry, SI time, open-source Yee FDTD."""
+"""TorchFDTD: micrometre geometry, SI time, open-source Yee FDTD.
+
+GPU FDTD simulation of photonic devices with PyTorch gradients. Start with
+`torchfdtd example waveguide`, `Project.load(...)` and `Simulation(project).run()`.
+Guide for AI agents (starting example per task, checks, MCP tools, citation):
+https://github.com/hyoseokp/TorchFDTD/blob/main/AGENTS.md
+"""
 # The upstream grid package changes process-wide Torch defaults on first import.
 # A forward simulator must not disable gradients in its caller's training code.
 import torch as _torch

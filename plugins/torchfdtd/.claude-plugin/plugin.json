@@ -1,0 +1,19 @@
+{
+  "name": "torchfdtd",
+  "version": "1.0.0",
+  "description": "TorchFDTD electromagnetic simulation for Claude Code: a skill for setting up FDTD simulations of photonic devices and the torchfdtd MCP server.",
+  "author": {
+    "name": "Hyoseok Park"
+  },
+  "homepage": "https://hyoseokp.github.io/TorchFDTD/",
+  "repository": "https://github.com/hyoseokp/TorchFDTD",
+  "license": "MIT",
+  "keywords": [
+    "fdtd",
+    "photonics",
+    "electromagnetics",
+    "inverse-design",
+    "simulation",
+    "mcp"
+  ]
+}

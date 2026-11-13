@@ -155,6 +155,51 @@ def failure_message(exc):
     return f'{type(exc).__name__}: {exc}'
 
 
+def resolve_project_execution(project, root, summary=None):
+    """The execution mode Auto would run, from live resources; a scene that fits nothing is reported, not raised."""
+    try:return resolve_execution(project, health=execution_resources(), scratch=scratch_directory(root), summary=summary)
+    except Exception as exc:
+        return dict(requested=project.region.execution_mode, mode=None, error=str(exc), warnings=[])
+
+
+def validation_report(project, root):
+    """Preflight of one project: cell and memory estimate, warnings, plan hash and execution mode.
+
+    Raises ValueError for a rejected scene (dispatch-time contracts such as exact-endpoint PMC or tensor media).
+    """
+    admit_planning(project);summary=estimate(project);plan_hash=resolve_plan(project).plan_hash
+    summary['warnings']=list(summary['warnings'])+stability_warnings(project)
+    # Endpoint and tensor dispatches build their own estimate; the stored frame rate applies to every dispatch.
+    summary.setdefault('snapshot', snapshot_frames(project))
+    # The echoed project carries the hash of its own content; the workbench
+    # keeps it with the revision counter and compares plan hashes to mark
+    # results of an earlier run as stale (G8-04).
+    stamped = project.stamped()
+    return {**summary, 'plan_hash': plan_hash, 'execution': resolve_project_execution(project, root, summary), 'project': stamped.model_dump(),
+            'revision': project.revision, 'content_sha256': stamped.content_sha256,
+            'stored_content_sha256_matches': project.content_matches()}
+
+
+def execute_project(project, root, progress=None, cancel=None, resolved=None):
+    """Admit, resolve and run one project as a workbench job does; returns the result and the execution record.
+
+    `resolved(execution)` is called once the mode is chosen, before the run, so a job shows it while running.
+    """
+    admit_planning(project)
+    execution = resolve_project_execution(project, root)
+    if resolved:
+        resolved(execution)
+    if execution.get('error'):
+        raise ValueError(execution['error'])
+    if execution['mode'] == 'resident':
+        return Simulation(project).run(progress=progress, cancel=cancel), execution
+    if execution['mode'] == 'tiled':
+        result = run_tiled_job(project, execution, progress=progress, cancel=cancel)
+        return result, {**execution, 'report': result.summary['execution']['report'], 'indicator': result.summary['execution']['indicator']}
+    result = run_streamed_job(project, execution, progress=progress, cancel=cancel)
+    return result, {**execution, 'report': result.summary['execution']['report']}
+
+
 class ServerExecutor(ThreadPoolExecutor):
     """A job pool whose tasks run inside models.server_limits(), like the requests that queue them.
 
@@ -236,25 +281,8 @@ def create_app(result_dir=None, memory_admission=False):
     @app.post('/api/validate')
     def validate(project: Project):
         # Dispatch-time contracts (exact-endpoint PMC, tensor media) are rejections, not server faults.
-        try:admit_planning(project);summary=estimate(project);plan_hash=resolve_plan(project).plan_hash
+        try:return validation_report(project, root)
         except ValueError as exc:raise HTTPException(422,str(exc)) from exc
-        summary['warnings']=list(summary['warnings'])+stability_warnings(project)
-        # Endpoint and tensor dispatches build their own estimate; the stored frame rate applies to every dispatch.
-        summary.setdefault('snapshot', snapshot_frames(project))
-        # The echoed project carries the hash of its own content; the workbench
-        # keeps it with the revision counter and compares plan hashes to mark
-        # results of an earlier run as stale (G8-04).
-        stamped = project.stamped()
-        return {**summary, 'plan_hash': plan_hash, 'execution': resolution(project, summary), 'project': stamped.model_dump(),
-                'revision': project.revision, 'content_sha256': stamped.content_sha256,
-                'stored_content_sha256_matches': project.content_matches()}
-
-    def resolution(project, summary=None):
-        # Auto/streamed selection reads live resources; a scene that fits nothing
-        # is reported in the record, not raised.
-        try:return resolve_execution(project, health=execution_resources(), scratch=scratch_directory(root), summary=summary)
-        except Exception as exc:
-            return dict(requested=project.region.execution_mode, mode=None, error=str(exc), warnings=[])
 
     @app.post('/api/python')
     def python(project: Project):
@@ -357,18 +385,8 @@ def create_app(result_dir=None, memory_admission=False):
         def update(data):
             job['progress'] = data
         try:
-            admit_planning(project)
-            job['execution'] = execution = resolution(project)
-            if execution.get('error'):
-                raise ValueError(execution['error'])
-            if execution['mode'] == 'resident':
-                result = Simulation(project).run(progress=update, cancel=job['cancel'])
-            elif execution['mode'] == 'tiled':
-                result = run_tiled_job(project, execution, progress=update, cancel=job['cancel'])
-                job['execution'] = {**execution, 'report': result.summary['execution']['report'], 'indicator': result.summary['execution']['indicator']}
-            else:
-                result = run_streamed_job(project, execution, progress=update, cancel=job['cancel'])
-                job['execution'] = {**execution, 'report': result.summary['execution']['report']}
+            result, job['execution'] = execute_project(project, root, progress=update, cancel=job['cancel'],
+                                                       resolved=lambda execution: job.__setitem__('execution', execution))
             result.save(root / f'{key}.npz')
             job['summary'] = result.summary
             job['monitors'] = result.monitor_data(max_values=MONITOR_JSON_VALUES) if len(result.times)>1 else []
@@ -390,7 +408,7 @@ def create_app(result_dir=None, memory_admission=False):
         try:admit_planning(project);plan_hash=resolve_plan(project).plan_hash
         except ValueError as exc:raise HTTPException(422,str(exc)) from exc
         # A scene the preflight already rejects is refused here, not queued to fail at dispatch.
-        preflight=resolution(project)
+        preflight=resolve_project_execution(project, root)
         if preflight.get('error'):raise HTTPException(422,preflight['error'])
         with lock:
             if sum(j['status'] in ('queued', 'running') for j in jobs.values()) >= 3:

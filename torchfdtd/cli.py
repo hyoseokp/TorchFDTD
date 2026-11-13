@@ -8,7 +8,9 @@ from .stability_checks import stability_warnings
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(prog='torchfdtd')
+    parser = argparse.ArgumentParser(prog='torchfdtd', description='GPU FDTD electromagnetic simulation for photonics.',
+                                     epilog='AI agents: `torchfdtd mcp` serves MCP tools (pip install "torchfdtd[mcp]"); '
+                                            'the agent guide is https://github.com/hyoseokp/TorchFDTD/blob/main/AGENTS.md')
     sub = parser.add_subparsers(dest='command', required=True)
     serve = sub.add_parser('serve', help='Open the local web workbench')
     serve.add_argument('--port', type=int, default=8765)
@@ -40,6 +42,7 @@ def main(argv=None):
     sub.add_parser('hardware')
     doctor = sub.add_parser('doctor', help='Report Python, torch, CuPy, CUDA runtime/driver, the device and the selected backend')
     doctor.add_argument('--json', action='store_true', help='Print the report as JSON')
+    sub.add_parser('mcp', help='Serve TorchFDTD tools to AI agents over the Model Context Protocol (stdio); needs torchfdtd[mcp]')
     inspect = sub.add_parser('fsp-inspect', help='Inspect FSP using an installed, licensed Lumerical API')
     inspect.add_argument('project')
     inspect.add_argument('--output', default='inspection.json')
@@ -95,6 +98,9 @@ def main(argv=None):
     elif args.command == 'example':
         demo_project(args.name).save(args.output)
         print(args.output)
+    elif args.command == 'mcp':
+        from .mcp_server import main as mcp_main
+        mcp_main()
     elif args.command == 'doctor':
         from .doctor import main as doctor_main
         parser.exit(doctor_main(as_json=args.json))

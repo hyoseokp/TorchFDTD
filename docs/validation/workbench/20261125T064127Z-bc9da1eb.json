@@ -1,0 +1,141 @@
+{
+  "kind": "workbench_journey_record",
+  "schema_version": 1,
+  "timestamp": "20261125T064127Z",
+  "commit": "bc9da1ebc12855df11dd24e783729faee724317e",
+  "dirty_paths": [],
+  "server_url": "http://127.0.0.1:51283",
+  "server_started_here": true,
+  "server_health": {
+    "cuda": false,
+    "gpu": null,
+    "gpu_memory_gb": 0,
+    "torch": "2.10.0+cu126",
+    "engine": "TorchFDTD Yee/CPML on fdtd grid",
+    "cpu_threads": 2,
+    "cupy": false,
+    "gpu_free_bytes": 0,
+    "gpu_total_bytes": 0,
+    "host_total_bytes": 85628207104,
+    "host_available_bytes": 50740658176,
+    "version": "0.15.0",
+    "admission": "fixed",
+    "server_limits": {
+      "resident_cells": 8000000,
+      "structures": 1000,
+      "sources": 512,
+      "monitors": 512,
+      "materials": 100,
+      "mesh_refinements": 64,
+      "monitor_samples": 12000000,
+      "steps": 100000,
+      "frequency_points": 2001,
+      "signal_samples": 100000,
+      "sheet_cells": 8000000,
+      "plane_points": 12000000
+    }
+  },
+  "environment": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.2",
+    "node": "v22.18.0",
+    "playwright": null,
+    "torch": "2.10.0+cu126",
+    "cuda_visible_to_server": false
+  },
+  "backend": "cpu (every spec selects the CPU resource)",
+  "specs": {
+    "tests/ui/g8-journey.spec.js": "6a7089b107de1b7267f2cda3dc2047cd033173ed6bc4b4444535d1e451c7473e",
+    "tests/ui/g8-editing.spec.js": "f17796593bdd6456a9d04433fc8d6e994301eaf4057b0b868aa3fa4075b0e4aa"
+  },
+  "bundle": {
+    "torchfdtd/web/assets/index-DErGp_7h.css": "aaefe25d640c4dc92a69ab20f49335885e1dc69c8325da46f6ed2c1507ac7ebc",
+    "torchfdtd/web/assets/index-gfw8dVSX.js": "5b9247134e5a9cc31025ea8ac32ecb7e5582f54a7ad141de7a3bdd70fda97fd4",
+    "torchfdtd/web/index.html": "aa00c3ccfa0ce00b7ff8492ed0292fe1bc3c12626aaf43b2f9fcb406c7f6d88d"
+  },
+  "playwright_exit_code": 0,
+  "wall_seconds": 52.516,
+  "tests": [
+    {
+      "file": "tests/ui/g8-editing.spec.js",
+      "title": "undo and redo restore edits and the history is bounded",
+      "status": "expected",
+      "outcome": "passed",
+      "duration_ms": 24817,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "file": "tests/ui/g8-editing.spec.js",
+      "title": "multi-select, duplicate all, copy, paste and delete all",
+      "status": "expected",
+      "outcome": "passed",
+      "duration_ms": 1590,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "file": "tests/ui/g8-editing.spec.js",
+      "title": "autosave to browser storage and recovery after reload",
+      "status": "expected",
+      "outcome": "passed",
+      "duration_ms": 1479,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "file": "tests/ui/g8-editing.spec.js",
+      "title": "the saved project carries a monotonic revision and a content hash the server confirms",
+      "status": "expected",
+      "outcome": "passed",
+      "duration_ms": 1856,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "file": "tests/ui/g8-editing.spec.js",
+      "title": "non-finite and out-of-range values are refused with a visible message",
+      "status": "expected",
+      "outcome": "passed",
+      "duration_ms": 1046,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "file": "tests/ui/g8-editing.spec.js",
+      "title": "results are marked stale when the plan changes after a run and current again when it is restored",
+      "status": "expected",
+      "outcome": "passed",
+      "duration_ms": 5161,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "file": "tests/ui/g8-journey.spec.js",
+      "title": "workbench journey: GDS import, materials, source, boundaries, mesh preview, preflight, queue, cancel, results, exports",
+      "status": "expected",
+      "outcome": "passed",
+      "duration_ms": 9449,
+      "attempts": 1,
+      "error": null,
+      "journey_timing_ms": {
+        "gds_import": 1536,
+        "materials": 1809,
+        "source_monitor": 2433,
+        "boundaries": 2964,
+        "mesh_preview": 3203,
+        "preflight": 3359,
+        "cancel": 4491,
+        "rerun": 8112,
+        "results_overlay": 8248,
+        "exports": 9374,
+        "total_ms": 9374
+      }
+    }
+  ],
+  "all_passed": true,
+  "report": {
+    "path": "docs/validation/workbench/20261125T064127Z-bc9da1eb.playwright.json",
+    "sha256": "ee63adbc032b71686db4b6e19beb2ed2fdef51a58e8e61eedf36982427b5758f"
+  }
+}

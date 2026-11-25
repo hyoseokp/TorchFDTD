@@ -70,6 +70,7 @@ def test_complete_solve_and_mixed_batch_with_fused_monitors(precision, graph):
     projects = cases(2, precision, '3d')
     for p in projects:
         p.monitors.extend(field_planes())
+        p.region.cuda_monitor_kernel='torch'
     reference = [Simulation(p).run(cuda_graph=graph) for p in projects]
     for p in projects:
         p.region.cuda_monitor_kernel='fused'

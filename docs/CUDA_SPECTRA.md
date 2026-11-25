@@ -1,6 +1,6 @@
 # Shared CUDA frequency-plane monitors
 
-Select `Region(cuda_monitor_kernel="fused")` independently of the Yee kernel, or choose **FDTD → Frequency monitor kernel → Shared CUDA plane DFT**. The default remains `"torch"`. The optional CUDA extension requires `pip install -e ".[cuda-kernels]"`.
+The default `Region(cuda_monitor_kernel="auto")` uses these kernels for real CUDA fields when CuPy works. Select `"fused"` or `"torch"` independently of the Yee kernel, or choose **FDTD → Frequency monitor kernel**. The optional CUDA extension requires `pip install -e ".[cuda-kernels]"`.
 
 ```python
 from torchfdtd import Simulation, run_tensor_batch
@@ -18,7 +18,7 @@ batch.raise_for_errors()
 
 A [complete Python example](../examples/spectral_batch.py) constructs independent TFSF sphere projects and evaluates signed spectral flux without the browser.
 
-The setting is serialized in project JSON and Python exports. Each result records `cuda_monitor_kernel`. Changing this implementation choice does not invalidate an otherwise matching flux-normalization signature. CPU and complex Bloch field monitors reject `"fused"` explicitly. Their reference monitor path remains available.
+An explicit setting is serialized in project JSON and Python exports. Each result records the kernel that ran as `cuda_monitor_kernel`. Changing this implementation choice does not invalidate an otherwise matching flux-normalization signature. CPU and complex Bloch field monitors reject `"fused"` explicitly. Their reference monitor path remains available.
 
 ## Algorithm and numerical scope
 

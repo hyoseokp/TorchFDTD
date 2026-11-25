@@ -283,8 +283,9 @@ class Region(Model):
     # Optional cap on the grid the resident path admits. None, the default, leaves
     # admission to the memory estimate; written to JSON only when set.
     resident_cell_limit: int | None = Field(default=None, ge=1, strict=True)
-    cuda_kernel: Literal['torch', 'fused'] = 'torch'
-    cuda_monitor_kernel: Literal['torch', 'fused'] = 'torch'
+    # 'auto' runs the fused CUDA kernels where they support the scene and CuPy works, else the Torch kernels.
+    cuda_kernel: Literal['auto', 'torch', 'fused'] = 'auto'
+    cuda_monitor_kernel: Literal['auto', 'torch', 'fused'] = 'auto'
     precision: Literal['float32', 'float64'] = 'float32'
     snapshot_interval: int = Field(default=20, ge=1, le=10000)
     field: Literal['Ex', 'Ey', 'Ez', 'Hx', 'Hy', 'Hz'] = 'Ez'
@@ -303,12 +304,16 @@ class Region(Model):
         return _check_at_most(value, server_limit('steps'), 'time steps')
 
     @model_serializer(mode='wrap')
-    def _omit_unset_cell_limit(self, handler):
+    def _omit_unset_fields(self, handler):
         # A region without a cap serializes, and therefore hashes and loads in
-        # earlier versions, exactly as before the field existed.
+        # earlier versions, exactly as before the field existed. Earlier versions
+        # read an absent kernel as their Torch default and refuse 'auto'.
         data = handler(self)
         if self.resident_cell_limit is None:
             data.pop('resident_cell_limit', None)
+        for name in ('cuda_kernel', 'cuda_monitor_kernel'):
+            if data.get(name) == 'auto':
+                del data[name]
         return data
 
     def cell_cap_refusal(self):

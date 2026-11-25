@@ -92,7 +92,7 @@ def test_graded_dispersive_fixture_restores_its_settings():
 def test_minimal_hand_written_file_takes_the_documented_defaults():
     project = Project.load(FIXTURES / 'projects' / 'minimal_defaults.json')
     assert project.schema_version == 1 and project.region.dimension == '2d' and project.region.backend == 'auto'
-    assert project.region.cuda_kernel == 'torch' and project.region.precision == 'float32'
+    assert project.region.cuda_kernel == 'auto' and project.region.cuda_monitor_kernel == 'auto' and project.region.precision == 'float32'
     assert [s.name for s in project.structures] == ['core'] and project.structures[0].material in {m.name for m in project.materials}
     assert project.sources[0].wavelength == 1.55 and project.monitors[0].name == 'output'
 

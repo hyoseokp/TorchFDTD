@@ -699,9 +699,10 @@ def run_tiled_job(project, resolution, *, progress=None, cancel=None):
         report[key] = _finite(report.get(key))
     peak = math.sqrt(float(stitched.intensity()[0].max())) if frames else 0.
     tile_cells = plan.report['total_tile_cells']
+    from .cuda_kernels import resolve_cuda_kernel
     stats.update(backend=resolution['backend'], precision=r.precision, gpu=resolution.get('gpu'),
                  cuda_graph=False, cuda_graph_steps=0, cuda_graph_replays=0,
-                 cuda_kernel=r.cuda_kernel if resolution['backend'] == 'cuda' else None, cuda_monitor_kernel=None,
+                 cuda_kernel=resolve_cuda_kernel(plan.tiles[0].project.region) if resolution['backend'] == 'cuda' else None, cuda_monitor_kernel=None,
                  steps=steps if not cancelled else 0, requested_steps=steps, cancelled=cancelled,
                  termination_reason='cancelled' if cancelled else 'max_steps', auto_shutoff=False, diagnostics=[],
                  diagnostic_seconds=0., diagnostic_backend=None, source_end_s=None, seconds=seconds,

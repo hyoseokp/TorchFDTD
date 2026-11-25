@@ -60,6 +60,31 @@ def _compile(source, device, capability, kernel_name='yee_update'):
     return module.get_function(kernel_name), module
 
 
+def fused_kernels_available():
+    """Whether CuPy imports and compiles and loads a kernel for the current CUDA device."""
+    if not torch.cuda.is_available() or not torch.cuda.device_count():
+        return False
+    from .cuda_bootstrap import prepare_cuda_kernels
+    device = torch.cuda.current_device()
+    try:
+        cupy = prepare_cuda_kernels()
+        with cupy.cuda.Device(device):
+            _compile('extern "C" __global__ void yee_update() {}', device, cupy.cuda.Device(device).compute_capability)
+    except Exception:  # noqa: BLE001 - CuPy, NVRTC or driver: the Torch kernels run instead
+        return False
+    return True
+
+
+def resolve_cuda_kernel(region, field='cuda_kernel'):
+    """The kernel a resident run uses for 'cuda_kernel' or 'cuda_monitor_kernel': the explicit choice, or for 'auto'
+    the fused kernels where they support the scene and work here, else the Torch kernels."""
+    choice = getattr(region, field)
+    if choice != 'auto':
+        return choice
+    supported = region.backend != 'cpu' and not region.complex_fields and 3*math.prod(region.shape) < 2**31
+    return 'fused' if supported and fused_kernels_available() else 'torch'
+
+
 class FusedYeeCUDA:
     """Specialize a real-valued grid while retaining its CPML and ADE states."""
 

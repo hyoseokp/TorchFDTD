@@ -16,6 +16,59 @@ def require_cuda():
     pytest.importorskip('cupy')
 
 
+def test_automatic_kernels_resolve_by_scene_and_by_what_works_here(monkeypatch):
+    from torchfdtd import cuda_kernels
+    resolve = cuda_kernels.resolve_cuda_kernel
+    real, cpu = Region(), Region(backend='cpu')
+    bloch = Region(dimension='3d', size=(2, 2, 2), mesh=.1, pml_cells=3, bloch_phase=(.3, 0, 0),
+                   boundaries=Boundaries(x_min=BoundaryFace(kind='bloch'), x_max=BoundaryFace(kind='bloch')))
+    assert bloch.complex_fields
+    assert real.cuda_kernel == real.cuda_monitor_kernel == 'auto'
+    for works in (True, False):
+        monkeypatch.setattr(cuda_kernels, 'fused_kernels_available', lambda works=works: works)
+        for field in ('cuda_kernel', 'cuda_monitor_kernel'):
+            assert resolve(real, field) == ('fused' if works else 'torch')
+            assert resolve(cpu, field) == resolve(bloch, field) == 'torch'
+        # Above the fused component index range the Torch update still runs.
+        assert resolve(Region(dimension='3d', size=(90, 90, 90), mesh=.1, pml_cells=8)) == 'torch'
+    assert resolve(Region(cuda_kernel='fused')) == 'fused' and resolve(Region(cuda_kernel='torch')) == 'torch'
+
+
+def test_an_explicit_kernel_is_saved_and_the_automatic_one_is_left_out():
+    automatic, explicit = Region().model_dump(), Region(cuda_kernel='torch', cuda_monitor_kernel='fused').model_dump()
+    assert 'cuda_kernel' not in automatic and 'cuda_monitor_kernel' not in automatic
+    assert (explicit['cuda_kernel'], explicit['cuda_monitor_kernel']) == ('torch', 'fused')
+    assert Region.model_validate(automatic).cuda_kernel == 'auto' and Region.model_validate(explicit).cuda_kernel == 'torch'
+
+
+def test_the_grid_holds_one_unit_permeability():
+    grid = YeeGrid(Region(dimension='3d', size=(1.8, 1.6, 1.4), mesh=.1, pml_cells=3, backend='cpu'))
+    assert grid.E.shape == grid.H.shape == grid.inverse_permittivity.shape == (*grid.region.shape, 3)
+    assert grid.inverse_permeability.shape == (1,) and grid.inverse_permeability[0] == 1
+
+
+@pytest.mark.parametrize('monitor', [False, True])
+def test_the_default_kernels_are_fused_and_reproduce_the_torch_fields(monitor):
+    require_cuda()
+    def run(**kernels):
+        from torchfdtd import FieldMonitor, SpectrumSettings
+        monitors = [Monitor(center=(.5, 0, 0))]
+        if monitor:
+            monitors.append(FieldMonitor(center=(.7, 0, 0), size=(0, 1.4, 1.4), spectrum=SpectrumSettings(
+                sampling='frequency', frequency_points=3, apodization='none')))
+        return Simulation(Project(region=Region(dimension='3d', size=(3.2, 2.8, 2.4), mesh=.1, pml_cells=4, steps=60, backend='cuda',
+                                                material_sampling='yee', **kernels),
+                                  structures=[Structure(kind='sphere', radius=.4, material='SiO2 (constant n)')],
+                                  sources=[Source(center=(-.8, 0, 0))], monitors=monitors)).run()
+    default, reference = run(), run(cuda_kernel='torch', cuda_monitor_kernel='torch')
+    assert default.summary['cuda_kernel'] == default.summary['cuda_monitor_kernel'] == 'fused'
+    assert default.summary['memory_model'] == 'fused_cuda'
+    for name in ('electric', 'magnetic', 'signals'):
+        np.testing.assert_allclose(getattr(default, name), getattr(reference, name), rtol=3e-6, atol=3e-6*np.abs(getattr(reference, name)).max())
+    for got, expected in zip(default.frequency_fields, reference.frequency_fields):
+        np.testing.assert_allclose(got['fields'], expected['fields'], rtol=0, atol=3e-6*np.abs(expected['fields']).max())
+
+
 @pytest.mark.parametrize('precision', ['float32', 'float64'])
 @pytest.mark.parametrize('layout', ['pml2d', 'pml3d', 'mixed', 'graded'])
 def test_fused_random_fields_and_all_cpml_states(precision, layout):

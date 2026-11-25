@@ -130,6 +130,7 @@ def _validate_pmc_case(p):
 
 def _run(cases,projects,objective,output_dir,keep_results,memory_fraction,cuda_graph,cancel,progress,cuda_graph_steps):
     from .cuda_batch import FusedBatchYeeCUDA,FusedBatchIO
+    from .cuda_kernels import resolve_cuda_kernel
     started=time.perf_counter();wall_started=time.time()
     # The plan's estimate describes this volume-plus-face Yee grid, not the endpoint dispatch.
     resolved=[resolve_plan(p) for p in projects]
@@ -285,7 +286,7 @@ def _run(cases,projects,objective,output_dir,keep_results,memory_fraction,cuda_g
         s.update(plan_hash=plan.plan_hash,backend='cuda',precision=r.precision,gpu=torch.cuda.get_device_name(),cuda_graph=graph is not None,
                  cuda_graph_steps=width,cuda_graph_replays=graph_replays,
                  cuda_kernel='fused_batch',batch_size=len(cases),batch_index=i,timing_scope='whole_cohort',
-                 cuda_monitor_kernel=r.cuda_monitor_kernel,
+                 cuda_monitor_kernel=resolve_cuda_kernel(r,'cuda_monitor_kernel'),
                  steps=completed,requested_steps=r.steps,cancelled=cancelled,termination_reason='cancelled' if cancelled else 'max_steps',
                  auto_shutoff=False,diagnostics=decisions[i].history,diagnostic_seconds=diagnostic_seconds[i],
                  diagnostic_backend=diagnostics[i].backend if diagnostics[i] else None,source_end_s=end if math.isfinite(end) else None,

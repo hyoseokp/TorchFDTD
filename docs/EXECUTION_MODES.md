@@ -15,6 +15,12 @@ configured now, and the results panel of a finished run shows what was done.
 | On, CuPy missing | `backend="cuda"`, both kernels `"torch"` | PyTorch reference updates on the GPU |
 | Off | `backend="cpu"`, both kernels `"torch"` | NumPy/PyTorch CPU |
 
+A project that sets no kernel has `"auto"` for both. A resident run then uses
+the fused kernels when CuPy imports and compiles a kernel for the device, the
+fields are real and the grid is within the fused index range (3 x cells below
+2^31), and the PyTorch kernels otherwise. The result summary names the kernels
+that ran. `"auto"` is not written to project JSON.
+
 The switch is disabled, with a tooltip, when `/api/health` reports no CUDA
 device. `/api/health` also reports `cupy`, the GPU name, `gpu_free_bytes`,
 `gpu_total_bytes`, `host_total_bytes` and `host_available_bytes`.

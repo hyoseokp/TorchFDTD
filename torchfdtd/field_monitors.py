@@ -110,7 +110,8 @@ def monitor_memory(project):
     # The shared CUDA DFT (explicit backend="cuda") keeps no step temporaries: the accumulator,
     # the eight-corner interpolation tables, one sample buffer and the two windows. The Torch
     # update is bounded by four accumulators and 192 bytes of tables per point and component.
-    fused=r.backend=='cuda' and r.cuda_monitor_kernel=='fused' and not r.complex_fields
+    from .cuda_kernels import resolve_cuda_kernel
+    fused=r.backend=='cuda' and not r.complex_fields and resolve_cuda_kernel(r,'cuda_monitor_kernel')=='fused'
     for n,nf,nc,sample in plane_sizes(project):
         value=n*nf*nc*sample
         size += value+n*nc*(8*(8+real)+real)+2*r.steps*real if fused else value*4+n*nc*8*24+r.steps*16
@@ -186,8 +187,10 @@ class FrequencyUpdates:
     """Select the reference path or shared real CUDA monitor kernels."""
     def __init__(self, monitors):
         monitors = list(monitors)
-        selected = [m for m in monitors if m.grid.region.cuda_monitor_kernel == 'fused']
-        self.reference = [m for m in monitors if m.grid.region.cuda_monitor_kernel == 'torch']
+        from .cuda_kernels import resolve_cuda_kernel
+        kernels = [resolve_cuda_kernel(m.grid.region, 'cuda_monitor_kernel') for m in monitors]
+        selected = [m for m, kernel in zip(monitors, kernels) if kernel == 'fused']
+        self.reference = [m for m, kernel in zip(monitors, kernels) if kernel == 'torch']
         self.fused = []
         if selected:
             if any(not m.torch or not m.grid.E.is_cuda or m.grid.E.is_complex() for m in selected):

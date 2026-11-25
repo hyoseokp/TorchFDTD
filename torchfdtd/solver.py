@@ -421,7 +421,8 @@ def estimate(p: Project, *, endpoint_dispatch=True):
     if boxes:warnings.append('TFSF boxes use normal-incidence live Yee lines and a homogeneous background shell. Inside is total field, outside is scattered field. Amplitude scales the auxiliary soft drive. Check incident PML, mesh and time convergence before quantitative scattering.')
     # The fused real CUDA kernels (explicit backend="cuda") have the calibrated model; every
     # other resident path keeps the tensor-expression bound of the Torch and NumPy updates.
-    fused = r.backend == 'cuda' and r.cuda_kernel == 'fused' and not r.complex_fields
+    from .cuda_kernels import resolve_cuda_kernel
+    fused = r.backend == 'cuda' and not r.complex_fields and resolve_cuda_kernel(r) == 'fused'
     volume_bytes = (fused_resident_bytes(r, stored, max_poles) if fused else
                     stored*((400 if r.precision == 'float64' else 200)+(160 if r.precision == 'float64' else 80)*max_poles)*(2 if r.complex_fields else 1))
     # Every soft or one-way source term keeps its sampled waveform, one real per step, on the device.
@@ -681,7 +682,9 @@ class Simulation:
         validate_graph_steps(cuda_graph_steps, use_cuda and cuda_graph)
         if use_cuda and not torch.cuda.is_available():
             raise RuntimeError('CUDA requested but unavailable. Install a CUDA-enabled PyTorch build or choose CPU.')
-        if use_cuda and r.cuda_kernel == 'fused' and r.complex_fields:
+        from .cuda_kernels import configure_cuda_kernel, resolve_cuda_kernel
+        cuda_kernel = resolve_cuda_kernel(r)
+        if use_cuda and cuda_kernel == 'fused' and r.complex_fields:
             # The same refusal as FusedYeeCUDA, before the grid is allocated.
             raise ValueError('The fused CUDA kernel currently supports real fields. Select cuda_kernel="torch" for Bloch fields.')
         from .plan import resources_copy
@@ -742,8 +745,7 @@ class Simulation:
         configure_materials(g, p, ownership)
         plan.verify_grid(g)
         configure_interfaces(g,interface_plan)
-        from .cuda_kernels import configure_cuda_kernel
-        configure_cuda_kernel(g, r.cuda_kernel)
+        configure_cuda_kernel(g, cuda_kernel)
         from .tfsf import prepare_tfsf,TfsfInjection
         prepare_tfsf(g,p,eps,ownership)
         from .run_control import StateDiagnostics, DecayDecision, source_end_time
@@ -770,7 +772,7 @@ class Simulation:
             counter = np.zeros(1, dtype=np.int64)
             traces = np.zeros((r.steps, len(monitors)), dtype=g.E.dtype)
 
-        tfsf=TfsfInjection([g],counter,fused=use_cuda and r.cuda_kernel=='fused')
+        tfsf=TfsfInjection([g],counter,fused=use_cuda and cuda_kernel=='fused')
 
         def inject(family):
             field=g.E if family=='E' else g.H
@@ -879,8 +881,8 @@ class Simulation:
         stats.update(plan_hash=plan.plan_hash, backend='cuda' if use_cuda else 'cpu', precision=r.precision,
                      gpu=torch.cuda.get_device_name() if use_cuda else None, cuda_graph=graph is not None,
                      cuda_graph_steps=width, cuda_graph_replays=graph_replays,
-                     cuda_kernel=r.cuda_kernel if use_cuda else None,
-                     cuda_monitor_kernel=r.cuda_monitor_kernel if use_cuda else None,
+                     cuda_kernel=cuda_kernel if use_cuda else None,
+                     cuda_monitor_kernel=resolve_cuda_kernel(r, 'cuda_monitor_kernel') if use_cuda else None,
                      steps=completed, requested_steps=r.steps, cancelled=termination_reason=='cancelled',
                      termination_reason=termination_reason, auto_shutoff=termination_reason=='decayed',
                       diagnostics=decision.history, diagnostic_seconds=diagnostic_seconds,

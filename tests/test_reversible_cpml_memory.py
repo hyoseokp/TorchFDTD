@@ -178,7 +178,7 @@ def test_complex_fused_project_copy_and_spectral_forwarding(monkeypatch):
         return original(copy, opts, device, spectral)
     monkeypatch.setattr(base, '_resident_reservation', capture)
     _cpml_reversible_reservation(project, options('cpu'), 'cuda', (4, 14), spectral=sentinel)
-    assert project.region.cuda_kernel == 'torch'
+    assert project.region.cuda_kernel == 'auto'
 
 
 @pytest.mark.parametrize('complex_fields,components', [(False, 1), (True, 3)])

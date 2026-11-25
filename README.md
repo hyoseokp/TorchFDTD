@@ -81,7 +81,7 @@ result = Simulation(project).run()
 result.save("results/run.npz")
 ```
 
-Lengths are in µm and time arrays in seconds. `dimension` defaults to `"2d"` and `cuda_kernel` to `"torch"`, so this example selects both explicitly. It needs an NVIDIA GPU and the `cuda-kernels` extra. `Project.load()` runs browser-made scenes.
+Lengths are in µm and time arrays in seconds. `dimension` defaults to `"2d"`. `cuda_kernel` defaults to `"auto"`, which runs the fused kernels when CuPy works and the PyTorch kernels otherwise. This example requires the fused kernels, so it needs an NVIDIA GPU and the `cuda-kernels` extra. `Project.load()` runs browser-made scenes.
 
 <details>
 <summary>2D example for CPU or GPU, with result loading</summary>

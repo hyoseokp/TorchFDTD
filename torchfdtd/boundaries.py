@@ -230,8 +230,14 @@ class YeeGrid(fdtd.Grid):
     """
     def __init__(self, region, absorber_faces=()):
         region.require_resident()
-        super().__init__(shape=region.shape, grid_spacing=region.reference_step * 1e-6,
+        # The upstream constructor runs on the smallest grid of this dimension: it would allocate a full-size unit
+        # permeability and one full-size temporary per material array. Every material here is non-magnetic.
+        super().__init__(shape=(2, 2, 1 if region.dimension == '2d' else 2), grid_spacing=region.reference_step * 1e-6,
                          courant_number=region.courant_factor/math.sqrt(2 if region.dimension == '2d' else 3))
+        self.Nx, self.Ny, self.Nz = region.shape
+        self.E, self.H = fdtd.backend.zeros((*region.shape, 3)), fdtd.backend.zeros((*region.shape, 3))
+        self.inverse_permittivity = fdtd.backend.ones((*region.shape, 3))
+        self.inverse_permeability = fdtd.backend.ones((1,))
         # fdtd validates a cubic-grid Courant number in its constructor. The
         # native metric curls below use the independently validated rectangular CFL.
         self.courant_number=region.rectangular_courant
@@ -425,7 +431,7 @@ class YeeGrid(fdtd.Grid):
             self.H -= self.courant_number * self.inverse_permeability * self.curl(self.E, True)
         else:
             curl = self.curl(self.E, True)
-            slabs = [(box, self.H[box]*decay-self.courant_number*gain*self.inverse_permeability[box]*curl[box])
+            slabs = [(box, self.H[box]*decay-self.courant_number*gain*self.inverse_permeability*curl[box])
                      for box, decay, gain in self.absorber_update('H')]
             self.H -= self.courant_number * self.inverse_permeability * curl
             for box, value in slabs:

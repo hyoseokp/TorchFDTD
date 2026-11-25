@@ -165,13 +165,12 @@ def source_profile(src, loc, region):
 
 # Resident device model of the fused real CUDA path, calibrated against the peaks in
 # docs/validation/resident_memory_fused_3060.json (docs/EXECUTION_MODES.md). Per cell:
-# E, H, the inverse permittivity and permeability and the three-component temporary
-# of the grid constructor are 15 reals; the sampled permittivity copied to the device
-# adds one real (three with Yee sampling); every CPML memory element adds one. A
+# E, H and the inverse permittivity are 9 reals; the sampled permittivity copied to the
+# device adds one real (three with Yee sampling); every CPML memory element adds one. A
 # dispersive scene adds, on every cell, one int64 index per sample and 8 + 42 x poles
 # reals: ADE state, diagnostics weights and the step temporaries held by the pools
 # of up to two captured CUDA graphs (cuda_graph_steps > 1 captures a second one).
-FUSED_CELL_REALS = 15
+FUSED_CELL_REALS = 9
 FUSED_ADE_REALS = (8, 42)
 FUSED_FIXED_BYTES = 64*2**20       # CUDA graph pools, diagnostics tables, allocator rounding
 

@@ -42,6 +42,8 @@ class CudaStepGraphs:
                 value.zero_()
         torch.cuda.current_stream().wait_stream(stream)
         torch.cuda.synchronize()
+        # The graphs allocate from their own pools and cannot reuse the cached temporaries of the steps above.
+        torch.cuda.empty_cache()
         self.graphs = {}
         for count in sorted({1, self.width}):
             # Capture on the side stream directly: torch.cuda.graph() would also run gc.collect() and

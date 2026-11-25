@@ -481,8 +481,8 @@ def test_record_states_the_prediction_for_the_rtx_5880_tile():
     assert reference == bench.reference_5880()
     assert reference['shape'] == [2050, 2050, 103] and reference['cells'] == 432_857_500 and reference['pillars'] == 19_881
     assert reference['measured_peak_gb'] == 25.6 and reference['memory_model'] == 'fused_cuda'
-    # The estimate stays above the measured peak read in either unit.
-    assert reference['estimate_bytes'] > 25.6*2**30
+    # The estimate stays above the measured peak read in either unit, less the unit permeability array of that run.
+    assert reference['estimate_bytes'] > 25.6*2**30-reference['unit_permeability_bytes_per_cell']*reference['cells']
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA unavailable')
@@ -498,3 +498,16 @@ def test_a_fused_run_stays_within_its_estimate():
     assert np.isfinite(result.electric).all()
     assert result.summary['memory_model'] == 'fused_cuda'
     assert 0 < peak <= result.summary['estimated_memory_mb']*2**20
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA unavailable')
+def test_a_dispersive_run_with_two_graphs_reserves_within_its_estimate():
+    pytest.importorskip('cupy')
+    from benchmarks import resident_memory_fused as bench
+    project = bench.project(bench.CASES['fused-f32-lorentz-graph8-4m'])
+    torch.cuda.synchronize()
+    torch.cuda.empty_cache()
+    start = torch.cuda.memory_reserved()
+    torch.cuda.reset_peak_memory_stats()
+    result = Simulation(project).run(cuda_graph_steps=8)
+    assert torch.cuda.max_memory_reserved()-start <= result.summary['estimated_memory_mb']*2**20

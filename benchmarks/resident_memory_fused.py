@@ -96,7 +96,8 @@ CASES = {
 # The RTX 5880 run: one 41 um tile of a 1 mm metalens, fused FP32 kernels with the CUDA graph, 1600
 # steps, peak 25.6 GB for the process read with nvidia-smi (so the CUDA context is included).
 REFERENCE_5880 = dict(hardware='NVIDIA RTX 5880 Ada Generation, 48 GB', lateral_um=41., steps=1600, measured_peak_gb=25.6,
-                      instrument='nvidia-smi process peak, including the CUDA context', seconds_per_tile=125)
+                      instrument='nvidia-smi process peak, including the CUDA context', seconds_per_tile=125,
+                      unit_permeability_bytes_per_cell=12)  # That run still held a full unit permeability array.
 
 
 def metalens_tile(lateral_um, steps=1600):

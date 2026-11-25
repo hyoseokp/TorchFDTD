@@ -9,6 +9,23 @@ Commits that only record validation evidence or documentation ("Record ...",
 
 ## Unreleased
 
+### Changed
+
+- `Region.cuda_kernel` and `Region.cuda_monitor_kernel` default to `"auto"`: a resident run on CUDA uses the fused kernels for real fields when CuPy imports and compiles a kernel for the device and the grid is within the fused index range, and the Torch kernels otherwise. An explicit `"torch"` or `"fused"` is kept; `"auto"` is not written to project JSON, and the result summary names the kernels that ran ([EXECUTION_MODES.md](EXECUTION_MODES.md#gpu-switch), 0575762).
+
+### Results change
+
+- Projects that set no kernel and run on CUDA with CuPy installed move from the Torch to the fused kernels. Fields and point traces were bit-identical for the sphere scenes measured at 64^3, 128^3 and 256^3 (RTX 3060, FP32). Plane-monitor spectra differ by rounding: the largest flux difference of the 128^3 scene was 3.8e-9 of the peak, and the tests accept 3e-6 in FP32. Earlier result files stay readable; `cuda_kernel="torch"` restores the previous kernels.
+
+### Performance
+
+- A run that sets no kernel steps 7.6 to 8.6 times faster than in 1.3.0 and completes 4.9 to 6.3 times sooner with CuPy installed (64^3 to 256^3 cells, RTX 3060, medians of three alternated runs) (0575762).
+- The resident grid holds one unit inverse permeability instead of a full array of ones, and is built without full-size temporaries. The fused kernels step 6 to 11% faster on the same scenes, with bit-identical fields, and the peak memory of fused dielectric runs of 16 million cells and more falls by 17 to 33% (baba365).
+
+### Fixed
+
+- The memory estimate bounds dispersive runs with `cuda_graph_steps` above 1 again. In 1.2.0 and 1.3.0 the cached temporaries of the uncaptured steps stayed reserved beside the graph pools, and a 4.1-million-cell Lorentz run reserved 1300 MiB against an estimate of 1149 MiB (1c4d02b).
+
 ## 1.3.0 (2026-11-14)
 
 ### Added

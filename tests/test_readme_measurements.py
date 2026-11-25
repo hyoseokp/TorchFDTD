@@ -118,4 +118,4 @@ def test_quick_start_selects_the_measured_path_explicitly():
     quick = readme[readme.index('## Quick start'):readme.index('## Documentation')]
     assert 'dimension="3d"' in quick and 'cuda_kernel="fused"' in quick
     assert '.[dev,cuda-kernels]' in quick
-    assert 'defaults to `"2d"`' in quick and '`"torch"`' in quick
+    assert 'defaults to `"2d"`' in quick and '`cuda_kernel` defaults to `"auto"`' in quick

@@ -9,6 +9,8 @@ Commits that only record validation evidence or documentation ("Record ...",
 
 ## Unreleased
 
+## 1.4.0 (2026-11-26)
+
 ### Changed
 
 - `Region.cuda_kernel` and `Region.cuda_monitor_kernel` default to `"auto"`: a resident run on CUDA uses the fused kernels for real fields when CuPy imports and compiles a kernel for the device and the grid is within the fused index range, and the Torch kernels otherwise. An explicit `"torch"` or `"fused"` is kept; `"auto"` is not written to project JSON, and the result summary names the kernels that ran ([EXECUTION_MODES.md](EXECUTION_MODES.md#gpu-switch), 0575762).
@@ -25,6 +27,10 @@ Commits that only record validation evidence or documentation ("Record ...",
 ### Fixed
 
 - The memory estimate bounds dispersive runs with `cuda_graph_steps` above 1 again. In 1.2.0 and 1.3.0 the cached temporaries of the uncaptured steps stayed reserved beside the graph pools, and a 4.1-million-cell Lorentz run reserved 1300 MiB against an estimate of 1149 MiB (1c4d02b).
+
+### Validation scope
+
+- RTX 3060 (Windows, torch 2.10, CuPy 13.6): the CUDA suite without the long tests, 1099 passed; the one failure, the memory check of `test_tensor_slab_acceptance`, fails in the same order on 1.3.0 and passes alone. The CPU suite passed except the clean-install record, which this release regenerates. The resident memory record was measured again (48 cases) and the workbench journeys recorded again on a CPU-only server. Other GPUs and the full release suite remain outside this release's validation scope.
 
 ## 1.3.0 (2026-11-14)
 
